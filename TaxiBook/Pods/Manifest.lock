@@ -19,11 +19,20 @@ PODS:
   - AFNetworking/Serialization (2.0.2)
   - AFNetworking/UIKit (2.0.2):
     - AFNetworking/NSURLConnection
+  - CocoaSecurity (1.2.2)
+  - SecureNSUserDefaults (1.0.0):
+    - CocoaSecurity (~> 1.2.1)
+  - SSKeychain (1.2.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
+  - SecureNSUserDefaults (~> 1.0.0)
+  - SSKeychain (~> 1.2.1)
 
 SPEC CHECKSUMS:
   AFNetworking: 22de50ae71ab1c4859773f61068d6fcd1d8f9a4d
+  CocoaSecurity: f53058286161eca4483a8e7370d7c99e85e4a592
+  SecureNSUserDefaults: 4bce99f87ef50cca20146dfe50a34288eb3ff24f
+  SSKeychain: d18926838c2e7cd342e2a49e9f869858e49f035a
 
 COCOAPODS: 0.27.1
