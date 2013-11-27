@@ -7,12 +7,19 @@
 //
 
 #import "TaxiBookAppDelegate.h"
-
+#import <NSUserDefaults+SecureAdditions.h>
 @implementation TaxiBookAppDelegate
+
+- (void)setNSSecret
+{
+    NSString *userDefaultKey  = @"thisIsASecretKey";
+    [[NSUserDefaults standardUserDefaults] setSecret:userDefaultKey];
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [self setNSSecret];
     return YES;
 }
 							
