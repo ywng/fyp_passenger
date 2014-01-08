@@ -141,25 +141,26 @@
     
     NSMutableDictionary *combinedParameters = [[NSMutableDictionary alloc] initWithDictionary:formDataParameters copyItems:YES];
     
-//    if (![combinedParameters objectForKey:TaxiBookInternalKeyUsername]) {
-//        
-//        // get username and session_token stored in nsuserdefault
-//        
-//        NSString *username = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyUsername];
-//        if (!username) {
-//            NSLog(@"username cannot find");
-//            [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUsernameCannotFind object:nil];
-//            return ;
-//        }
-//        NSString *sessionToken = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeySessionToken];
-//        if (!sessionToken) {
-//            NSLog(@"session token cannot find");
-//            sessionToken = @""; // let it expire the token and re-login
-//        }
-//        
-//        [combinedParameters setValue:username forKey:@"username"];
-//        [combinedParameters setValue:sessionToken forKey:@"session_token"];
-//    }
+    if (![combinedParameters objectForKey:TaxiBookInternalKeyEmail]) {
+        
+        // get email and session_token stored in nsuserdefault
+        
+        NSString *email = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyEmail];
+        if (!email) {
+            NSLog(@"email cannot find");
+            [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationEmailCannotFind object:nil];
+            return ;
+        }
+        NSString *sessionToken = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeySessionToken];
+        if (!sessionToken) {
+            NSLog(@"session token cannot find");
+            sessionToken = @""; // let it expire the token and re-login
+        }
+        
+        [combinedParameters setValue:email forKey:@"email"];
+        [combinedParameters setValue:sessionToken forKey:@"session_token"];
+        [combinedParameters setValue:@"passenger" forKey:@"user_type"];
+    }
     
     NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, relativeUrl] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
     
@@ -178,7 +179,7 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedOut object:nil];
                 return;
             }
-            parameters = @{@"email" : reLoginEmail, @"password" : password};
+            parameters = @{@"email" : reLoginEmail, @"password" : password, @"user_type": @"passenger"};
             
             [self loginwithParemeters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 // re-do the post method again
@@ -224,15 +225,15 @@
     [self.imageRequestManager GET:url parameters:nil success:success failure:failure];
 }
 
-- (void)getUrl:(NSString *)relativeUrl success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure loginIfNeed:(BOOL)loginIfNeed
-{
-    
-}
+//- (void)getUrl:(NSString *)relativeUrl success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure loginIfNeed:(BOOL)loginIfNeed
+//{
+//    
+//}
 
 - (id)init
 {
     if (self = [super init]) {
-        self.serverDomain = @"http://wwwfyp.cse.ust.hk:7118/ywng/fyp_web/index.php/";
+        self.serverDomain = @"http://taxibook.site50.net/server/index.php/";
         self.isLoggingIn = NO;
 //        __weak TaxiBookConnectionManager *weakSelf = self;
         [self.normalRequestManager.reachabilityManager setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {

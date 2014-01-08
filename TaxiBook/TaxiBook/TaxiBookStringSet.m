@@ -14,7 +14,7 @@ NSString const *TaxiBookServiceName = @"com.taxibook.taxibook";
 
 #pragma mark -
 #pragma mark - NSNotification Set
-NSString const *TaxiBookNotificationUsernameCannotFind = @"com.taxibook.notification.user.username.notFound";
+NSString const *TaxiBookNotificationEmailCannotFind = @"com.taxibook.notification.user.email.notFound";
 NSString const *TaxiBookNotificationUserLoggedOut = @"com.taxibook.notification.user.logout";
 
 #pragma mark -

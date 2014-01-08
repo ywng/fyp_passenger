@@ -14,7 +14,7 @@ extern NSString *TaxiBookServiceName;
 
 #pragma mark -
 #pragma mark - NSNotification Set
-extern NSString *TaxiBookNotificationUsernameCannotFind;
+extern NSString *TaxiBookNotificationEmailCannotFind;
 extern NSString *TaxiBookNotificationUserLoggedOut;
 
 #pragma mark -
