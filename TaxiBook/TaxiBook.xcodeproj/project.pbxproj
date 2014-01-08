@@ -28,6 +28,10 @@
 		77517F03182CA86C009991F3 /* TaxiBookErrorSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 77517F02182CA86C009991F3 /* TaxiBookErrorSet.m */; };
 		778533D21845CB71007BCA1B /* TaxiBookRegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778533D11845CB71007BCA1B /* TaxiBookRegisterViewController.m */; };
 		778533D81845CC0B007BCA1B /* TaxiBookProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778533D71845CC0B007BCA1B /* TaxiBookProfileViewController.m */; };
+		EDBFF53E187D205F0037F986 /* TaxiBook.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBFF53D187D205F0037F986 /* TaxiBook.storyboard */; };
+		EDBFF541187D22F30037F986 /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF540187D22F30037F986 /* WelcomeViewController.m */; };
+		EDBFF544187D24A00037F986 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF543187D24A00037F986 /* SignInViewController.m */; };
+		EDBFF547187D280E0037F986 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF546187D280E0037F986 /* TabBarViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +75,13 @@
 		778533D11845CB71007BCA1B /* TaxiBookRegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaxiBookRegisterViewController.m; path = ViewControllers/TaxiBookRegisterViewController.m; sourceTree = "<group>"; };
 		778533D61845CC0B007BCA1B /* TaxiBookProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TaxiBookProfileViewController.h; path = ViewControllers/TaxiBookProfileViewController.h; sourceTree = "<group>"; };
 		778533D71845CC0B007BCA1B /* TaxiBookProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaxiBookProfileViewController.m; path = ViewControllers/TaxiBookProfileViewController.m; sourceTree = "<group>"; };
+		EDBFF53D187D205F0037F986 /* TaxiBook.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = TaxiBook.storyboard; sourceTree = "<group>"; };
+		EDBFF53F187D22F30037F986 /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
+		EDBFF540187D22F30037F986 /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
+		EDBFF542187D24A00037F986 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
+		EDBFF543187D24A00037F986 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
+		EDBFF545187D280E0037F986 /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarViewController.h; sourceTree = "<group>"; };
+		EDBFF546187D280E0037F986 /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewController.m; sourceTree = "<group>"; };
 		F92DB0BA8861486AB6F6D1B3 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		FFFCA88C5CDA45279A4CE0BA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -137,6 +148,7 @@
 		774CEDA81820E3EB0004A123 /* TaxiBook */ = {
 			isa = PBXGroup;
 			children = (
+				EDBFF53D187D205F0037F986 /* TaxiBook.storyboard */,
 				77517EF9182CA0BD009991F3 /* Models */,
 				77517EF8182CA0B1009991F3 /* Views */,
 				77517EF7182CA0A7009991F3 /* ViewControllers */,
@@ -182,12 +194,18 @@
 		77517EF7182CA0A7009991F3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				EDBFF542187D24A00037F986 /* SignInViewController.h */,
+				EDBFF543187D24A00037F986 /* SignInViewController.m */,
 				774CEDB71820E3EB0004A123 /* TaxiBookViewController.h */,
 				774CEDB81820E3EB0004A123 /* TaxiBookViewController.m */,
 				778533D61845CC0B007BCA1B /* TaxiBookProfileViewController.h */,
 				778533D71845CC0B007BCA1B /* TaxiBookProfileViewController.m */,
 				778533D01845CB71007BCA1B /* TaxiBookRegisterViewController.h */,
 				778533D11845CB71007BCA1B /* TaxiBookRegisterViewController.m */,
+				EDBFF53F187D22F30037F986 /* WelcomeViewController.h */,
+				EDBFF540187D22F30037F986 /* WelcomeViewController.m */,
+				EDBFF545187D280E0037F986 /* TabBarViewController.h */,
+				EDBFF546187D280E0037F986 /* TabBarViewController.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -301,6 +319,7 @@
 				774CEDBB1820E3EB0004A123 /* Images.xcassets in Resources */,
 				774CEDAD1820E3EB0004A123 /* InfoPlist.strings in Resources */,
 				774CEDB61820E3EB0004A123 /* Main.storyboard in Resources */,
+				EDBFF53E187D205F0037F986 /* TaxiBook.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,11 +371,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDBFF544187D24A00037F986 /* SignInViewController.m in Sources */,
 				774CEDAF1820E3EB0004A123 /* main.m in Sources */,
 				774CEDB91820E3EB0004A123 /* TaxiBookViewController.m in Sources */,
+				EDBFF541187D22F30037F986 /* WelcomeViewController.m in Sources */,
 				77517EFC182CA0E0009991F3 /* TaxiBookConnectionManager.m in Sources */,
 				778533D21845CB71007BCA1B /* TaxiBookRegisterViewController.m in Sources */,
 				774CEDB31820E3EB0004A123 /* TaxiBookAppDelegate.m in Sources */,
+				EDBFF547187D280E0037F986 /* TabBarViewController.m in Sources */,
 				778533D81845CC0B007BCA1B /* TaxiBookProfileViewController.m in Sources */,
 				77517F03182CA86C009991F3 /* TaxiBookErrorSet.m in Sources */,
 				77517F00182CA2DC009991F3 /* TaxiBookStringSet.m in Sources */,
