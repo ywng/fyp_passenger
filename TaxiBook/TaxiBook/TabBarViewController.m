@@ -26,6 +26,7 @@
 
 - (void)viewDidLoad
 {
+
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
@@ -35,12 +36,13 @@
 -(void)viewDidAppear:(BOOL)animated{
     //check logged in or not
     //if not direct to login and register page
+    
     NSString *LoggedIn = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyLoggedIn];
     NSLog(@"Logged in? %@", LoggedIn);
     if ([TaxiBookInternalKeyLoggedIn  isEqual: @"YES"]) {
         
     }else{
-        [self performSegueWithIdentifier:@"welcomeModal" sender:self];
+   //     [self performSegueWithIdentifier:@"welcomeModal" sender:self];
     }
     
 }

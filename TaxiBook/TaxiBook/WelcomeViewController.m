@@ -30,6 +30,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     [self.navigationController setNavigationBarHidden:YES animated:NO];
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"welcomeBackground"]];
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,6 +47,7 @@
     }
     
 }
+
 
 
 @end

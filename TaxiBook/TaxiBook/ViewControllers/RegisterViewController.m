@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 taxibook. All rights reserved.
 //
 
-#import "TaxiBookRegisterViewController.h"
+#import "RegisterViewController.h"
 
-@interface TaxiBookRegisterViewController ()
+@interface RegisterViewController ()
 
 @end
 
-@implementation TaxiBookRegisterViewController
+@implementation RegisterViewController
 
 
 - (IBAction)registerButtonPressed:(id)sender {
@@ -86,6 +86,15 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void) viewWillDisappear:(BOOL)animated {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        // back button was pressed.  We know this is true because self is no longer
+        // in the navigation stack.
+        [self.navigationController setNavigationBarHidden:YES animated:NO];
+    }
+    [super viewWillDisappear:animated];
 }
 
 @end
