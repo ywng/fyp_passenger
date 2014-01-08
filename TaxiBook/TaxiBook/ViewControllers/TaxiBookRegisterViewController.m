@@ -72,6 +72,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 	// Do any additional setup after loading the view.
 //    [self.emailTextField setText:@"default_email2@email.com"];
 //    [self.phoneTextField setText:@"98765431"];
