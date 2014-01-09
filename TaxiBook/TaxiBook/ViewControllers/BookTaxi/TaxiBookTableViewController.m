@@ -9,10 +9,16 @@
 #import "TaxiBookTableViewController.h"
 
 @interface TaxiBookTableViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *originExpandBtn;
+@property (weak, nonatomic) IBOutlet UIButton *destExpandBtn;
+
 
 @end
 
 @implementation TaxiBookTableViewController
+BOOL originExpand;
+BOOL destExpand;
+BOOL timeExpand;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -26,6 +32,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    originExpand=false;
+    destExpand=false;
+    timeExpand=false;
+    [self.originExpandBtn setBackgroundImage:[UIImage imageNamed:@"expand.png"] forState:UIControlStateNormal];
+    [self.destExpandBtn setBackgroundImage:[UIImage imageNamed:@"expand.png"] forState:UIControlStateNormal];
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -39,31 +50,89 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (IBAction)expandOrigin:(id)sender {
+    [self toggleOriginMap:sender];
+}
+
+-(void)toggleOriginMap:(id)sender{
+    [sender setContentMode:UIViewContentModeScaleAspectFill];
+    if(originExpand){
+        originExpand=false;
+        [sender clearsContextBeforeDrawing];
+        [sender setBackgroundImage:[UIImage imageNamed:@"expand.png"] forState:UIControlStateNormal];
+    }else{
+        originExpand=true;
+        [sender clearsContextBeforeDrawing];
+        [sender setBackgroundImage:[UIImage imageNamed:@"collapse.png"] forState:UIControlStateNormal];
+    }
+    [self.tableView reloadData];
+
+}
+
+- (IBAction)expandDest:(id)sender {
+    [self toggleDestMap:sender];
+}
+
+-(void)toggleDestMap:(id)sender{
+    [sender setContentMode:UIViewContentModeScaleAspectFill];
+    if(destExpand){
+        destExpand=false;
+        [sender clearsContextBeforeDrawing];
+        [sender setBackgroundImage:[UIImage imageNamed:@"expand.png"] forState:UIControlStateNormal];
+    }else{
+        destExpand=true;
+        [sender clearsContextBeforeDrawing];
+        [sender setBackgroundImage:[UIImage imageNamed:@"collapse.png"] forState:UIControlStateNormal];
+    }
+    [self.tableView reloadData];
+}
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-#warning Potentially incomplete method implementation.
-    // Return the number of sections.
-    return 0;
+- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 1) {
+        if (originExpand) {
+            return 364; //expand the cell
+        } else {
+            return 0; // Hide the cell
+        }
+        
+    }
+    if (indexPath.row == 3) {
+        if (destExpand) {
+            return 364; //expand the cell
+        } else {
+            return 0; // Hide the cell
+        }
+    }
+    if (indexPath.row == 5) {
+        if (timeExpand) {
+            return 162; //expand the cell
+        } else {
+            return 0; // Hide the cell
+        }
+    }
+    return 44;//default height
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
-    
-    return cell;
+    NSLog(@"did select %@", indexPath);
+    if(indexPath.row==0){
+        //in case the user select the row instead of pressing the btn
+        [self toggleOriginMap:self.originExpandBtn];
+        
+    }else if(indexPath.row==2){
+        [self toggleDestMap:self.originExpandBtn];
+        
+    }else if(indexPath.row==4){
+        if(timeExpand){
+            timeExpand=false;
+        }else{
+            timeExpand=true;
+        }
+        [self.tableView reloadData];
+    }
 }
 
 /*
