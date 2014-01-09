@@ -81,12 +81,11 @@
         
     }else if(indexPath.section==1){
         [[TaxiBookConnectionManager sharedManager] logoutPassengerWithCompletionHandler:^(id responseObject) {
-            
+            [SubView dismissAlert];
         }];
+        [SubView loadingView:nil];
         
     }
-    
-    
 }
 
 /*
