@@ -67,6 +67,15 @@
 }
 
 
+- (void)registerPassenger:(NSDictionary *)formDataParameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSLog(@"new register request to server param: %@", formDataParameters);
+    
+    NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/passenger/register/"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+    
+    [self.normalRequestManager POST:postUrl parameters:formDataParameters success:success failure:failure];
+}
+
 
 - (void)loginwithParemeters:(NSDictionary *)formDataParameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
@@ -94,14 +103,26 @@
             
             NSString *sessionToken = [responseObject objectForKey:@"session_token"];
             NSString *expireTime = [responseObject objectForKey:@"expire_time"];
-            NSString *username = [responseObject objectForKey:@"username"];
-            NSNumber *userId = [responseObject objectForKey:@"user_id"];
+            NSString *firstName = [responseObject objectForKey:@"first_name"];
+            NSString *lastName = [responseObject objectForKey:@"last_name"];
+            NSInteger pid = [[responseObject objectForKey:@"pid"] integerValue];
+            NSString *email = [responseObject objectForKey:@"email"];
             
-            [[NSUserDefaults standardUserDefaults] setSecretObject:username forKey:TaxiBookInternalKeyUsername];
+            [[NSUserDefaults standardUserDefaults] setSecretObject:email forKey:TaxiBookInternalKeyEmail];
+            [[NSUserDefaults standardUserDefaults] setSecretObject:firstName forKey:TaxiBookInternalKeyFirstName];
+            [[NSUserDefaults standardUserDefaults] setSecretObject:lastName forKey:TaxiBookInternalKeyLastName];
             [[NSUserDefaults standardUserDefaults] setSecretObject:sessionToken forKey:TaxiBookInternalKeySessionToken];
             [[NSUserDefaults standardUserDefaults] setSecretObject:expireTime forKey:TaxiBookInternalKeySessionExpireTime];
-            [[NSUserDefaults standardUserDefaults] setSecretObject:userId forKey:TaxiBookInternalKeyUserId];
+            [[NSUserDefaults standardUserDefaults] setSecretInteger:pid forKey:TaxiBookInternalKeyUserId];
+            [[NSUserDefaults standardUserDefaults] setSecretBool:YES forKey:TaxiBookInternalKeyLoggedIn];
             [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            NSString *password = [formDataParameters objectForKey:@"password"];
+            if (password) {
+                [SSKeychain setPassword:password forService:TaxiBookServiceName account:email];
+            }
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedIn object:nil];
             
             success(operation, responseObject);
             for (NSInteger index = [self.waitForProcessQueue count] - 1; index >= 0; index -- ) {

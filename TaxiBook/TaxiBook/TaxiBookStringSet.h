@@ -15,6 +15,7 @@ extern NSString *TaxiBookServiceName;
 #pragma mark -
 #pragma mark - NSNotification Set
 extern NSString *TaxiBookNotificationEmailCannotFind;
+extern NSString *TaxiBookNotificationUserLoggedIn;
 extern NSString *TaxiBookNotificationUserLoggedOut;
 
 #pragma mark -
@@ -23,7 +24,7 @@ extern NSString *TaxiBookNotificationUserLoggedOut;
 // internal key mapping -- useful when access NSSecureUserDefault
 
 extern NSString *TaxiBookInternalKeyUserId;
-extern NSString *TaxiBookInternalKeyUsername;
+//extern NSString *TaxiBookInternalKeyUsername;
 extern NSString *TaxiBookInternalKeyEmail;
 extern NSString *TaxiBookInternalKeyFirstName;
 extern NSString *TaxiBookInternalKeyLastName;

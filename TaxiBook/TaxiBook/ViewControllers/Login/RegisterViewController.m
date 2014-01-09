@@ -7,6 +7,8 @@
 //
 
 #import "RegisterViewController.h"
+#import <SSKeychain/SSKeychain.h>
+#import <NSUserDefaults+SecureAdditions.h>
 
 @interface RegisterViewController ()
 
@@ -41,24 +43,59 @@
     [self.passwordTextField resignFirstResponder];
     
     TaxiBookConnectionManager *manager = [TaxiBookConnectionManager sharedManager];
-    
-    [manager postToUrl:@"/passenger/register/" withParameters:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    // [self setupLoadingView];
+    [manager registerPassenger:dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         // get the pid
         NSLog(@"responseObject %@", responseObject);
-        NSNumber *pid = [responseObject objectForKey:@"pid"];
         
-        [self.resultTextView setText:[pid description]];
+        NSInteger pid = [[responseObject objectForKey:@"pid"] integerValue];
+        
+        [[NSUserDefaults standardUserDefaults] setSecretObject:self.emailTextField.text forKey:TaxiBookInternalKeyEmail];
+        [[NSUserDefaults standardUserDefaults] setSecretObject:self.firstNameTextField.text forKey:TaxiBookInternalKeyFirstName];
+        [[NSUserDefaults standardUserDefaults] setSecretObject:self.lastNameTextField.text forKey:TaxiBookInternalKeyLastName];
+        [[NSUserDefaults standardUserDefaults] setSecretInteger:pid forKey:TaxiBookInternalKeyUserId];
+
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [manager loginwithParemeters:@{@"email": self.emailTextField.text, @"password": self.passwordTextField.text, @"user_type": @"passenger"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [self dismissViewControllerAnimated:YES completion:nil];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"error login %@", error);
+            [self.resultTextView setText:error.description];
+            // [self dismissLoadingView];
+        }];
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error on register %@", error);
         [self.resultTextView setText:error.description];
-    } loginIfNeed:NO];
+        // [self dismissLoadingView];
+    }];
     
 }
 
 
+#pragma mark - UITextFieldDelegate
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    NSInteger nextTag = textField.tag + 1;
+    // Try to find next responder
+    UIResponder* nextResponder = [textField.superview viewWithTag:nextTag];
+    if (nextResponder) {
+        // Found next responder, so set it.
+        [nextResponder becomeFirstResponder];
+    } else {
+        // Not found, so remove keyboard.
+        [textField resignFirstResponder];
+    }
+    return NO; // We do not want UITextField to insert line-breaks.
+
+}
+
+
+#pragma mark - VC Lifecycle
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
