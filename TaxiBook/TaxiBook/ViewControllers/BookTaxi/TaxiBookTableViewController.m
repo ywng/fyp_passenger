@@ -11,6 +11,7 @@
 @interface TaxiBookTableViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *originExpandBtn;
 @property (weak, nonatomic) IBOutlet UIButton *destExpandBtn;
+@property (weak, nonatomic) IBOutlet UILabel *dateTimeLbl;
 
 
 @end
@@ -37,12 +38,29 @@ BOOL timeExpand;
     timeExpand=false;
     [self.originExpandBtn setBackgroundImage:[UIImage imageNamed:@"expand.png"] forState:UIControlStateNormal];
     [self.destExpandBtn setBackgroundImage:[UIImage imageNamed:@"expand.png"] forState:UIControlStateNormal];
+    
+    // your label text is set to current time
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy-MM-dd    HH:mm:ss";
+    NSString *string = [formatter stringFromDate:[NSDate date]];
+    self.dateTimeLbl.text=string;
+    // timer is set & will be triggered each second
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(showTime) userInfo:nil repeats:YES];
+
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+}
+
+// following method will be called frequently.
+-(void)showTime{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"yyyy-MM-dd      HH:mm:ss";
+    NSString *string = [formatter stringFromDate:[NSDate date]];
+    self.dateTimeLbl.text=string;
 }
 
 - (void)didReceiveMemoryWarning
@@ -107,7 +125,7 @@ BOOL timeExpand;
     }
     if (indexPath.row == 5) {
         if (timeExpand) {
-            return 162; //expand the cell
+            return 160; //expand the cell
         } else {
             return 0; // Hide the cell
         }
@@ -123,7 +141,7 @@ BOOL timeExpand;
         [self toggleOriginMap:self.originExpandBtn];
         
     }else if(indexPath.row==2){
-        [self toggleDestMap:self.originExpandBtn];
+        [self toggleDestMap:self.destExpandBtn];
         
     }else if(indexPath.row==4){
         if(timeExpand){
