@@ -25,6 +25,7 @@
 		77517F00182CA2DC009991F3 /* TaxiBookStringSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 77517EFF182CA2DC009991F3 /* TaxiBookStringSet.m */; };
 		77517F03182CA86C009991F3 /* TaxiBookErrorSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 77517F02182CA86C009991F3 /* TaxiBookErrorSet.m */; };
 		778533D81845CC0B007BCA1B /* TaxiBookProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778533D71845CC0B007BCA1B /* TaxiBookProfileViewController.m */; };
+		ED40EB7A187E679C00E186F1 /* BookingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED40EB79187E679C00E186F1 /* BookingDetailViewController.m */; };
 		EDBFF549187D87070037F986 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDBFF548187D87070037F986 /* Images.xcassets */; };
 		EDBFF54F187DB4FA0037F986 /* BookTaxiMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF54E187DB4FA0037F986 /* BookTaxiMainViewController.m */; };
 		EDBFF559187DB6440037F986 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF554187DB6440037F986 /* RegisterViewController.m */; };
@@ -74,6 +75,8 @@
 		77517F02182CA86C009991F3 /* TaxiBookErrorSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookErrorSet.m; sourceTree = "<group>"; };
 		778533D61845CC0B007BCA1B /* TaxiBookProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TaxiBookProfileViewController.h; path = ViewControllers/TaxiBookProfileViewController.h; sourceTree = "<group>"; };
 		778533D71845CC0B007BCA1B /* TaxiBookProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaxiBookProfileViewController.m; path = ViewControllers/TaxiBookProfileViewController.m; sourceTree = "<group>"; };
+		ED40EB78187E679C00E186F1 /* BookingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookingDetailViewController.h; path = ViewControllers/BookTaxi/BookingDetailViewController.h; sourceTree = "<group>"; };
+		ED40EB79187E679C00E186F1 /* BookingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookingDetailViewController.m; path = ViewControllers/BookTaxi/BookingDetailViewController.m; sourceTree = "<group>"; };
 		EDBFF548187D87070037F986 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EDBFF54D187DB4FA0037F986 /* BookTaxiMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookTaxiMainViewController.h; path = ViewControllers/BookTaxi/BookTaxiMainViewController.h; sourceTree = "<group>"; };
 		EDBFF54E187DB4FA0037F986 /* BookTaxiMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookTaxiMainViewController.m; path = ViewControllers/BookTaxi/BookTaxiMainViewController.m; sourceTree = "<group>"; };
@@ -267,6 +270,8 @@
 				EDBFF54E187DB4FA0037F986 /* BookTaxiMainViewController.m */,
 				EDBFF573187DDDBF0037F986 /* ConfirmationViewController.h */,
 				EDBFF574187DDDBF0037F986 /* ConfirmationViewController.m */,
+				ED40EB78187E679C00E186F1 /* BookingDetailViewController.h */,
+				ED40EB79187E679C00E186F1 /* BookingDetailViewController.m */,
 			);
 			name = BookTaxi;
 			sourceTree = "<group>";
@@ -426,6 +431,7 @@
 				EDBFF55A187DB6440037F986 /* SignInViewController.m in Sources */,
 				EDBFF54F187DB4FA0037F986 /* BookTaxiMainViewController.m in Sources */,
 				774CEDAF1820E3EB0004A123 /* main.m in Sources */,
+				ED40EB7A187E679C00E186F1 /* BookingDetailViewController.m in Sources */,
 				EDBFF55B187DB6440037F986 /* WelcomeViewController.m in Sources */,
 				EDBFF575187DDDBF0037F986 /* ConfirmationViewController.m in Sources */,
 				77517EFC182CA0E0009991F3 /* TaxiBookConnectionManager.m in Sources */,
