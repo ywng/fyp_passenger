@@ -36,8 +36,8 @@
     //check logged in or not
     //if not direct to login and register page
     
-    NSString *loggedIn = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyLoggedIn];
-    NSLog(@"Logged in? %@", loggedIn);
+    BOOL loggedIn = [[NSUserDefaults standardUserDefaults] secretBoolForKey:TaxiBookInternalKeyLoggedIn];
+    NSLog(@"Logged in? %d", loggedIn);
     if (!loggedIn) {
         [self performSegueWithIdentifier:@"welcomeModal" sender:self];
     }

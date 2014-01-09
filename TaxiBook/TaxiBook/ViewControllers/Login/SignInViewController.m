@@ -7,10 +7,12 @@
 //
 
 #import "SignInViewController.h"
+#import <NSUserDefaults+SecureAdditions.h>
 
 @interface SignInViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *user;
-@property (weak, nonatomic) IBOutlet UITextField *password;
+@property (weak, nonatomic) IBOutlet UITextField *userLbl;
+
+@property (weak, nonatomic) IBOutlet UITextField *passwordLbl;
 
 @end
 
@@ -50,45 +52,35 @@
 
 - (IBAction)login:(UIButton *)sender {
     //check password and
-    if(self.user.text.length==0){
+    if(self.userLbl.text.length==0){
         [self showError:@"Please input user name!"];
         return;
     }
-    if(self.password.text.length==0){
+    if(self.passwordLbl.text.length==0){
         [self showError:@"Please input passowrd!"];
         return;
     }
     
-    BOOL loggedIn=false;
     //check login by POST
     TaxiBookConnectionManager *connection=[TaxiBookConnectionManager sharedManager];
     NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:
-                            self.user, @"email",
-                            self.password, @"password",
+                            self.userLbl.text, @"email",
+                            self.passwordLbl.text, @"password",
                             @"passenger", @"user_type",nil];
 
     [connection loginwithParemeters:params
                             success:^(AFHTTPRequestOperation *operation, id responseObject){
                                 
-
+                                // [self dismissLoadingView];
+                                [self dismissViewControllerAnimated:YES completion:nil];
                             }
                             failure:^(AFHTTPRequestOperation *operation, NSError *error){
+                                // [self dismissLoadingView];
                                 [self showError:[error localizedDescription]];
-                                [self.password resignFirstResponder];
+                                [self.passwordLbl resignFirstResponder];
                                 return;
                             }];
     
-    
-    
-    if(!loggedIn){
-        [self showError:@"Incorrect password or user name. Please input again!"];
-        [self.password resignFirstResponder];
-        return;
-    }else{
-        
-        
-        
-    }
 }
 
 -(void) showError:(NSString*)message{
