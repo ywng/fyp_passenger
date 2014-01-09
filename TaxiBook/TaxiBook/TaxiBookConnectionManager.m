@@ -185,9 +185,9 @@
     NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, relativeUrl] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
 
     
-    NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"POST" URLString:[NSURL URLWithString:postUrl] parameters:formDataParameters];
+    NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"POST" URLString:postUrl parameters:formDataParameters];
     
-    [self.normalRequestManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    AFHTTPRequestOperation *operation = [self.normalRequestManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSNumber *responseStatusCode = [responseObject objectForKey:@"status_code"];
         NSLog(@"received data from server %@", relativeUrl);
         if (responseStatusCode && [responseStatusCode integerValue] == -1 && loginIfNeed) {
@@ -239,6 +239,8 @@
         failure(operation, error);
     }];
     
+    [self.normalRequestManager.operationQueue addOperation:operation];
+    
 }
 
 - (void)loadImageFromUrl:(NSString *)url success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
@@ -276,9 +278,9 @@
     NSString *getUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, relativeUrl] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
     
     
-    NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"GET" URLString:[NSURL URLWithString:getUrl] parameters:nil];
+    NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"GET" URLString:getUrl parameters:nil];
     
-    [self.normalRequestManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    AFHTTPRequestOperation *operation = [self.normalRequestManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSNumber *responseStatusCode = [responseObject objectForKey:@"status_code"];
         NSLog(@"received data from server %@", relativeUrl);
         if (responseStatusCode && [responseStatusCode integerValue] == -1 && loginIfNeed) {
@@ -329,6 +331,7 @@
         }
         failure(operation, error);
     }];
+    [self.normalRequestManager.operationQueue addOperation:operation];
 }
 
 - (void)logoutPassenger
@@ -358,9 +361,11 @@
     
     NSString *getUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/passenger/logout"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
     
-    NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"GET" URLString:[NSURL URLWithString:getUrl] parameters:nil];
+    NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"GET" URLString:getUrl parameters:nil];
     
-    [self.normalRequestManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    AFHTTPRequestOperation *operation = [self.normalRequestManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"received logout confirm from server");
         
         [[NSUserDefaults standardUserDefaults] setSecretBool:NO forKey:TaxiBookInternalKeyLoggedIn];
         [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyEmail];
@@ -375,11 +380,11 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedOut object:nil];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        if ([error.domain isEqualToString:TaxiBookServiceName]) {
-            NSLog(@"received error from server: logout function %@", error);
-        }
+        NSLog(@"received error from server: logout function %@", error);
+        
     }];
 
+    [self.normalRequestManager.operationQueue addOperation:operation];
     
 }
 

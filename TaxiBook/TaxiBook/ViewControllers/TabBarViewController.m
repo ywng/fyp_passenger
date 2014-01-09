@@ -48,6 +48,7 @@
     [super viewWillAppear:animated];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedLogoutNotification:) name:TaxiBookNotificationUserLoggedOut object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedLoginNotification:) name:TaxiBookNotificationUserLoggedIn object:nil];
     
 }
 
@@ -57,10 +58,14 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)receivedLoginNotification:(NSNotification *)notification
+{
+    [self setSelectedIndex:0];
+}
+
 - (void)receivedLogoutNotification:(NSNotification *)notification
 {
     [self performSegueWithIdentifier:@"welcomeModal" sender:self];
-    [self setSelectedIndex:0];
 }
 
 @end

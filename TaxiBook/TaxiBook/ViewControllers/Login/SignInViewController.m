@@ -71,6 +71,7 @@
                             success:^(AFHTTPRequestOperation *operation, id responseObject){
                                 
                                 [SubView dismissAlert];
+                                [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedIn object:nil];
                                 [self dismissViewControllerAnimated:YES completion:nil];
                             }
                             failure:^(AFHTTPRequestOperation *operation, NSError *error){
