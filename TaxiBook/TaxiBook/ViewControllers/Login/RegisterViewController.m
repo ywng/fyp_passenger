@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 taxibook. All rights reserved.
 //
 
-#import "TaxiBookRegisterViewController.h"
+#import "RegisterViewController.h"
 
-@interface TaxiBookRegisterViewController ()
+@interface RegisterViewController ()
 
 @end
 
-@implementation TaxiBookRegisterViewController
+@implementation RegisterViewController
 
 
 - (IBAction)registerButtonPressed:(id)sender {
@@ -72,6 +72,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.navigationController setNavigationBarHidden:NO animated:NO];
 	// Do any additional setup after loading the view.
 //    [self.emailTextField setText:@"default_email2@email.com"];
 //    [self.phoneTextField setText:@"98765431"];
@@ -86,5 +87,16 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void) viewWillDisappear:(BOOL)animated {
+    if ([self.navigationController.viewControllers indexOfObject:self]==NSNotFound) {
+        // back button was pressed.  We know this is true because self is no longer
+        // in the navigation stack.
+        [self.navigationController setNavigationBarHidden:YES animated:NO];
+    }
+    [super viewWillDisappear:animated];
+}
+
+
 
 @end
