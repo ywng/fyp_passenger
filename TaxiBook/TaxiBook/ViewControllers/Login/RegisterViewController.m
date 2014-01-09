@@ -24,18 +24,33 @@
     
     if (self.emailTextField.text.length > 0) {
         [dict setObject:self.emailTextField.text forKey:@"email"];
+    }else{
+        [SubView showError:@"Please input email address!" withTitle:@"Register Failed"];
+        return;
     }
     if (self.phoneTextField.text.length > 0) {
         [dict setObject:self.phoneTextField.text forKey:@"phone"];
+    }else{
+        [SubView showError:@"Please input 8-digit phone number!" withTitle:@"Register Failed"];
+        return;
     }
     if (self.firstNameTextField.text.length > 0) {
         [dict setObject:self.firstNameTextField.text forKey:@"first_name"];
+    }else{
+        [SubView showError:@"Please input your first name!" withTitle:@"Register Failed"];
+        return;
     }
     if (self.lastNameTextField.text.length > 0) {
         [dict setObject:self.lastNameTextField.text forKey:@"last_name"];
+    }else{
+        [SubView showError:@"Please input your last name!" withTitle:@"Register Failed"];
+        return;
     }
     if (self.passwordTextField.text.length > 0) {
         [dict setObject:self.passwordTextField.text forKey:@"password"];
+    }else{
+        [SubView showError:@"Please input at least 6 character password!" withTitle:@"Register Failed"];
+        return;
     }
     [self.emailTextField resignFirstResponder];
     [self.phoneTextField resignFirstResponder];
@@ -64,14 +79,30 @@
             [self dismissViewControllerAnimated:YES completion:nil];
             [SubView dismissAlert];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"error login %@", error);
             [SubView dismissAlert];
+            NSLog(@"error login %@", error);
+            
+            if ([error.domain isEqualToString:TaxiBookServiceName]) {
+                NSString *message = [error.userInfo objectForKey:@"message"];
+                [SubView showError:message withTitle:@"Register Failed"];
+            }else{
+                [SubView showError:@"Cannot login after registration!" withTitle:@"Login Failed"];
+            }
+            
         }];
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"error on register %@", error);
         [SubView dismissAlert];
+        NSLog(@"error on register %@", error);
+        
+        if ([error.domain isEqualToString:TaxiBookServiceName]) {
+            NSString *message = [error.userInfo objectForKey:@"message"];
+            [SubView showError:message withTitle:@"Register Failed"];
+        }else{
+            [SubView showError:@"Cannot register an account!" withTitle:@"Registration Failed"];
+        }
+        
     }];
     
     [SubView loadingView:nil];

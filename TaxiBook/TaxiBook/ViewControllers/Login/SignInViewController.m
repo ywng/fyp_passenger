@@ -52,11 +52,11 @@
 - (IBAction)login:(UIButton *)sender {
     //check password and
     if(self.emailLbl.text.length==0){
-        [SubView showError:@"Please input user name!"];
+        [SubView showError:@"Please input user name!" withTitle:@"Login Failed"];
         return;
     }
     if(self.passwordLbl.text.length==0){
-        [SubView showError:@"Please input passowrd!"];
+        [SubView showError:@"Please input passowrd!" withTitle:@"Login Failed"];
         return;
     }
     
@@ -76,7 +76,12 @@
                             }
                             failure:^(AFHTTPRequestOperation *operation, NSError *error){
                                 [SubView dismissAlert];
-                                [SubView showError:@"Incorrect email or password!"];
+                                if ([error.domain isEqualToString:TaxiBookServiceName]) {
+                                    NSString *message = [error.userInfo objectForKey:@"message"];
+                                    [SubView showError:message withTitle:@"Register Failed"];
+                                }else{
+                                    [SubView showError:@"Cannot login the system!" withTitle:@"Login Failed"];
+                                }
                                 
                                 return;
                             }];

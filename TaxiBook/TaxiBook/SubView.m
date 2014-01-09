@@ -9,10 +9,12 @@
 #import "SubView.h"
 
 
-static UIAlertView *alertWindow;
+static UIAlertView *alertWindow = nil;
 
 @implementation SubView
 +(void) loadingView:(NSString*) loadingMessage{
+    [SubView removeViewIfNeeded];
+    
     alertWindow = [[UIAlertView alloc] initWithTitle:@"Loading..." message:loadingMessage delegate:nil cancelButtonTitle:nil otherButtonTitles: nil];
     [alertWindow show];
     
@@ -25,8 +27,9 @@ static UIAlertView *alertWindow;
     
 }
 
-+(void) showError:(NSString*)message{
-    alertWindow = [[UIAlertView alloc] initWithTitle:@"Login Failed"
++(void) showError:(NSString*)message withTitle:(NSString *)title{
+    [SubView removeViewIfNeeded];
+    alertWindow = [[UIAlertView alloc] initWithTitle:title
                                                            message:message
                                                           delegate:nil
                                                  cancelButtonTitle:@"OK"
@@ -36,7 +39,17 @@ static UIAlertView *alertWindow;
 
 +(void) dismissAlert{
     [alertWindow dismissWithClickedButtonIndex:1 animated:NO];
+    
+    alertWindow = nil;
 }
 
+
++ (void)removeViewIfNeeded
+{
+    if (alertWindow) {
+        [alertWindow dismissWithClickedButtonIndex:0 animated:NO];
+    }
+    alertWindow = nil;
+}
 
 @end
