@@ -8,6 +8,7 @@
 
 #import "SettingViewController.h"
 #import "TaxiBookConnectionManager.h"
+#import "SubView.h"
 
 @interface SettingViewController ()
 
