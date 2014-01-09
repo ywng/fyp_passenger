@@ -331,6 +331,58 @@
     }];
 }
 
+- (void)logoutPassenger
+{
+    NSLog(@"new logout request to server");
+    
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    // get email and session_token stored in nsuserdefault
+    
+    NSString *email = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyEmail];
+    if (!email) {
+        NSLog(@"email cannot find");
+        [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationEmailCannotFind object:nil];
+        return ;
+    }
+    NSString *sessionToken = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeySessionToken];
+    
+    if (!sessionToken) {
+        NSLog(@"session token cannot find");
+        sessionToken = @""; // let it expire the token and re-login
+    } else {
+        [requestSerializer setValue:sessionToken forHTTPHeaderField:@"X-taxibook-session-token"];
+    }
+    [requestSerializer setValue:email forHTTPHeaderField:@"X-taxibook-email"];
+    [requestSerializer setValue:@"passenger" forHTTPHeaderField:@"X-taxibook-user-type"];
+    
+    NSString *getUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/passenger/logout"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+    
+    NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"GET" URLString:[NSURL URLWithString:getUrl] parameters:nil];
+    
+    [self.normalRequestManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        [[NSUserDefaults standardUserDefaults] setSecretBool:NO forKey:TaxiBookInternalKeyLoggedIn];
+        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyEmail];
+        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyFirstName];
+        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyLastName];
+        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeySessionToken];
+        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeySessionExpireTime];
+        [[NSUserDefaults standardUserDefaults] setSecretInteger:-1 forKey:TaxiBookInternalKeyUserId];
+        
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedOut object:nil];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if ([error.domain isEqualToString:TaxiBookServiceName]) {
+            NSLog(@"received error from server: logout function %@", error);
+        }
+    }];
+
+    
+}
+
 - (id)init
 {
     if (self = [super init]) {
