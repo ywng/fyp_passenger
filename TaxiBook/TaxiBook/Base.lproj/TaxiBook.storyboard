@@ -111,7 +111,9 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="password" destination="fg2-R2-5ZN" id="ys7-af-Yzm"/>
+                        <outlet property="passwordLbl" destination="fg2-R2-5ZN" id="zG9-wJ-vWO"/>
                         <outlet property="user" destination="f6B-JA-3zz" id="gjk-xf-k2X"/>
+                        <outlet property="userLbl" destination="f6B-JA-3zz" id="bwC-B6-cH9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xq0-Hv-NNY" userLabel="First Responder" sceneMemberID="firstResponder"/>
