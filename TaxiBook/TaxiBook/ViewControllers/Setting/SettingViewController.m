@@ -80,6 +80,8 @@
     if(indexPath.section==0){
         
     }else if(indexPath.section==1){
+        
+    }else if(indexPath.section==2){
         [[TaxiBookConnectionManager sharedManager] logoutPassengerWithCompletionHandler:^(id responseObject) {
             [SubView dismissAlert];
         }];

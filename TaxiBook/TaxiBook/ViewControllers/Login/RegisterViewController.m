@@ -62,6 +62,7 @@
         [manager loginwithParemeters:@{@"email": self.emailTextField.text, @"password": self.passwordTextField.text, @"user_type": @"passenger"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
             [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedIn object:nil];
             [self dismissViewControllerAnimated:YES completion:nil];
+            [SubView dismissAlert];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"error login %@", error);
             [SubView dismissAlert];
