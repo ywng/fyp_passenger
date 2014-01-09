@@ -1,18 +1,18 @@
 //
-//  BookTaxiMainViewController.m
+//  ConfirmationViewController.m
 //  TaxiBook
 //
 //  Created by Yik Wai Ng Jason on 9/1/14.
 //  Copyright (c) 2014 taxibook. All rights reserved.
 //
 
-#import "BookTaxiMainViewController.h"
+#import "ConfirmationViewController.h"
 
-@interface BookTaxiMainViewController ()
+@interface ConfirmationViewController ()
 
 @end
 
-@implementation BookTaxiMainViewController
+@implementation ConfirmationViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,8 +27,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-
-   
 }
 
 - (void)didReceiveMemoryWarning

@@ -8,6 +8,11 @@
 
 #import "TaxiBookAppDelegate.h"
 #import <NSUserDefaults+SecureAdditions.h>
+
+#import "BookTaxiMainViewController.h"
+#import "AccountViewController.h"
+#import "OptionViewController.h"
+
 @implementation TaxiBookAppDelegate
 
 - (void)setNSSecret
@@ -20,7 +25,26 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [application setStatusBarHidden:NO];
+    [application setStatusBarStyle:UIStatusBarStyleLightContent];
     [self setNSSecret];
+    
+  /*  self.tabBarController = [[UITabBarController alloc] init];
+    
+    BookTaxiMainViewController* vc1 = [[BookTaxiMainViewController alloc] init];
+    AccountViewController* vc2 = [[AccountViewController alloc] init];
+    OptionViewController* vc3 = [[OptionViewController alloc] init];
+ 
+    UINavigationController* bookTaxiNavController = [[UINavigationController alloc]
+                                             initWithRootViewController:vc1];
+    
+    NSArray* controllers = [NSArray arrayWithObjects:bookTaxiNavController,vc2, vc3, nil];
+    self.tabBarController.viewControllers = controllers;
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = self.tabBarController;
+    [self.window makeKeyAndVisible];
+ */   
     return YES;
 }
 							

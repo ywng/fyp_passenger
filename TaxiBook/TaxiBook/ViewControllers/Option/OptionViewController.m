@@ -1,18 +1,18 @@
 //
-//  BookTaxiMainViewController.m
+//  OptionViewController.m
 //  TaxiBook
 //
 //  Created by Yik Wai Ng Jason on 9/1/14.
 //  Copyright (c) 2014 taxibook. All rights reserved.
 //
 
-#import "BookTaxiMainViewController.h"
+#import "OptionViewController.h"
 
-@interface BookTaxiMainViewController ()
+@interface OptionViewController ()
 
 @end
 
-@implementation BookTaxiMainViewController
+@implementation OptionViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,8 +27,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-
-   
 }
 
 - (void)didReceiveMemoryWarning

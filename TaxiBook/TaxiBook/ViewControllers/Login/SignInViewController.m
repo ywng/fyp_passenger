@@ -47,6 +47,7 @@
     [super viewWillDisappear:animated];
 }
 
+
 - (IBAction)login:(UIButton *)sender {
     //check password and
     if(self.user.text.length==0){
@@ -98,5 +99,7 @@
                                             otherButtonTitles:nil];
     [messagePopup show];
 }
+
+
 
 @end

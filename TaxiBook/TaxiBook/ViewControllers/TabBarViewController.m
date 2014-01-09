@@ -30,6 +30,15 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    UIColor *barColor=[UIColor colorWithRed:48.0f/255.0f green:81.0f/255.0f blue:148.0f/255.0f alpha:1.0f];
+    self.navigationController.navigationBar.barTintColor = barColor;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.titleTextAttributes= @{UITextAttributeTextColor : [UIColor whiteColor]};
+    self.navigationController.navigationBar.translucent = NO;
+    
+    // *barTintColor* sets the background color
+    // *tintColor* sets the buttons color
+    
     
 }
 
@@ -42,7 +51,7 @@
     if ([TaxiBookInternalKeyLoggedIn  isEqual: @"YES"]) {
         
     }else{
-   //     [self performSegueWithIdentifier:@"welcomeModal" sender:self];
+     //   [self performSegueWithIdentifier:@"welcomeModal" sender:self];
     }
     
 }

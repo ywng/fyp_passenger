@@ -33,6 +33,9 @@
 		EDBFF55E187DB65F0037F986 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF55D187DB65F0037F986 /* TabBarViewController.m */; };
 		EDBFF561187DB6DC0037F986 /* TaxiBook.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBFF55F187DB6DC0037F986 /* TaxiBook.storyboard */; };
 		EDBFF564187DB6FE0037F986 /* TaxiBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF563187DB6FE0037F986 /* TaxiBookViewController.m */; };
+		EDBFF56D187DD9340037F986 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF56C187DD9340037F986 /* AccountViewController.m */; };
+		EDBFF571187DD9710037F986 /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF570187DD9710037F986 /* OptionViewController.m */; };
+		EDBFF575187DDDBF0037F986 /* ConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF574187DDDBF0037F986 /* ConfirmationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +88,12 @@
 		EDBFF560187DB6DC0037F986 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TaxiBook.storyboard; sourceTree = "<group>"; };
 		EDBFF562187DB6FE0037F986 /* TaxiBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TaxiBookViewController.h; path = ViewControllers/TaxiBookViewController.h; sourceTree = "<group>"; };
 		EDBFF563187DB6FE0037F986 /* TaxiBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaxiBookViewController.m; path = ViewControllers/TaxiBookViewController.m; sourceTree = "<group>"; };
+		EDBFF56B187DD9340037F986 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AccountViewController.h; path = ViewControllers/Account/AccountViewController.h; sourceTree = "<group>"; };
+		EDBFF56C187DD9340037F986 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AccountViewController.m; path = ViewControllers/Account/AccountViewController.m; sourceTree = "<group>"; };
+		EDBFF56F187DD9710037F986 /* OptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OptionViewController.h; path = ViewControllers/Option/OptionViewController.h; sourceTree = "<group>"; };
+		EDBFF570187DD9710037F986 /* OptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OptionViewController.m; path = ViewControllers/Option/OptionViewController.m; sourceTree = "<group>"; };
+		EDBFF573187DDDBF0037F986 /* ConfirmationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmationViewController.h; sourceTree = "<group>"; };
+		EDBFF574187DDDBF0037F986 /* ConfirmationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmationViewController.m; sourceTree = "<group>"; };
 		F92DB0BA8861486AB6F6D1B3 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		FFFCA88C5CDA45279A4CE0BA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -197,6 +206,8 @@
 		77517EF7182CA0A7009991F3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				EDBFF572187DD9770037F986 /* Option */,
+				EDBFF56E187DD93A0037F986 /* Account */,
 				EDBFF552187DB56A0037F986 /* BookTaxi */,
 				EDBFF551187DB54D0037F986 /* Login */,
 				EDBFF562187DB6FE0037F986 /* TaxiBookViewController.h */,
@@ -254,8 +265,28 @@
 			children = (
 				EDBFF54D187DB4FA0037F986 /* BookTaxiMainViewController.h */,
 				EDBFF54E187DB4FA0037F986 /* BookTaxiMainViewController.m */,
+				EDBFF573187DDDBF0037F986 /* ConfirmationViewController.h */,
+				EDBFF574187DDDBF0037F986 /* ConfirmationViewController.m */,
 			);
 			name = BookTaxi;
+			sourceTree = "<group>";
+		};
+		EDBFF56E187DD93A0037F986 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				EDBFF56B187DD9340037F986 /* AccountViewController.h */,
+				EDBFF56C187DD9340037F986 /* AccountViewController.m */,
+			);
+			name = Account;
+			sourceTree = "<group>";
+		};
+		EDBFF572187DD9770037F986 /* Option */ = {
+			isa = PBXGroup;
+			children = (
+				EDBFF56F187DD9710037F986 /* OptionViewController.h */,
+				EDBFF570187DD9710037F986 /* OptionViewController.m */,
+			);
+			name = Option;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -396,14 +427,17 @@
 				EDBFF54F187DB4FA0037F986 /* BookTaxiMainViewController.m in Sources */,
 				774CEDAF1820E3EB0004A123 /* main.m in Sources */,
 				EDBFF55B187DB6440037F986 /* WelcomeViewController.m in Sources */,
+				EDBFF575187DDDBF0037F986 /* ConfirmationViewController.m in Sources */,
 				77517EFC182CA0E0009991F3 /* TaxiBookConnectionManager.m in Sources */,
 				774CEDB31820E3EB0004A123 /* TaxiBookAppDelegate.m in Sources */,
 				EDBFF559187DB6440037F986 /* RegisterViewController.m in Sources */,
+				EDBFF571187DD9710037F986 /* OptionViewController.m in Sources */,
 				EDBFF564187DB6FE0037F986 /* TaxiBookViewController.m in Sources */,
 				EDBFF55E187DB65F0037F986 /* TabBarViewController.m in Sources */,
 				778533D81845CC0B007BCA1B /* TaxiBookProfileViewController.m in Sources */,
 				77517F03182CA86C009991F3 /* TaxiBookErrorSet.m in Sources */,
 				77517F00182CA2DC009991F3 /* TaxiBookStringSet.m in Sources */,
+				EDBFF56D187DD9340037F986 /* AccountViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,6 +573,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TaxiBook/TaxiBook-Prefix.pch";
 				INFOPLIST_FILE = "TaxiBook/TaxiBook-Info.plist";
@@ -553,6 +588,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TaxiBook/TaxiBook-Prefix.pch";
 				INFOPLIST_FILE = "TaxiBook/TaxiBook-Info.plist";
