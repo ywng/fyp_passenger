@@ -19,8 +19,9 @@
 typedef void (^SuccessHandler)(AFHTTPRequestOperation *operation, id responseObject);
 typedef void (^FailureHandler)(AFHTTPRequestOperation *operation, NSError *error);
 typedef enum {
-    RequestManagerTypeNormal = 0,
+    RequestManagerTypePOST = 0,
     RequestManagerTypeImage = 1,
+    RequestManagerTypeGET = 2,
 } RequestManagerType;
 
 @interface TaxiBookHTTPOperation : NSObject
@@ -45,6 +46,6 @@ typedef enum {
 
 - (void)loadImageFromUrl:(NSString *)url success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
-//- (void)getUrl:(NSString *)relativeUrl success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure loginIfNeed:(BOOL)loginIfNeed;
+- (void)getUrl:(NSString *)relativeUrl success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure loginIfNeed:(BOOL)loginIfNeed;
 
 @end

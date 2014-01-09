@@ -108,8 +108,10 @@
                 // pop all operation in the queue with the cannot login error
                 TaxiBookHTTPOperation *taxibookOperation = [self.waitForProcessQueue objectAtIndex:index];
                 [self.waitForProcessQueue removeLastObject];
-                if (taxibookOperation.requestType == RequestManagerTypeNormal) {
+                if (taxibookOperation.requestType == RequestManagerTypePOST) {
                     [self postToUrl:taxibookOperation.relativeUrl withParameters:taxibookOperation.params success:taxibookOperation.success failure:taxibookOperation.failure loginIfNeed:NO];
+                } else if (taxibookOperation.requestType == RequestManagerTypeGET) {
+                    [self getUrl:taxibookOperation.relativeUrl success:success failure:failure loginIfNeed:NO];
                 } else {
                     // we do not have photo upload for now
 //                    [self uploadImageToUrl:taxibookOperation.relativeUrl withParameters:taxibookOperation.params filePath:taxibookOperation.fileURL success:taxibookOperation.success failure:taxibookOperation.failure loginIfNeed:NO];
@@ -137,43 +139,43 @@
 
 - (void)postToUrl:(NSString *)relativeUrl withParameters:(NSDictionary *)formDataParameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure loginIfNeed:(BOOL)loginIfNeed
 {
-    NSLog(@"new request to server: %@ param: %@", relativeUrl, formDataParameters);
+    NSLog(@"new POST request to server: %@ param: %@", relativeUrl, formDataParameters);
     
-    NSMutableDictionary *combinedParameters = [[NSMutableDictionary alloc] initWithDictionary:formDataParameters copyItems:YES];
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
     
-    if (![combinedParameters objectForKey:TaxiBookInternalKeyEmail]) {
-        
-        // get email and session_token stored in nsuserdefault
-        
-        NSString *email = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyEmail];
-        if (!email) {
-            NSLog(@"email cannot find");
-            [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationEmailCannotFind object:nil];
-            return ;
-        }
-        NSString *sessionToken = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeySessionToken];
-        if (!sessionToken) {
-            NSLog(@"session token cannot find");
-            sessionToken = @""; // let it expire the token and re-login
-        }
-        
-        [combinedParameters setValue:email forKey:@"email"];
-        [combinedParameters setValue:sessionToken forKey:@"session_token"];
-        [combinedParameters setValue:@"passenger" forKey:@"user_type"];
+    // get email and session_token stored in nsuserdefault
+    
+    NSString *email = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyEmail];
+    if (!email) {
+        NSLog(@"email cannot find");
+        [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationEmailCannotFind object:nil];
+        return ;
     }
+    NSString *sessionToken = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeySessionToken];
+    if (!sessionToken) {
+        NSLog(@"session token cannot find");
+        sessionToken = @""; // let it expire the token and re-login
+    } else {
+        [requestSerializer setValue:sessionToken forHTTPHeaderField:@"X-taxibook-session-token"];
+    }
+    [requestSerializer setValue:email forHTTPHeaderField:@"X-taxibook-email"];
+    [requestSerializer setValue:@"passenger" forHTTPHeaderField:@"X-taxibook-user-type"];
     
     NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, relativeUrl] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+
     
-    [self.normalRequestManager POST:postUrl parameters:combinedParameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"POST" URLString:[NSURL URLWithString:postUrl] parameters:formDataParameters];
+    
+    [self.normalRequestManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSNumber *responseStatusCode = [responseObject objectForKey:@"status_code"];
         NSLog(@"received data from server %@", relativeUrl);
         if (responseStatusCode && [responseStatusCode integerValue] == -1 && loginIfNeed) {
             // Credential checking failed, re-login the user
-
+            
             NSDictionary *parameters = nil;
             NSString *reLoginEmail = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyEmail];
             NSString *password = [SSKeychain passwordForService:TaxiBookServiceName account:reLoginEmail];
-
+            
             if (!password) {
                 // cannot find a password
                 [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedOut object:nil];
@@ -183,7 +185,7 @@
             
             [self loginwithParemeters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 // re-do the post method again
-                [self postToUrl:relativeUrl withParameters:formDataParameters success:success failure:failure loginIfNeed:NO]; // break the loop if credential check if fail again
+                [self postToUrl:relativeUrl withParameters:formDataParameters success:success failure:failure loginIfNeed:NO]; // break the loop if credential check fail again
                 
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 
@@ -191,8 +193,99 @@
                     // create a TaxiBookHTTPOperation object
                     TaxiBookHTTPOperation *taxibookOperation = [[TaxiBookHTTPOperation alloc] init];
                     taxibookOperation.relativeUrl = relativeUrl;
-                    taxibookOperation.requestType = RequestManagerTypeNormal;
+                    taxibookOperation.requestType = RequestManagerTypePOST;
                     taxibookOperation.params = formDataParameters;
+                    taxibookOperation.success = success;
+                    taxibookOperation.failure = failure;
+                    [self.waitForProcessQueue insertObject:taxibookOperation atIndex:0];
+                } else {
+                    // force logout
+                    [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedOut object:nil];
+                }
+            }];
+        }
+        else if (responseStatusCode && [responseStatusCode integerValue] < 0) {
+            NSError *errorWithMessage = [NSError errorWithDomain:TaxiBookServiceName code:[responseStatusCode integerValue] userInfo:@{@"message": [responseObject objectForKey:@"message"]}];
+            failure(operation, errorWithMessage); // negative reponse code consider to be fail
+        } else {
+            success(operation, responseObject);
+        }
+
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if ([error.domain isEqualToString:TaxiBookServiceName]) {
+            NSLog(@"received error from server %@ %@", relativeUrl, error);
+        }
+        failure(operation, error);
+    }];
+    
+}
+
+- (void)loadImageFromUrl:(NSString *)url success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    AFImageResponseSerializer *imageResponse = [[AFImageResponseSerializer alloc] init];
+    
+    [self.imageRequestManager setResponseSerializer:imageResponse];
+    [self.imageRequestManager GET:url parameters:nil success:success failure:failure];
+}
+
+- (void)getUrl:(NSString *)relativeUrl success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure loginIfNeed:(BOOL)loginIfNeed
+{
+    NSLog(@"new GET request to server: %@", relativeUrl);
+    
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    // get email and session_token stored in nsuserdefault
+    
+    NSString *email = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyEmail];
+    if (!email) {
+        NSLog(@"email cannot find");
+        [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationEmailCannotFind object:nil];
+        return ;
+    }
+    NSString *sessionToken = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeySessionToken];
+    if (!sessionToken) {
+        NSLog(@"session token cannot find");
+        sessionToken = @""; // let it expire the token and re-login
+    } else {
+        [requestSerializer setValue:sessionToken forHTTPHeaderField:@"X-taxibook-session-token"];
+    }
+    [requestSerializer setValue:email forHTTPHeaderField:@"X-taxibook-email"];
+    [requestSerializer setValue:@"passenger" forHTTPHeaderField:@"X-taxibook-user-type"];
+    
+    NSString *getUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, relativeUrl] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+    
+    
+    NSMutableURLRequest *request = [requestSerializer requestWithMethod:@"GET" URLString:[NSURL URLWithString:getUrl] parameters:nil];
+    
+    [self.normalRequestManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSNumber *responseStatusCode = [responseObject objectForKey:@"status_code"];
+        NSLog(@"received data from server %@", relativeUrl);
+        if (responseStatusCode && [responseStatusCode integerValue] == -1 && loginIfNeed) {
+            // Credential checking failed, re-login the user
+            
+            NSDictionary *parameters = nil;
+            NSString *reLoginEmail = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyEmail];
+            NSString *password = [SSKeychain passwordForService:TaxiBookServiceName account:reLoginEmail];
+            
+            if (!password) {
+                // cannot find a password
+                [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedOut object:nil];
+                return;
+            }
+            parameters = @{@"email" : reLoginEmail, @"password" : password, @"user_type": @"passenger"};
+            
+            [self loginwithParemeters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                // re-do the post method again
+                [self getUrl:relativeUrl success:success failure:failure loginIfNeed:NO]; // break the loop if credential check fail again
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                
+                if ([error.domain isEqualToString:TaxiBookServiceName] && error.code == TaxiBookErrorAlreadyLoggingIn) {
+                    // create a TaxiBookHTTPOperation object
+                    TaxiBookHTTPOperation *taxibookOperation = [[TaxiBookHTTPOperation alloc] init];
+                    taxibookOperation.relativeUrl = relativeUrl;
+                    taxibookOperation.requestType = RequestManagerTypeGET;
+                    taxibookOperation.params = nil;
                     taxibookOperation.success = success;
                     taxibookOperation.failure = failure;
                     [self.waitForProcessQueue insertObject:taxibookOperation atIndex:0];
@@ -216,19 +309,6 @@
         failure(operation, error);
     }];
 }
-
-- (void)loadImageFromUrl:(NSString *)url success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
-{
-    AFImageResponseSerializer *imageResponse = [[AFImageResponseSerializer alloc] init];
-    
-    [self.imageRequestManager setResponseSerializer:imageResponse];
-    [self.imageRequestManager GET:url parameters:nil success:success failure:failure];
-}
-
-//- (void)getUrl:(NSString *)relativeUrl success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure loginIfNeed:(BOOL)loginIfNeed
-//{
-//    
-//}
 
 - (id)init
 {
