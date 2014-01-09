@@ -79,7 +79,9 @@
     if(indexPath.section==0){
         
     }else if(indexPath.section==1){
-        [[TaxiBookConnectionManager sharedManager] logoutPassenger];
+        [[TaxiBookConnectionManager sharedManager] logoutPassengerWithCompletionHandler:^(id responseObject) {
+            
+        }];
         
     }
     
