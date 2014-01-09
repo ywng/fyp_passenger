@@ -212,6 +212,7 @@
 		77517EF7182CA0A7009991F3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				ED40EB84187E92A800E186F1 /* Setting */,
 				EDBFF552187DB56A0037F986 /* BookTaxi */,
 				EDBFF551187DB54D0037F986 /* Login */,
 				EDBFF562187DB6FE0037F986 /* TaxiBookViewController.h */,
@@ -224,7 +225,6 @@
 				ED40EB7C187E7BC500E186F1 /* SubView.m */,
 				ED40EB7E187E915800E186F1 /* CustomNavigationController.h */,
 				ED40EB7F187E915800E186F1 /* CustomNavigationController.m */,
-				ED40EB84187E92A800E186F1 /* Setting */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
