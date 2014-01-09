@@ -73,7 +73,18 @@
     
     NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/passenger/register/"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
     
-    [self.normalRequestManager POST:postUrl parameters:formDataParameters success:success failure:failure];
+    [self.normalRequestManager POST:postUrl parameters:formDataParameters success:^(AFHTTPRequestOperation *operation, id responseObject){
+        
+        NSNumber *responseStatusCode = [responseObject objectForKey:@"status_code"];
+        
+        if (responseStatusCode && [responseStatusCode integerValue] < 0) {
+            NSError *errorWithMessage = [NSError errorWithDomain:TaxiBookServiceName code:[responseStatusCode integerValue] userInfo:@{@"message": [responseObject objectForKey:@"message"]}];
+            failure(operation, errorWithMessage); // negative reponse code consider to be fail
+        } else {
+            success(operation, responseObject);
+        }
+        
+    } failure:failure];
 }
 
 
