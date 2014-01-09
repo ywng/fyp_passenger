@@ -67,6 +67,15 @@
 }
 
 
+- (void)registerPassenger:(NSDictionary *)formDataParameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSLog(@"new register request to server param: %@", formDataParameters);
+    
+    NSString *postUrl = [[NSString stringWithFormat:@"%@%@", self.serverDomain, @"/passenger/register/"] stringByReplacingOccurrencesOfString:@"//" withString:@"/"];
+    
+    [self.normalRequestManager POST:postUrl parameters:formDataParameters success:success failure:failure];
+}
+
 
 - (void)loginwithParemeters:(NSDictionary *)formDataParameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {

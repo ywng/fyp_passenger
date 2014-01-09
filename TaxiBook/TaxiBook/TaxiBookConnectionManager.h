@@ -40,6 +40,8 @@ typedef enum {
 
 + (TaxiBookConnectionManager *)sharedManager;
 
+- (void)registerPassenger:(NSDictionary *)formDataParameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 - (void)loginwithParemeters:(NSDictionary *)formDataParameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 - (void)postToUrl:(NSString *)relativeUrl withParameters:(NSDictionary *)formDataParameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure loginIfNeed:(BOOL)loginIfNeed;
