@@ -8,6 +8,7 @@
 
 #import "SettingViewController.h"
 #import "TaxiBookConnectionManager.h"
+#import "SubView.h"
 
 @interface SettingViewController ()
 
@@ -80,6 +81,7 @@
         
     }else if(indexPath.section==1){
         [[TaxiBookConnectionManager sharedManager] logoutPassenger];
+        [SubView loadingView:nil];
         
     }
     

@@ -410,10 +410,10 @@
             </objects>
             <point key="canvasLocation" x="-165" y="-1907"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Custom Navigation Controller-->
         <scene sceneID="cBv-0j-fno">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VUp-WX-eYv" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="VUp-WX-eYv" customClass="CustomNavigationController" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="8ke-yH-3iT"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
