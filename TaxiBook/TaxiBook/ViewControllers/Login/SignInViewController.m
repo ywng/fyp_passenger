@@ -8,6 +8,7 @@
 
 #import "SignInViewController.h"
 #import <NSUserDefaults+SecureAdditions.h>
+#import "SubView.h"
 
 @interface SignInViewController ()
 
@@ -51,11 +52,11 @@
 - (IBAction)login:(UIButton *)sender {
     //check password and
     if(self.emailLbl.text.length==0){
-        [self showError:@"Please input user name!"];
+        [SubView showError:@"Please input user name!"];
         return;
     }
     if(self.passwordLbl.text.length==0){
-        [self showError:@"Please input passowrd!"];
+        [SubView showError:@"Please input passowrd!"];
         return;
     }
     
@@ -69,26 +70,21 @@
     [connection loginwithParemeters:params
                             success:^(AFHTTPRequestOperation *operation, id responseObject){
                                 
-                                // [self dismissLoadingView];
+                                [SubView dismissAlert];
                                 [self dismissViewControllerAnimated:YES completion:nil];
                             }
                             failure:^(AFHTTPRequestOperation *operation, NSError *error){
-                                // [self dismissLoadingView];
-                                [self showError:[error localizedDescription]];
-                                [self.passwordLbl resignFirstResponder];
+                                [SubView dismissAlert];
+                                [SubView showError:@"Incorrect email or password!"];
+                                
                                 return;
                             }];
     
+    
+    [SubView loadingView:nil];
 }
 
--(void) showError:(NSString*)message{
-    UIAlertView *messagePopup = [[UIAlertView alloc] initWithTitle:@"Login Failed"
-                                                      message:message
-                                                     delegate:nil
-                                            cancelButtonTitle:@"OK"
-                                            otherButtonTitles:nil];
-    [messagePopup show];
-}
+
 
 
 
