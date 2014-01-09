@@ -334,7 +334,7 @@
     [self.normalRequestManager.operationQueue addOperation:operation];
 }
 
-- (void)logoutPassenger
+- (void)logoutPassengerWithCompletionHandler:(void (^)(id responseObject))completionHandler
 {
     NSLog(@"new logout request to server");
     
@@ -379,9 +379,23 @@
         
         [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedOut object:nil];
         
+        completionHandler(responseObject);
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"received error from server: logout function %@", error);
+
+        [[NSUserDefaults standardUserDefaults] setSecretBool:NO forKey:TaxiBookInternalKeyLoggedIn];
+        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyEmail];
+        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyFirstName];
+        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeyLastName];
+        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeySessionToken];
+        [[NSUserDefaults standardUserDefaults] setSecretObject:@"" forKey:TaxiBookInternalKeySessionExpireTime];
+        [[NSUserDefaults standardUserDefaults] setSecretInteger:-1 forKey:TaxiBookInternalKeyUserId];
         
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserLoggedOut object:nil];
+        completionHandler(nil);
     }];
 
     [self.normalRequestManager.operationQueue addOperation:operation];
