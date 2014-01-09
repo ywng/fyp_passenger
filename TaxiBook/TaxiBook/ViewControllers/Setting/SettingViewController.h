@@ -1,5 +1,5 @@
 //
-//  OptionViewController.h
+//  SettingViewController.h
 //  TaxiBook
 //
 //  Created by Yik Wai Ng Jason on 9/1/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface OptionViewController : UIViewController
+@interface SettingViewController : UITableViewController
 
 @end

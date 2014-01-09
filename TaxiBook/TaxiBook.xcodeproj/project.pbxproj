@@ -27,6 +27,8 @@
 		778533D81845CC0B007BCA1B /* TaxiBookProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778533D71845CC0B007BCA1B /* TaxiBookProfileViewController.m */; };
 		ED40EB7A187E679C00E186F1 /* BookingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED40EB79187E679C00E186F1 /* BookingDetailViewController.m */; };
 		ED40EB7D187E7BC500E186F1 /* SubView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED40EB7C187E7BC500E186F1 /* SubView.m */; };
+		ED40EB80187E915800E186F1 /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED40EB7F187E915800E186F1 /* CustomNavigationController.m */; };
+		ED40EB87187E948A00E186F1 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED40EB86187E948A00E186F1 /* SettingViewController.m */; };
 		EDBFF549187D87070037F986 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDBFF548187D87070037F986 /* Images.xcassets */; };
 		EDBFF54F187DB4FA0037F986 /* BookTaxiMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF54E187DB4FA0037F986 /* BookTaxiMainViewController.m */; };
 		EDBFF559187DB6440037F986 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF554187DB6440037F986 /* RegisterViewController.m */; };
@@ -35,8 +37,6 @@
 		EDBFF55E187DB65F0037F986 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF55D187DB65F0037F986 /* TabBarViewController.m */; };
 		EDBFF561187DB6DC0037F986 /* TaxiBook.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBFF55F187DB6DC0037F986 /* TaxiBook.storyboard */; };
 		EDBFF564187DB6FE0037F986 /* TaxiBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF563187DB6FE0037F986 /* TaxiBookViewController.m */; };
-		EDBFF56D187DD9340037F986 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF56C187DD9340037F986 /* AccountViewController.m */; };
-		EDBFF571187DD9710037F986 /* OptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF570187DD9710037F986 /* OptionViewController.m */; };
 		EDBFF575187DDDBF0037F986 /* ConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF574187DDDBF0037F986 /* ConfirmationViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +80,10 @@
 		ED40EB79187E679C00E186F1 /* BookingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookingDetailViewController.m; path = ViewControllers/BookTaxi/BookingDetailViewController.m; sourceTree = "<group>"; };
 		ED40EB7B187E7BC500E186F1 /* SubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubView.h; sourceTree = "<group>"; };
 		ED40EB7C187E7BC500E186F1 /* SubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubView.m; sourceTree = "<group>"; };
+		ED40EB7E187E915800E186F1 /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomNavigationController.h; path = ViewControllers/CustomNavigationController.h; sourceTree = "<group>"; };
+		ED40EB7F187E915800E186F1 /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomNavigationController.m; path = ViewControllers/CustomNavigationController.m; sourceTree = "<group>"; };
+		ED40EB85187E948A00E186F1 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingViewController.h; path = ViewControllers/Setting/SettingViewController.h; sourceTree = "<group>"; };
+		ED40EB86187E948A00E186F1 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingViewController.m; path = ViewControllers/Setting/SettingViewController.m; sourceTree = "<group>"; };
 		EDBFF548187D87070037F986 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		EDBFF54D187DB4FA0037F986 /* BookTaxiMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookTaxiMainViewController.h; path = ViewControllers/BookTaxi/BookTaxiMainViewController.h; sourceTree = "<group>"; };
 		EDBFF54E187DB4FA0037F986 /* BookTaxiMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookTaxiMainViewController.m; path = ViewControllers/BookTaxi/BookTaxiMainViewController.m; sourceTree = "<group>"; };
@@ -94,10 +98,6 @@
 		EDBFF560187DB6DC0037F986 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TaxiBook.storyboard; sourceTree = "<group>"; };
 		EDBFF562187DB6FE0037F986 /* TaxiBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TaxiBookViewController.h; path = ViewControllers/TaxiBookViewController.h; sourceTree = "<group>"; };
 		EDBFF563187DB6FE0037F986 /* TaxiBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaxiBookViewController.m; path = ViewControllers/TaxiBookViewController.m; sourceTree = "<group>"; };
-		EDBFF56B187DD9340037F986 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AccountViewController.h; path = ViewControllers/Account/AccountViewController.h; sourceTree = "<group>"; };
-		EDBFF56C187DD9340037F986 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AccountViewController.m; path = ViewControllers/Account/AccountViewController.m; sourceTree = "<group>"; };
-		EDBFF56F187DD9710037F986 /* OptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OptionViewController.h; path = ViewControllers/Option/OptionViewController.h; sourceTree = "<group>"; };
-		EDBFF570187DD9710037F986 /* OptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OptionViewController.m; path = ViewControllers/Option/OptionViewController.m; sourceTree = "<group>"; };
 		EDBFF573187DDDBF0037F986 /* ConfirmationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmationViewController.h; sourceTree = "<group>"; };
 		EDBFF574187DDDBF0037F986 /* ConfirmationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmationViewController.m; sourceTree = "<group>"; };
 		F92DB0BA8861486AB6F6D1B3 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -212,8 +212,6 @@
 		77517EF7182CA0A7009991F3 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				EDBFF572187DD9770037F986 /* Option */,
-				EDBFF56E187DD93A0037F986 /* Account */,
 				EDBFF552187DB56A0037F986 /* BookTaxi */,
 				EDBFF551187DB54D0037F986 /* Login */,
 				EDBFF562187DB6FE0037F986 /* TaxiBookViewController.h */,
@@ -224,6 +222,9 @@
 				EDBFF55D187DB65F0037F986 /* TabBarViewController.m */,
 				ED40EB7B187E7BC500E186F1 /* SubView.h */,
 				ED40EB7C187E7BC500E186F1 /* SubView.m */,
+				ED40EB7E187E915800E186F1 /* CustomNavigationController.h */,
+				ED40EB7F187E915800E186F1 /* CustomNavigationController.m */,
+				ED40EB84187E92A800E186F1 /* Setting */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -255,6 +256,15 @@
 			name = Utility;
 			sourceTree = "<group>";
 		};
+		ED40EB84187E92A800E186F1 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				ED40EB85187E948A00E186F1 /* SettingViewController.h */,
+				ED40EB86187E948A00E186F1 /* SettingViewController.m */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
 		EDBFF551187DB54D0037F986 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,24 +289,6 @@
 				ED40EB79187E679C00E186F1 /* BookingDetailViewController.m */,
 			);
 			name = BookTaxi;
-			sourceTree = "<group>";
-		};
-		EDBFF56E187DD93A0037F986 /* Account */ = {
-			isa = PBXGroup;
-			children = (
-				EDBFF56B187DD9340037F986 /* AccountViewController.h */,
-				EDBFF56C187DD9340037F986 /* AccountViewController.m */,
-			);
-			name = Account;
-			sourceTree = "<group>";
-		};
-		EDBFF572187DD9770037F986 /* Option */ = {
-			isa = PBXGroup;
-			children = (
-				EDBFF56F187DD9710037F986 /* OptionViewController.h */,
-				EDBFF570187DD9710037F986 /* OptionViewController.m */,
-			);
-			name = Option;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -441,15 +433,15 @@
 				EDBFF55B187DB6440037F986 /* WelcomeViewController.m in Sources */,
 				EDBFF575187DDDBF0037F986 /* ConfirmationViewController.m in Sources */,
 				77517EFC182CA0E0009991F3 /* TaxiBookConnectionManager.m in Sources */,
+				ED40EB87187E948A00E186F1 /* SettingViewController.m in Sources */,
 				774CEDB31820E3EB0004A123 /* TaxiBookAppDelegate.m in Sources */,
 				EDBFF559187DB6440037F986 /* RegisterViewController.m in Sources */,
-				EDBFF571187DD9710037F986 /* OptionViewController.m in Sources */,
+				ED40EB80187E915800E186F1 /* CustomNavigationController.m in Sources */,
 				EDBFF564187DB6FE0037F986 /* TaxiBookViewController.m in Sources */,
 				EDBFF55E187DB65F0037F986 /* TabBarViewController.m in Sources */,
 				778533D81845CC0B007BCA1B /* TaxiBookProfileViewController.m in Sources */,
 				77517F03182CA86C009991F3 /* TaxiBookErrorSet.m in Sources */,
 				77517F00182CA2DC009991F3 /* TaxiBookStringSet.m in Sources */,
-				EDBFF56D187DD9340037F986 /* AccountViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
