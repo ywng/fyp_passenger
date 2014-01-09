@@ -10,9 +10,7 @@
 #import <NSUserDefaults+SecureAdditions.h>
 
 @interface SignInViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *userLbl;
 
-@property (weak, nonatomic) IBOutlet UITextField *passwordLbl;
 
 @end
 
@@ -52,7 +50,7 @@
 
 - (IBAction)login:(UIButton *)sender {
     //check password and
-    if(self.userLbl.text.length==0){
+    if(self.emailLbl.text.length==0){
         [self showError:@"Please input user name!"];
         return;
     }
@@ -64,8 +62,8 @@
     //check login by POST
     TaxiBookConnectionManager *connection=[TaxiBookConnectionManager sharedManager];
     NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:
-                            self.userLbl.text, @"email",
-                            self.passwordLbl.text, @"password",
+                            [self.emailLbl text], @"email",
+                            [self.passwordLbl text], @"password",
                             @"passenger", @"user_type",nil];
 
     [connection loginwithParemeters:params

@@ -10,4 +10,7 @@
 
 @interface SignInViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *emailLbl;
+@property (weak, nonatomic) IBOutlet UITextField *passwordLbl;
+
 @end
