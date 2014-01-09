@@ -9,6 +9,7 @@
 #import "RegisterViewController.h"
 #import <SSKeychain/SSKeychain.h>
 #import <NSUserDefaults+SecureAdditions.h>
+#import "SubView.h"
 
 @interface RegisterViewController ()
 
@@ -63,16 +64,16 @@
             [self dismissViewControllerAnimated:YES completion:nil];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"error login %@", error);
-            [self.resultTextView setText:error.description];
-            // [self dismissLoadingView];
+            [SubView dismissAlert];
         }];
         
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"error on register %@", error);
-        [self.resultTextView setText:error.description];
-        // [self dismissLoadingView];
+        [SubView dismissAlert];
     }];
+    
+    [SubView loadingView:nil];
     
 }
 
@@ -117,7 +118,7 @@
 //    [self.firstNameTextField setText:@"default_first"];
 //    [self.lastNameTextField setText:@"default_last"];
 //    [self.passwordTextField setText:@"passwordSecret"];
-    [self.resultTextView setText:@"result shows here"];
+    
 }
 
 - (void)didReceiveMemoryWarning
