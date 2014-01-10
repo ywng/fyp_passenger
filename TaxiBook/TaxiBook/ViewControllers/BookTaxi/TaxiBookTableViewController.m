@@ -14,7 +14,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *destExpandBtn;
 @property (weak, nonatomic) IBOutlet UILabel *dateTimeLbl;
 @property (weak, nonatomic) IBOutlet UIDatePicker *timePicker;
+@property (strong,nonatomic)NSTimer *timer;
 
+@property (nonatomic, retain) CLLocationManager *locationManager;
+@property (nonatomic,retain) GMSMarker *marker;
 
 @end
 
@@ -25,6 +28,47 @@ BOOL timeExpand;
 NSDateFormatter *formatter;
 NSString *dateTimeString;
 
+
+- (GMSMapView *)googleMapView
+{
+    if (!_googleMapView) {
+        
+        //make intial map for the canvas views
+        CGRect mapRect = self.originView.frame;
+        GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:22.396428
+                                                                longitude:114.109497
+                                                                     zoom:10.0];
+
+        _googleMapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, mapRect.size.width, mapRect.size.height) camera:camera];
+        CLLocationCoordinate2D position = CLLocationCoordinate2DMake(22.396428,114.109497);
+        self.marker = [GMSMarker markerWithPosition:position];
+        self.marker.map=_googleMapView;
+        
+       
+        
+        return _googleMapView;
+        
+    }
+    
+    return _googleMapView;
+}
+
+
+
+- (void)showCurrentLocation {
+    self.googleMapView.myLocationEnabled = YES;
+    self.googleMapView.settings.myLocationButton = YES;
+    [self.locationManager startUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:newLocation.coordinate.latitude
+                                                            longitude:newLocation.coordinate.longitude
+                                                                 zoom:17.0];
+    [_googleMapView animateToCameraPosition:camera];
+  
+}
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -33,6 +77,7 @@ NSString *dateTimeString;
     }
     return self;
 }
+
 
 - (void)viewDidLoad
 {
@@ -43,10 +88,12 @@ NSString *dateTimeString;
     [self.originExpandBtn setBackgroundImage:[UIImage imageNamed:@"expand.png"] forState:UIControlStateNormal];
     [self.destExpandBtn setBackgroundImage:[UIImage imageNamed:@"expand.png"] forState:UIControlStateNormal];
     
+    [self showCurrentLocation];
+    
     // your label text is set to current time
     [self showTime];
     // timer is set & will be triggered each second
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(showTime) userInfo:nil repeats:YES];
+    self.timer=[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(showTime) userInfo:nil repeats:YES];
 
 
     // Uncomment the following line to preserve selection between presentations.
@@ -81,11 +128,17 @@ NSString *dateTimeString;
         [sender clearsContextBeforeDrawing];
         [sender setBackgroundImage:[UIImage imageNamed:@"expand.png"] forState:UIControlStateNormal];
     }else{
+        if(destExpand){
+            [self toggleDestMap:self.destExpandBtn];
+        }
+        [self.originView addSubview:self.googleMapView];
         originExpand=true;
+        [self.originView addSubview:self.googleMapView];
         [sender clearsContextBeforeDrawing];
         [sender setBackgroundImage:[UIImage imageNamed:@"collapse.png"] forState:UIControlStateNormal];
     }
-    [self.tableView reloadData];
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
 
 }
 
@@ -100,11 +153,16 @@ NSString *dateTimeString;
         [sender clearsContextBeforeDrawing];
         [sender setBackgroundImage:[UIImage imageNamed:@"expand.png"] forState:UIControlStateNormal];
     }else{
+        if(originExpand){
+            [self toggleOriginMap:self.originExpandBtn];
+        }
+        [self.destView addSubview:self.googleMapView];
         destExpand=true;
         [sender clearsContextBeforeDrawing];
         [sender setBackgroundImage:[UIImage imageNamed:@"collapse.png"] forState:UIControlStateNormal];
     }
-    [self.tableView reloadData];
+    [self.tableView beginUpdates];
+    [self.tableView endUpdates];
 }
 
 #pragma mark - Table view data source
@@ -149,12 +207,22 @@ NSString *dateTimeString;
         if(timeExpand){
             dateTimeString= [formatter stringFromDate:self.timePicker.date];
             self.dateTimeLbl.text=dateTimeString;
+            [self.timer invalidate];
+            self.timer=nil;
             timeExpand=false;
         }else{
             timeExpand=true;
         }
-        [self.tableView reloadData];
+        [self.tableView beginUpdates];
+        [self.tableView endUpdates];
     }
+}
+
+#pragma mark - GMSMapViewDelegate
+
+- (void)mapView:(GMSMapView *)mapView
+didTapAtCoordinate:(CLLocationCoordinate2D)coordinate {
+    NSLog(@"You tapped at %f,%f", coordinate.latitude, coordinate.longitude);
 }
 
 /*

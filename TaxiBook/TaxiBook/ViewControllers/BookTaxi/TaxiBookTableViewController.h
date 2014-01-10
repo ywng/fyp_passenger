@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <GoogleMaps/GoogleMaps.h>
 
-@interface TaxiBookTableViewController : UITableViewController
+@interface TaxiBookTableViewController : UITableViewController<GMSMapViewDelegate>
+
+@property (strong, nonatomic) GMSMapView *googleMapView;
+@property (weak, nonatomic) IBOutlet UIView *originView;
+@property (weak, nonatomic) IBOutlet UIView *destView;
+
 
 @end
