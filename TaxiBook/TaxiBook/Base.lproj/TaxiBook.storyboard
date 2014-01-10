@@ -718,6 +718,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="dateTimeLbl" destination="oUE-57-5iy" id="geD-DH-qaQ"/>
                         <outlet property="destExpandBtn" destination="VH9-06-mHO" id="BvU-Ub-5gM"/>
                         <outlet property="originExpandBtn" destination="Jt0-vu-bF1" id="Isw-D2-kZc"/>
+                        <outlet property="timePicker" destination="3rR-hP-X4C" id="K82-3s-xmF"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tjj-QI-wDH" userLabel="First Responder" sceneMemberID="firstResponder"/>

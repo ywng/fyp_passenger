@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *originExpandBtn;
 @property (weak, nonatomic) IBOutlet UIButton *destExpandBtn;
 @property (weak, nonatomic) IBOutlet UILabel *dateTimeLbl;
+@property (weak, nonatomic) IBOutlet UIDatePicker *timePicker;
 
 
 @end
@@ -21,6 +22,8 @@
 BOOL originExpand;
 BOOL destExpand;
 BOOL timeExpand;
+NSDateFormatter *formatter;
+NSString *dateTimeString;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -41,7 +44,7 @@ BOOL timeExpand;
     [self.destExpandBtn setBackgroundImage:[UIImage imageNamed:@"expand.png"] forState:UIControlStateNormal];
     
     // your label text is set to current time
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy-MM-dd    HH:mm:ss";
     NSString *string = [formatter stringFromDate:[NSDate date]];
     self.dateTimeLbl.text=string;
@@ -60,8 +63,8 @@ BOOL timeExpand;
 -(void)showTime{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy-MM-dd      HH:mm:ss";
-    NSString *string = [formatter stringFromDate:[NSDate date]];
-    self.dateTimeLbl.text=string;
+    dateTimeString= [formatter stringFromDate:[NSDate date]];
+    self.dateTimeLbl.text=dateTimeString;
 }
 
 - (void)didReceiveMemoryWarning
@@ -147,6 +150,7 @@ BOOL timeExpand;
         
     }else if(indexPath.row==4){
         if(timeExpand){
+            self.dateTimeLbl.text=[self.timePicker se]
             timeExpand=false;
         }else{
             timeExpand=true;
