@@ -44,10 +44,7 @@ NSString *dateTimeString;
     [self.destExpandBtn setBackgroundImage:[UIImage imageNamed:@"expand.png"] forState:UIControlStateNormal];
     
     // your label text is set to current time
-    formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"yyyy-MM-dd    HH:mm:ss";
-    NSString *string = [formatter stringFromDate:[NSDate date]];
-    self.dateTimeLbl.text=string;
+    [self showTime];
     // timer is set & will be triggered each second
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(showTime) userInfo:nil repeats:YES];
 
@@ -61,7 +58,7 @@ NSString *dateTimeString;
 
 // following method will be called frequently.
 -(void)showTime{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"yyyy-MM-dd      HH:mm:ss";
     dateTimeString= [formatter stringFromDate:[NSDate date]];
     self.dateTimeLbl.text=dateTimeString;
@@ -150,7 +147,8 @@ NSString *dateTimeString;
         
     }else if(indexPath.row==4){
         if(timeExpand){
-            self.dateTimeLbl.text=[self.timePicker se]
+            dateTimeString= [formatter stringFromDate:self.timePicker.date];
+            self.dateTimeLbl.text=dateTimeString;
             timeExpand=false;
         }else{
             timeExpand=true;
