@@ -12,6 +12,7 @@
 
 +(void) loadingView:(NSString*) loadingMessage;
 +(void) showError:(NSString*)message withTitle:(NSString*)title ;
++(void) confirmDia:(NSString*)message withTitle:(NSString*)title;
 
 +(void) dismissAlert;
 

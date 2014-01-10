@@ -1,5 +1,5 @@
 //
-//  LocationSearchBar.h
+//  TaxiBookTableViewController.h
 //  TaxiBook
 //
 //  Created by Yik Wai Ng Jason on 9/1/14.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LocationSearchBar : UISearchBar
+@interface TaxiBookTableViewController : UITableViewController
 
 @end
