@@ -8,6 +8,7 @@
 
 #import "TaxiBookAppDelegate.h"
 #import <NSUserDefaults+SecureAdditions.h>
+#import <GoogleMaps/GoogleMaps.h>
 
 
 @implementation TaxiBookAppDelegate
@@ -25,6 +26,10 @@
     [application setStatusBarHidden:NO];
     [application setStatusBarStyle:UIStatusBarStyleLightContent];
     [self setNSSecret];
+    
+    // start google map service
+    [GMSServices provideAPIKey:@"AIzaSyAu-8oZWNCKRva2h2BFwrweMVRNdwbLDro"];
+    
     return YES;
 }
 							
