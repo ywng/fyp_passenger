@@ -428,7 +428,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="baY-6d-bJg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-127" y="1019"/>
+            <point key="canvasLocation" x="-165" y="1018"/>
         </scene>
         <!--Language Setting View Controller-->
         <scene sceneID="odm-Ov-K3d">
@@ -457,26 +457,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="We3-zn-0fi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="281" y="1016"/>
-        </scene>
-        <!--Book Taxi Main View Controller - TaxiBook-->
-        <scene sceneID="LZu-DI-2TH">
-            <objects>
-                <viewController id="pGi-MW-NEM" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Sly-0G-9RD"/>
-                        <viewControllerLayoutGuide type="bottom" id="0uU-8y-dw2"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8Ef-2p-3xn">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" title="Language" id="ya7-LH-BUI"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hSn-We-PhT" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="299" y="1019"/>
+            <point key="canvasLocation" x="572" y="1018"/>
         </scene>
         <!--View Controller - Terms -->
         <scene sceneID="3LF-g4-nM8">
@@ -495,7 +476,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eCK-9C-TS3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="688" y="1018"/>
+            <point key="canvasLocation" x="364" y="1786"/>
         </scene>
         <!--View Controller - Version-->
         <scene sceneID="j3D-HD-kpu">
@@ -514,7 +495,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ivo-Ht-wVy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1463" y="1019"/>
+            <point key="canvasLocation" x="1387" y="1786"/>
         </scene>
         <!--View Controller - Walkthrough-->
         <scene sceneID="nlM-Tl-txc">
@@ -533,7 +514,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vkV-UX-bt4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1828" y="1018"/>
+            <point key="canvasLocation" x="1808" y="1018"/>
         </scene>
         <!--View Controller - Report-->
         <scene sceneID="CNd-zm-4Ss">
@@ -552,7 +533,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hBY-Ah-Svf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1091" y="1019"/>
+            <point key="canvasLocation" x="887" y="1786"/>
         </scene>
         <!--Taxi Book Table View Controller - TaxiBook-->
         <scene sceneID="6PK-tQ-IZb">
@@ -692,7 +673,7 @@
                                                         <!--2014-01-09 19:33:19 +0000-->
                                                     </date>
                                                     <timeZone key="timeZone" name="America/Los_Angeles">
-                                                        <mutableData key="data">
+                                                        <data key="data">
 VFppZgAAAAAAAAAAAAAAAAAAAAAAAAAEAAAABAAAAAAAAAC5AAAABAAAABCepkign7sVkKCGKqChmveQ
 y4kaoNIj9HDSYSYQ1v50INiArZDa/tGg28CQENzes6DdqayQ3r6VoN+JjpDgnneg4WlwkOJ+WaDjSVKQ
 5F47oOUpNJDmR1gg5xJREOgnOiDo8jMQ6gccIOrSFRDr5v4g7LH3EO3G4CDukdkQ76/8oPBxuxDxj96g
@@ -710,7 +691,7 @@ f5gqkAABAAECAwEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEAAQABAAEA
 AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
-</mutableData>
+</data>
                                                     </timeZone>
                                                 </datePicker>
                                             </subviews>
