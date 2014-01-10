@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		71A7C12FE9984A968C9AAF5B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFFCA88C5CDA45279A4CE0BA /* libPods.a */; };
+		77402F40187F0BB0008E9C9B /* LanguageSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77402F3F187F0BB0008E9C9B /* LanguageSettingViewController.m */; };
+		77402F44187F0DE2008E9C9B /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 77402F43187F0DE2008E9C9B /* Order.m */; };
+		77402F47187F2E1F008E9C9B /* MDDirectionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 77402F46187F2E1F008E9C9B /* MDDirectionService.m */; };
 		774CEDA31820E3EB0004A123 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 774CEDA21820E3EB0004A123 /* Foundation.framework */; };
 		774CEDA51820E3EB0004A123 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 774CEDA41820E3EB0004A123 /* CoreGraphics.framework */; };
 		774CEDA71820E3EB0004A123 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 774CEDA61820E3EB0004A123 /* UIKit.framework */; };
@@ -52,6 +55,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		77402F3E187F0BB0008E9C9B /* LanguageSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LanguageSettingViewController.h; path = ViewControllers/Setting/LanguageSettingViewController.h; sourceTree = "<group>"; };
+		77402F3F187F0BB0008E9C9B /* LanguageSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LanguageSettingViewController.m; path = ViewControllers/Setting/LanguageSettingViewController.m; sourceTree = "<group>"; };
+		77402F42187F0DE2008E9C9B /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Order.h; path = Models/Unit/Order.h; sourceTree = "<group>"; };
+		77402F43187F0DE2008E9C9B /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Order.m; path = Models/Unit/Order.m; sourceTree = "<group>"; };
+		77402F45187F2E1F008E9C9B /* MDDirectionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDDirectionService.h; path = Utility/MDDirectionService.h; sourceTree = "<group>"; };
+		77402F46187F2E1F008E9C9B /* MDDirectionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDDirectionService.m; path = Utility/MDDirectionService.m; sourceTree = "<group>"; };
 		774CED9F1820E3EB0004A123 /* TaxiBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaxiBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		774CEDA21820E3EB0004A123 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		774CEDA41820E3EB0004A123 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -132,6 +141,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		77402F41187F0DB4008E9C9B /* Unit */ = {
+			isa = PBXGroup;
+			children = (
+				77402F42187F0DE2008E9C9B /* Order.h */,
+				77402F43187F0DE2008E9C9B /* Order.m */,
+			);
+			name = Unit;
+			sourceTree = "<group>";
+		};
 		774CED961820E3EB0004A123 = {
 			isa = PBXGroup;
 			children = (
@@ -242,6 +260,7 @@
 		77517EF9182CA0BD009991F3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				77402F41187F0DB4008E9C9B /* Unit */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -255,6 +274,8 @@
 				77517F02182CA86C009991F3 /* TaxiBookErrorSet.m */,
 				77517EFE182CA2DC009991F3 /* TaxiBookStringSet.h */,
 				77517EFF182CA2DC009991F3 /* TaxiBookStringSet.m */,
+				77402F45187F2E1F008E9C9B /* MDDirectionService.h */,
+				77402F46187F2E1F008E9C9B /* MDDirectionService.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -262,6 +283,8 @@
 		ED40EB84187E92A800E186F1 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				77402F3E187F0BB0008E9C9B /* LanguageSettingViewController.h */,
+				77402F3F187F0BB0008E9C9B /* LanguageSettingViewController.m */,
 				ED40EB85187E948A00E186F1 /* SettingViewController.h */,
 				ED40EB86187E948A00E186F1 /* SettingViewController.m */,
 			);
@@ -430,8 +453,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDBFF55A187DB6440037F986 /* SignInViewController.m in Sources */,
+				77402F40187F0BB0008E9C9B /* LanguageSettingViewController.m in Sources */,
+				77402F47187F2E1F008E9C9B /* MDDirectionService.m in Sources */,
 				ED40EB7D187E7BC500E186F1 /* SubView.m in Sources */,
 				774CEDAF1820E3EB0004A123 /* main.m in Sources */,
+				ED40EB8A187ECD9100E186F1 /* LocationSearchBar.m in Sources */,
+				77402F44187F0DE2008E9C9B /* Order.m in Sources */,
 				ED40EB7A187E679C00E186F1 /* BookingDetailViewController.m in Sources */,
 				EDBFF55B187DB6440037F986 /* WelcomeViewController.m in Sources */,
 				EDBFF575187DDDBF0037F986 /* ConfirmationViewController.m in Sources */,
