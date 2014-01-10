@@ -7,6 +7,7 @@
 //
 
 #import "TaxiBookTableViewController.h"
+#import "SubView.h"
 
 @interface TaxiBookTableViewController ()
 @property (weak, nonatomic) IBOutlet UIButton *originExpandBtn;
@@ -68,6 +69,7 @@ BOOL timeExpand;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)expandOrigin:(id)sender {
     [self toggleOriginMap:sender];
 }
@@ -107,7 +109,7 @@ BOOL timeExpand;
 
 #pragma mark - Table view data source
 
-- (float)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 1) {
         if (originExpand) {
             return 364; //expand the cell

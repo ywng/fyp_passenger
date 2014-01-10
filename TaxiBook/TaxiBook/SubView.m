@@ -37,6 +37,19 @@ static UIAlertView *alertWindow = nil;
     [alertWindow show];
 }
 
++(void) confirmDia:(NSString*)message withTitle:(NSString*)title{
+    [SubView removeViewIfNeeded];
+    alertWindow = [[UIAlertView alloc] initWithTitle:title
+                                             message:message
+                                            delegate:nil
+                                   cancelButtonTitle:@"Cancel"
+                                   otherButtonTitles:@"Confirm", nil];
+    [alertWindow show];
+
+    
+}
+
+
 +(void) dismissAlert{
     [alertWindow dismissWithClickedButtonIndex:1 animated:NO];
     

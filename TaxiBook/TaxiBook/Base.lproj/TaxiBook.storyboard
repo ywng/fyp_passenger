@@ -622,6 +622,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <navigationItem key="navigationItem" title="TaxiBook" id="9vk-To-TRZ">
                         <barButtonItem key="rightBarButtonItem" title="Confirm" id="5U8-lW-hy8">
                             <connections>
+                                <action selector="confirmBooking:" destination="i3z-BN-6Ya" id="dQW-l9-Fm0"/>
                                 <segue destination="B5L-mP-0wy" kind="push" id="DbE-RT-h5O"/>
                             </connections>
                         </barButtonItem>
