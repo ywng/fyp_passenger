@@ -10,7 +10,7 @@
 #import "MDDirectionService.h"
 #import "SubView.h"
 
-@interface BookingDetailViewController ()
+@interface BookingDetailViewController () <MDDirectionServiceDelegate>
 
 @end
 
@@ -152,7 +152,7 @@
         NSArray *keys = [NSArray arrayWithObjects:@"sensor", @"waypoints", nil];
         NSDictionary *query = [NSDictionary dictionaryWithObjects:parameters forKeys:keys];
         MDDirectionService *mds=[[MDDirectionService alloc] init];
-        [mds setDirectionsQuery:query withSelector:@selector(drawDirection:) withDelegate:self];
+        [mds setDirectionsQuery:query withDelegate:self];
         
         // need to rewrite mds to compatible with AFNetworking
     }
@@ -168,6 +168,11 @@
 {
     CGRect mapRect = self.mapView.frame;
     [self.googleMapView setFrame:CGRectMake(0, 0, mapRect.size.width, mapRect.size.height)];
+}
+
+- (void)finishDownloadDirections:(NSDictionary *)json
+{
+    [self drawDirection:json];
 }
 
 - (void)drawDirection:(NSDictionary *)json

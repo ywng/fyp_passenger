@@ -10,20 +10,17 @@
 #import "SubView.h"
 
 @interface TaxiBookTableViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *originExpandBtn;
-@property (weak, nonatomic) IBOutlet UIButton *destExpandBtn;
-@property (weak, nonatomic) IBOutlet UILabel *dateTimeLbl;
-@property (weak, nonatomic) IBOutlet UIDatePicker *timePicker;
 
+@property (strong, nonatomic) NSDateFormatter *formatter;
+@property (nonatomic) BOOL originExpand;
+@property (nonatomic) BOOL destExpand;
+@property (nonatomic)BOOL timeExpand;
+@property (strong, nonatomic) NSString *dateTimeString;
 
 @end
 
 @implementation TaxiBookTableViewController
-BOOL originExpand;
-BOOL destExpand;
-BOOL timeExpand;
-NSDateFormatter *formatter;
-NSString *dateTimeString;
+
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -37,34 +34,22 @@ NSString *dateTimeString;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    originExpand=false;
-    destExpand=false;
-    timeExpand=false;
-    [self.originExpandBtn setBackgroundImage:[UIImage imageNamed:@"expand.png"] forState:UIControlStateNormal];
-    [self.destExpandBtn setBackgroundImage:[UIImage imageNamed:@"expand.png"] forState:UIControlStateNormal];
+    self.originExpand= NO;
+    self.destExpand= NO;
+    self.timeExpand= NO;
     
-    // your label text is set to current time
-    formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"yyyy-MM-dd    HH:mm:ss";
-    NSString *string = [formatter stringFromDate:[NSDate date]];
-    self.dateTimeLbl.text=string;
-    // timer is set & will be triggered each second
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(showTime) userInfo:nil repeats:YES];
-
+    // label text is set to current time
+    self.formatter = [[NSDateFormatter alloc] init];
+    self.formatter.dateFormat = @"yyyy-MM-dd    HH:mm";
+    self.dateTimeString = [self.formatter stringFromDate:[NSDate date]];
+    self.dateTimeLbl.text= self.dateTimeString;
+    
 
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-}
-
-// following method will be called frequently.
--(void)showTime{
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    formatter.dateFormat = @"yyyy-MM-dd      HH:mm:ss";
-    dateTimeString= [formatter stringFromDate:[NSDate date]];
-    self.dateTimeLbl.text=dateTimeString;
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,47 +59,42 @@ NSString *dateTimeString;
 }
 
 - (IBAction)expandOrigin:(id)sender {
+    [self resignAllResponder];
     [self toggleOriginMap:sender];
 }
 
--(void)toggleOriginMap:(id)sender{
-    [sender setContentMode:UIViewContentModeScaleAspectFill];
-    if(originExpand){
-        originExpand=false;
-        [sender clearsContextBeforeDrawing];
-        [sender setBackgroundImage:[UIImage imageNamed:@"expand.png"] forState:UIControlStateNormal];
-    }else{
-        originExpand=true;
-        [sender clearsContextBeforeDrawing];
-        [sender setBackgroundImage:[UIImage imageNamed:@"collapse.png"] forState:UIControlStateNormal];
+-(void)toggleOriginMap:(UIButton *)sender{
+    if (self.originExpand) {
+        [sender setImage:[UIImage imageNamed:@"expand"] forState:UIControlStateNormal];
+    } else {
+        [sender setImage:[UIImage imageNamed:@"collapse"] forState:UIControlStateNormal];
     }
-    [self.tableView reloadData];
-
+    self.originExpand = !self.originExpand;
+    [sender setNeedsDisplay];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:1 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (IBAction)expandDest:(id)sender {
+    [self resignAllResponder];
     [self toggleDestMap:sender];
 }
 
--(void)toggleDestMap:(id)sender{
-    [sender setContentMode:UIViewContentModeScaleAspectFill];
-    if(destExpand){
-        destExpand=false;
-        [sender clearsContextBeforeDrawing];
-        [sender setBackgroundImage:[UIImage imageNamed:@"expand.png"] forState:UIControlStateNormal];
-    }else{
-        destExpand=true;
-        [sender clearsContextBeforeDrawing];
-        [sender setBackgroundImage:[UIImage imageNamed:@"collapse.png"] forState:UIControlStateNormal];
+-(void)toggleDestMap:(UIButton *)sender{
+    if (self.destExpand) {
+        [sender setImage:[UIImage imageNamed:@"expand"] forState:UIControlStateNormal];
+    } else {
+        [sender setImage:[UIImage imageNamed:@"collapse"] forState:UIControlStateNormal];
     }
-    [self.tableView reloadData];
+    self.destExpand= !self.destExpand;
+    [sender setNeedsDisplay];
+    [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:3 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 #pragma mark - Table view data source
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 1) {
-        if (originExpand) {
+        if (self.originExpand) {
             return 364; //expand the cell
         } else {
             return 0; // Hide the cell
@@ -122,15 +102,15 @@ NSString *dateTimeString;
         
     }
     if (indexPath.row == 3) {
-        if (destExpand) {
+        if (self.destExpand) {
             return 364; //expand the cell
         } else {
             return 0; // Hide the cell
         }
     }
     if (indexPath.row == 5) {
-        if (timeExpand) {
-            return 160; //expand the cell
+        if (self.timeExpand) {
+            return 162; //expand the cell
         } else {
             return 0; // Hide the cell
         }
@@ -140,23 +120,28 @@ NSString *dateTimeString;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"did select %@", indexPath);
-    if(indexPath.row==0){
+    [self resignAllResponder];
+    
+    if (indexPath.row==0) {
         //in case the user select the row instead of pressing the btn
         [self toggleOriginMap:self.originExpandBtn];
-        
-    }else if(indexPath.row==2){
+
+    } else if(indexPath.row==2) {
         [self toggleDestMap:self.destExpandBtn];
         
-    }else if(indexPath.row==4){
-        if(timeExpand){
-//            self.dateTimeLbl.text=[self.timePicker se]
-            timeExpand=false;
-        }else{
-            timeExpand=true;
-        }
-        [self.tableView reloadData];
+    } else if(indexPath.row==4) {
+        [self.view bringSubviewToFront:self.timePicker];
+        NSLog(@"super view of self.timePicker %@ %@ %@",  NSStringFromCGRect(self.timePicker.bounds),self.timePicker.superview, NSStringFromCGRect(self.timePicker.superview.bounds));
+        self.timeExpand = !self.timeExpand;
+        [self.tableView reloadInputViews];
+        [self.tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:5 inSection:0]] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
+}
+
+- (void)resignAllResponder
+{
+    [self.originTextField resignFirstResponder];
+    [self.destTextField resignFirstResponder];
 }
 
 /*

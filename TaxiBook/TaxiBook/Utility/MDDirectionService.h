@@ -8,10 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol MDDirectionServiceDelegate <NSObject>
+
+- (void)finishDownloadDirections:(NSDictionary *)json;
+
+@end
+
 @interface MDDirectionService : NSObject
-- (void)setDirectionsQuery:(NSDictionary *)object withSelector:(SEL)selector
-              withDelegate:(id)delegate;
-- (void)retrieveDirections:(SEL)sel withDelegate:(id)delegate;
-- (void)fetchedData:(NSData *)data withSelector:(SEL)selector
-       withDelegate:(id)delegate;
+- (void)setDirectionsQuery:(NSDictionary *)object withDelegate:(id<MDDirectionServiceDelegate>)delegate;
+- (void)retrieveDirections:(id<MDDirectionServiceDelegate>)delegate;
+- (void)fetchedData:(NSData *)data withDelegate:(id<MDDirectionServiceDelegate>)delegate;
 @end

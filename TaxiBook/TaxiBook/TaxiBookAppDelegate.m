@@ -28,7 +28,7 @@
     [self setNSSecret];
     
     // start google map service
-    [GMSServices provideAPIKey:@"AIzaSyAu-8oZWNCKRva2h2BFwrweMVRNdwbLDro"];
+    [GMSServices provideAPIKey:TaxiBookGoogleAPIIOSKey];
     
     return YES;
 }

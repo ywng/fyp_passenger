@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TaxiBookTableViewController : UITableViewController
+@interface TaxiBookTableViewController : UITableViewController <UITextFieldDelegate>
+
+@property (weak, nonatomic) IBOutlet UIButton *originExpandBtn;
+@property (weak, nonatomic) IBOutlet UIButton *destExpandBtn;
+@property (weak, nonatomic) IBOutlet UILabel *dateTimeLbl;
+@property (weak, nonatomic) IBOutlet UIDatePicker *timePicker;
+
+@property (weak, nonatomic) IBOutlet UITextField *originTextField;
+@property (weak, nonatomic) IBOutlet UITextField *destTextField;
 
 @end
