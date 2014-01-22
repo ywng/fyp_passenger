@@ -150,7 +150,7 @@ NSString *dateTimeString;
         
     }else if(indexPath.row==4){
         if(timeExpand){
-            self.dateTimeLbl.text=[self.timePicker se]
+//            self.dateTimeLbl.text=[self.timePicker se]
             timeExpand=false;
         }else{
             timeExpand=true;

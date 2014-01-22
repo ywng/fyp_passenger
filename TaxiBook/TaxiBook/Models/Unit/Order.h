@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "TaxiBookGPS.h"
+#import "Driver.h"
 
 
 typedef NS_ENUM(NSInteger, OrderStatus) {
@@ -19,15 +21,6 @@ typedef NS_ENUM(NSInteger, OrderStatus) {
     OrderStatusOrderFinished = 6,
     OrderStatusUnknown = 1<<9
 };
-
-
-@interface TaxiBookGPS : NSObject
-
-@property (nonatomic) float latitude;
-@property (nonatomic) float longitude;
-@property (nonatomic) NSString *streetDescription;
-
-@end
 
 
 @interface Order : NSObject
@@ -44,6 +37,8 @@ typedef NS_ENUM(NSInteger, OrderStatus) {
 @property (nonatomic) float estimatedPrice;
 @property (nonatomic) NSTimeInterval estimatedDuration;
 @property (strong, nonatomic) NSDate *estimatedPickupTime;
+
+@property (strong, nonatomic) Driver *confirmedDriver;
 
 
 // only inactive order

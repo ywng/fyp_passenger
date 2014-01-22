@@ -35,6 +35,16 @@
     return _googleMapView;
 }
 
+- (DriverInfoView *)loadDriverInfoView
+{
+    NSArray *ele = [[NSBundle mainBundle] loadNibNamed:@"DriverInfoView" owner:self options:nil];
+    if ([ele count] > 0) {
+        return [ele objectAtIndex:0];
+    } else {
+        return nil;
+    }
+}
+
 
 #pragma mark - VC Lifecycle
 
@@ -73,6 +83,8 @@
     [self setupGoogleMapView];
 }
 
+#pragma mark - View update
+
 - (void)updateDisplayOrder
 {
     TaxiBookConnectionManager *sharedManager = [TaxiBookConnectionManager sharedManager];
@@ -85,6 +97,12 @@
         id jsonData = [responseObject objectForKey:@"order"];
         
         weakSelf.displayOrder = [Order newInstanceFromServerData:jsonData];
+        
+        jsonData = [responseObject objectForKey:@"driver"];
+        if (jsonData) {
+            weakSelf.displayOrder.confirmedDriver = [Driver newInstanceFromServerData:jsonData];
+        }
+        
         [weakSelf updateView];
 
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -139,6 +157,9 @@
         // need to rewrite mds to compatible with AFNetworking
     }
     
+    // check status to add/remove view
+    [self setupContentView];
+    
     
     [SubView dismissAlert];
 }
@@ -187,5 +208,103 @@
     self.durationLabel.hidden = NO;
     self.estimatedFeeLabel.hidden = NO;
 }
+
+- (void)setupContentView
+{
+    switch (self.displayOrder.orderStatus) {
+        case OrderStatusPending:
+        {
+            self.contentView.frame = CGRectMake(0, 0, 320, 100);
+            self.pageControl.numberOfPages = 1;
+        }
+            break;
+        case OrderStatusBidded:
+        {
+            self.contentView.frame = CGRectMake(0, 0, 640, 100);
+            self.pageControl.numberOfPages = 2;
+        }
+            break;
+        case OrderStatusCustomerConfirmed:
+        {
+            self.contentView.frame = CGRectMake(0, 0, 640, 100);
+            self.pageControl.numberOfPages = 2;
+        }
+            break;
+        case OrderStatusDriverComing:
+        {
+            self.contentView.frame = CGRectMake(0, 0, 640, 100);
+            self.pageControl.numberOfPages = 2;
+        }
+            break;
+        case OrderStatusDriverWaiting:
+        {
+            self.contentView.frame = CGRectMake(0, 0, 640, 100);
+            self.pageControl.numberOfPages = 2;
+        }
+            break;
+        case OrderStatusDriverPickedUp:
+        {
+            self.contentView.frame = CGRectMake(0, 0, 640, 100);
+            self.pageControl.numberOfPages = 2;
+        }
+            break;
+        case OrderStatusOrderFinished:
+        {
+            self.contentView.frame = CGRectMake(0, 0, 640, 100);
+            self.pageControl.numberOfPages = 2;
+        }
+            break;
+        default:
+        {
+            self.contentView.frame = CGRectMake(0, 0, 320, 100);
+            self.pageControl.numberOfPages = 1;
+        }
+            break;
+    }
+    
+    [self.scrollableContentView setScrollEnabled:YES];
+    [self.scrollableContentView setContentSize:self.contentView.frame.size];
+//    self.scrollableContentView.contentSize = self.contentView.frame.size;
+
+    if (self.pageControl.numberOfPages > 1) {
+        if (!self.driverInfoView) {
+            self.driverInfoView = [self loadDriverInfoView];
+            [self.driverInfoView setFrame:CGRectMake(320, 0, 320, 100)];
+            [self.contentView addSubview:self.driverInfoView];
+            [self.driverInfoView updateInfo:self.displayOrder.confirmedDriver orderStatus:self.displayOrder.orderStatus];
+        } else {
+            [self.driverInfoView updateInfo:self.displayOrder.confirmedDriver orderStatus:self.displayOrder.orderStatus];
+        }
+    }
+    [self.scrollableContentView setNeedsUpdateConstraints];
+}
+
+- (IBAction)pageControlValueChanged:(UIPageControl *)sender {
+    
+    CGFloat preferContentOffset = sender.currentPage * [UIScreen mainScreen].bounds.size.width;
+    
+//    
+//    if (self.contentView.frame.size.width <= preferContentOffset) {
+//        preferContentOffset = self.contentView.frame.size.width - [UIScreen mainScreen].bounds.size.width;
+//    }
+    
+    [self.scrollableContentView setContentOffset:CGPointMake(preferContentOffset, 0) animated:YES];
+
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView == self.scrollableContentView) {
+        CGFloat pageWidth = self.scrollableContentView.frame.size.width;
+        float fractionalPage = self.scrollableContentView.contentOffset.x / pageWidth;
+        NSInteger page = lround(fractionalPage);
+        self.pageControl.currentPage = page;
+        
+    }
+}
+
+
 
 @end
