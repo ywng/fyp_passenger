@@ -7,13 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <GoogleMaps/GoogleMaps.h>
 
-@interface TaxiBookTableViewController : UITableViewController<GMSMapViewDelegate>
+@interface TaxiBookTableViewController : UITableViewController <UITextFieldDelegate>
 
-@property (strong, nonatomic) GMSMapView *googleMapView;
-@property (weak, nonatomic) IBOutlet UIView *originView;
-@property (weak, nonatomic) IBOutlet UIView *destView;
+@property (weak, nonatomic) IBOutlet UIButton *originExpandBtn;
+@property (weak, nonatomic) IBOutlet UIButton *destExpandBtn;
+@property (weak, nonatomic) IBOutlet UILabel *dateTimeLbl;
+@property (weak, nonatomic) IBOutlet UIDatePicker *timePicker;
 
+@property (weak, nonatomic) IBOutlet UITextField *originTextField;
+@property (weak, nonatomic) IBOutlet UITextField *destTextField;
 
 @end

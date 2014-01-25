@@ -1063,9 +1063,9 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <connections>
                         <outlet property="dateTimeLbl" destination="oUE-57-5iy" id="geD-DH-qaQ"/>
                         <outlet property="destExpandBtn" destination="VH9-06-mHO" id="BvU-Ub-5gM"/>
-                        <outlet property="destView" destination="fnC-CZ-awS" id="s26-J1-GCP"/>
+                        <outlet property="destTextField" destination="aam-fd-rcX" id="p7Z-CB-3Ul"/>
                         <outlet property="originExpandBtn" destination="Jt0-vu-bF1" id="Isw-D2-kZc"/>
-                        <outlet property="originView" destination="CYd-QF-Cmf" id="tIJ-Kf-o5b"/>
+                        <outlet property="originTextField" destination="Zey-h7-P23" id="q9u-TC-IyH"/>
                         <outlet property="timePicker" destination="3rR-hP-X4C" id="K82-3s-xmF"/>
                     </connections>
                 </tableViewController>
