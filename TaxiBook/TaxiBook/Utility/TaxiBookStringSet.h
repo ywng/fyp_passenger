@@ -11,6 +11,10 @@
 @interface TaxiBookStringSet : NSObject
 
 extern NSString *TaxiBookServiceName;
+extern NSString *TaxiBookGoogleAPIIOSKey;
+extern NSString *TaxiBookGoogleAPIServerKey;
+
+
 
 #pragma mark -
 #pragma mark - NSNotification Set

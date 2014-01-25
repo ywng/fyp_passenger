@@ -18,7 +18,7 @@
 
 static NSString *kMDDirectionsURL = @"http://maps.googleapis.com/maps/api/directions/json?";
 
-- (void)setDirectionsQuery:(NSDictionary *)query withSelector:(SEL)selector withDelegate:(id)delegate
+- (void)setDirectionsQuery:(NSDictionary *)query withDelegate:(id<MDDirectionServiceDelegate>)delegate
 {
     NSArray *waypoints = [query objectForKey:@"waypoints"];
     NSString *origin = [waypoints objectAtIndex:0];
@@ -38,25 +38,29 @@ static NSString *kMDDirectionsURL = @"http://maps.googleapis.com/maps/api/direct
     }
     NSString *urlStr = [url stringByAddingPercentEscapesUsingEncoding: NSASCIIStringEncoding];
     _directionsURL = [NSURL URLWithString:urlStr];
-    [self retrieveDirections:selector withDelegate:delegate];
+    [self retrieveDirections:delegate];
 }
-- (void)retrieveDirections:(SEL)selector withDelegate:(id)delegate{
-    dispatch_async(dispatch_get_main_queue(), ^{
+- (void)retrieveDirections:(id<MDDirectionServiceDelegate>)delegate{
+    dispatch_queue_t downloadQueue = dispatch_queue_create("MDDirectionService", nil);
+    
+    dispatch_async(downloadQueue, ^{
         NSData* data =
         [NSData dataWithContentsOfURL:_directionsURL];
-        [self fetchedData:data withSelector:selector withDelegate:delegate];
+        [self fetchedData:data withDelegate:delegate];
     });
 }
 
-- (void)fetchedData:(NSData *)data withSelector:(SEL)selector withDelegate:(id)delegate{
+- (void)fetchedData:(NSData *)data withDelegate:(id<MDDirectionServiceDelegate>)delegate{
     
     NSError* error;
     NSDictionary *json = [NSJSONSerialization
                           JSONObjectWithData:data
                           options:kNilOptions
                           error:&error];
-    if (selector && delegate && [delegate respondsToSelector:selector]) {
-        [delegate performSelector:selector withObject:json];
+    if (delegate && [delegate conformsToProtocol:@protocol(MDDirectionServiceDelegate)]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [delegate finishDownloadDirections:json];
+        });
     }
 }
 

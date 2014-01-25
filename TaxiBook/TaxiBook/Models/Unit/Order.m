@@ -8,10 +8,6 @@
 
 #import "Order.h"
 
-@implementation TaxiBookGPS
-
-@end
-
 @interface Order ()
 
 @end

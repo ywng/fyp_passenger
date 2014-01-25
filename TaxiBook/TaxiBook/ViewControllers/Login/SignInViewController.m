@@ -56,7 +56,7 @@
         return;
     }
     if(self.passwordLbl.text.length==0){
-        [SubView showError:@"Please input passowrd!" withTitle:@"Login Failed"];
+        [SubView showError:@"Please input password!" withTitle:@"Login Failed"];
         return;
     }
     

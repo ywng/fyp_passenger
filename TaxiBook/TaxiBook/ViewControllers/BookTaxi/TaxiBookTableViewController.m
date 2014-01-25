@@ -22,11 +22,7 @@
 @end
 
 @implementation TaxiBookTableViewController
-BOOL originExpand;
-BOOL destExpand;
-BOOL timeExpand;
-NSDateFormatter *formatter;
-NSString *dateTimeString;
+
 
 
 - (GMSMapView *)googleMapView
@@ -82,11 +78,15 @@ NSString *dateTimeString;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    originExpand=false;
-    destExpand=false;
-    timeExpand=false;
-    [self.originExpandBtn setBackgroundImage:[UIImage imageNamed:@"expand.png"] forState:UIControlStateNormal];
-    [self.destExpandBtn setBackgroundImage:[UIImage imageNamed:@"expand.png"] forState:UIControlStateNormal];
+    self.originExpand= NO;
+    self.destExpand= NO;
+    self.timeExpand= NO;
+    
+    // label text is set to current time
+    self.formatter = [[NSDateFormatter alloc] init];
+    self.formatter.dateFormat = @"yyyy-MM-dd    HH:mm";
+    self.dateTimeString = [self.formatter stringFromDate:[NSDate date]];
+    self.dateTimeLbl.text= self.dateTimeString;
     
     [self showCurrentLocation];
     
@@ -118,6 +118,7 @@ NSString *dateTimeString;
 }
 
 - (IBAction)expandOrigin:(id)sender {
+    [self resignAllResponder];
     [self toggleOriginMap:sender];
 }
 
@@ -143,6 +144,7 @@ NSString *dateTimeString;
 }
 
 - (IBAction)expandDest:(id)sender {
+    [self resignAllResponder];
     [self toggleDestMap:sender];
 }
 
@@ -169,7 +171,7 @@ NSString *dateTimeString;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row == 1) {
-        if (originExpand) {
+        if (self.originExpand) {
             return 364; //expand the cell
         } else {
             return 0; // Hide the cell
@@ -177,15 +179,15 @@ NSString *dateTimeString;
         
     }
     if (indexPath.row == 3) {
-        if (destExpand) {
+        if (self.destExpand) {
             return 364; //expand the cell
         } else {
             return 0; // Hide the cell
         }
     }
     if (indexPath.row == 5) {
-        if (timeExpand) {
-            return 160; //expand the cell
+        if (self.timeExpand) {
+            return 162; //expand the cell
         } else {
             return 0; // Hide the cell
         }
@@ -195,12 +197,13 @@ NSString *dateTimeString;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"did select %@", indexPath);
-    if(indexPath.row==0){
+    [self resignAllResponder];
+    
+    if (indexPath.row==0) {
         //in case the user select the row instead of pressing the btn
         [self toggleOriginMap:self.originExpandBtn];
-        
-    }else if(indexPath.row==2){
+
+    } else if(indexPath.row==2) {
         [self toggleDestMap:self.destExpandBtn];
         
     }else if(indexPath.row==4){

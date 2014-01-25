@@ -8,9 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		71A7C12FE9984A968C9AAF5B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFFCA88C5CDA45279A4CE0BA /* libPods.a */; };
+		773001E418905E7E00100A2A /* TaxiBookBookingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 773001E318905E7E00100A2A /* TaxiBookBookingViewController.m */; };
+		773001E718906B7800100A2A /* PlaceSearchResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 773001E618906B7800100A2A /* PlaceSearchResultTableViewController.m */; };
+		773001EA18906BF300100A2A /* GoogleMapPlaceSearchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 773001E918906BF300100A2A /* GoogleMapPlaceSearchService.m */; };
 		77402F40187F0BB0008E9C9B /* LanguageSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77402F3F187F0BB0008E9C9B /* LanguageSettingViewController.m */; };
 		77402F44187F0DE2008E9C9B /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = 77402F43187F0DE2008E9C9B /* Order.m */; };
 		77402F47187F2E1F008E9C9B /* MDDirectionService.m in Sources */ = {isa = PBXBuildFile; fileRef = 77402F46187F2E1F008E9C9B /* MDDirectionService.m */; };
+		77402F49187FCD71008E9C9B /* DriverInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77402F48187FCD71008E9C9B /* DriverInfoView.xib */; };
+		77402F4C187FCDB7008E9C9B /* DriverInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77402F4B187FCDB7008E9C9B /* DriverInfoView.m */; };
+		77402F4F187FD1EC008E9C9B /* Driver.m in Sources */ = {isa = PBXBuildFile; fileRef = 77402F4E187FD1EC008E9C9B /* Driver.m */; };
+		77402F52187FD257008E9C9B /* TaxiBookGPS.m in Sources */ = {isa = PBXBuildFile; fileRef = 77402F51187FD257008E9C9B /* TaxiBookGPS.m */; };
 		774CEDA31820E3EB0004A123 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 774CEDA21820E3EB0004A123 /* Foundation.framework */; };
 		774CEDA51820E3EB0004A123 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 774CEDA41820E3EB0004A123 /* CoreGraphics.framework */; };
 		774CEDA71820E3EB0004A123 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 774CEDA61820E3EB0004A123 /* UIKit.framework */; };
@@ -33,7 +40,6 @@
 		ED40EB80187E915800E186F1 /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED40EB7F187E915800E186F1 /* CustomNavigationController.m */; };
 		ED40EB87187E948A00E186F1 /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED40EB86187E948A00E186F1 /* SettingViewController.m */; };
 		ED40EB8D187EE02E00E186F1 /* TaxiBookTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED40EB8C187EE02E00E186F1 /* TaxiBookTableViewController.m */; };
-		ED40EB8F187EE77400E186F1 /* VenueTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED40EB8E187EE77400E186F1 /* VenueTableCell.xib */; };
 		EDBFF549187D87070037F986 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDBFF548187D87070037F986 /* Images.xcassets */; };
 		EDBFF559187DB6440037F986 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF554187DB6440037F986 /* RegisterViewController.m */; };
 		EDBFF55A187DB6440037F986 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF556187DB6440037F986 /* SignInViewController.m */; };
@@ -55,12 +61,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		77402F3E187F0BB0008E9C9B /* LanguageSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LanguageSettingViewController.h; path = ViewControllers/Setting/LanguageSettingViewController.h; sourceTree = "<group>"; };
-		77402F3F187F0BB0008E9C9B /* LanguageSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LanguageSettingViewController.m; path = ViewControllers/Setting/LanguageSettingViewController.m; sourceTree = "<group>"; };
-		77402F42187F0DE2008E9C9B /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Order.h; path = Models/Unit/Order.h; sourceTree = "<group>"; };
-		77402F43187F0DE2008E9C9B /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Order.m; path = Models/Unit/Order.m; sourceTree = "<group>"; };
-		77402F45187F2E1F008E9C9B /* MDDirectionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MDDirectionService.h; path = Utility/MDDirectionService.h; sourceTree = "<group>"; };
-		77402F46187F2E1F008E9C9B /* MDDirectionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MDDirectionService.m; path = Utility/MDDirectionService.m; sourceTree = "<group>"; };
+		773001E218905E7E00100A2A /* TaxiBookBookingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiBookBookingViewController.h; sourceTree = "<group>"; };
+		773001E318905E7E00100A2A /* TaxiBookBookingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookBookingViewController.m; sourceTree = "<group>"; };
+		773001E518906B7800100A2A /* PlaceSearchResultTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceSearchResultTableViewController.h; sourceTree = "<group>"; };
+		773001E618906B7800100A2A /* PlaceSearchResultTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlaceSearchResultTableViewController.m; sourceTree = "<group>"; };
+		773001E818906BF300100A2A /* GoogleMapPlaceSearchService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleMapPlaceSearchService.h; sourceTree = "<group>"; };
+		773001E918906BF300100A2A /* GoogleMapPlaceSearchService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleMapPlaceSearchService.m; sourceTree = "<group>"; };
+		77402F3E187F0BB0008E9C9B /* LanguageSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguageSettingViewController.h; sourceTree = "<group>"; };
+		77402F3F187F0BB0008E9C9B /* LanguageSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguageSettingViewController.m; sourceTree = "<group>"; };
+		77402F42187F0DE2008E9C9B /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
+		77402F43187F0DE2008E9C9B /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
+		77402F45187F2E1F008E9C9B /* MDDirectionService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MDDirectionService.h; sourceTree = "<group>"; };
+		77402F46187F2E1F008E9C9B /* MDDirectionService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MDDirectionService.m; sourceTree = "<group>"; };
+		77402F48187FCD71008E9C9B /* DriverInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DriverInfoView.xib; sourceTree = "<group>"; };
+		77402F4A187FCDB7008E9C9B /* DriverInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriverInfoView.h; sourceTree = "<group>"; };
+		77402F4B187FCDB7008E9C9B /* DriverInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriverInfoView.m; sourceTree = "<group>"; };
+		77402F4D187FD1EC008E9C9B /* Driver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Driver.h; sourceTree = "<group>"; };
+		77402F4E187FD1EC008E9C9B /* Driver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Driver.m; sourceTree = "<group>"; };
+		77402F50187FD257008E9C9B /* TaxiBookGPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiBookGPS.h; sourceTree = "<group>"; };
+		77402F51187FD257008E9C9B /* TaxiBookGPS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookGPS.m; sourceTree = "<group>"; };
 		774CED9F1820E3EB0004A123 /* TaxiBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaxiBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		774CEDA21820E3EB0004A123 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		774CEDA41820E3EB0004A123 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -84,31 +103,30 @@
 		77517EFF182CA2DC009991F3 /* TaxiBookStringSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookStringSet.m; sourceTree = "<group>"; };
 		77517F01182CA86C009991F3 /* TaxiBookErrorSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiBookErrorSet.h; sourceTree = "<group>"; };
 		77517F02182CA86C009991F3 /* TaxiBookErrorSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookErrorSet.m; sourceTree = "<group>"; };
-		778533D61845CC0B007BCA1B /* TaxiBookProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TaxiBookProfileViewController.h; path = ViewControllers/TaxiBookProfileViewController.h; sourceTree = "<group>"; };
-		778533D71845CC0B007BCA1B /* TaxiBookProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaxiBookProfileViewController.m; path = ViewControllers/TaxiBookProfileViewController.m; sourceTree = "<group>"; };
-		ED40EB78187E679C00E186F1 /* BookingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BookingDetailViewController.h; path = ViewControllers/BookTaxi/BookingDetailViewController.h; sourceTree = "<group>"; };
-		ED40EB79187E679C00E186F1 /* BookingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BookingDetailViewController.m; path = ViewControllers/BookTaxi/BookingDetailViewController.m; sourceTree = "<group>"; };
-		ED40EB7B187E7BC500E186F1 /* SubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SubView.h; sourceTree = "<group>"; };
-		ED40EB7C187E7BC500E186F1 /* SubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SubView.m; sourceTree = "<group>"; };
-		ED40EB7E187E915800E186F1 /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CustomNavigationController.h; path = ViewControllers/CustomNavigationController.h; sourceTree = "<group>"; };
-		ED40EB7F187E915800E186F1 /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CustomNavigationController.m; path = ViewControllers/CustomNavigationController.m; sourceTree = "<group>"; };
-		ED40EB85187E948A00E186F1 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingViewController.h; path = ViewControllers/Setting/SettingViewController.h; sourceTree = "<group>"; };
-		ED40EB86187E948A00E186F1 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingViewController.m; path = ViewControllers/Setting/SettingViewController.m; sourceTree = "<group>"; };
-		ED40EB8B187EE02E00E186F1 /* TaxiBookTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TaxiBookTableViewController.h; path = ViewControllers/BookTaxi/TaxiBookTableViewController.h; sourceTree = "<group>"; };
-		ED40EB8C187EE02E00E186F1 /* TaxiBookTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaxiBookTableViewController.m; path = ViewControllers/BookTaxi/TaxiBookTableViewController.m; sourceTree = "<group>"; };
-		ED40EB8E187EE77400E186F1 /* VenueTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VenueTableCell.xib; sourceTree = "<group>"; };
+		778533D61845CC0B007BCA1B /* TaxiBookProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiBookProfileViewController.h; sourceTree = "<group>"; };
+		778533D71845CC0B007BCA1B /* TaxiBookProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookProfileViewController.m; sourceTree = "<group>"; };
+		ED40EB78187E679C00E186F1 /* BookingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookingDetailViewController.h; sourceTree = "<group>"; };
+		ED40EB79187E679C00E186F1 /* BookingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookingDetailViewController.m; sourceTree = "<group>"; };
+		ED40EB7B187E7BC500E186F1 /* SubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubView.h; path = ../Views/SubView.h; sourceTree = "<group>"; };
+		ED40EB7C187E7BC500E186F1 /* SubView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubView.m; path = ../Views/SubView.m; sourceTree = "<group>"; };
+		ED40EB7E187E915800E186F1 /* CustomNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationController.h; sourceTree = "<group>"; };
+		ED40EB7F187E915800E186F1 /* CustomNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationController.m; sourceTree = "<group>"; };
+		ED40EB85187E948A00E186F1 /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		ED40EB86187E948A00E186F1 /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		ED40EB8B187EE02E00E186F1 /* TaxiBookTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiBookTableViewController.h; sourceTree = "<group>"; };
+		ED40EB8C187EE02E00E186F1 /* TaxiBookTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookTableViewController.m; sourceTree = "<group>"; };
 		EDBFF548187D87070037F986 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		EDBFF553187DB6440037F986 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RegisterViewController.h; path = ViewControllers/Login/RegisterViewController.h; sourceTree = "<group>"; };
-		EDBFF554187DB6440037F986 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RegisterViewController.m; path = ViewControllers/Login/RegisterViewController.m; sourceTree = "<group>"; };
-		EDBFF555187DB6440037F986 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SignInViewController.h; path = ViewControllers/Login/SignInViewController.h; sourceTree = "<group>"; };
-		EDBFF556187DB6440037F986 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SignInViewController.m; path = ViewControllers/Login/SignInViewController.m; sourceTree = "<group>"; };
-		EDBFF557187DB6440037F986 /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WelcomeViewController.h; path = ViewControllers/Login/WelcomeViewController.h; sourceTree = "<group>"; };
-		EDBFF558187DB6440037F986 /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WelcomeViewController.m; path = ViewControllers/Login/WelcomeViewController.m; sourceTree = "<group>"; };
-		EDBFF55C187DB65F0037F986 /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TabBarViewController.h; path = ViewControllers/TabBarViewController.h; sourceTree = "<group>"; };
-		EDBFF55D187DB65F0037F986 /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TabBarViewController.m; path = ViewControllers/TabBarViewController.m; sourceTree = "<group>"; };
+		EDBFF553187DB6440037F986 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		EDBFF554187DB6440037F986 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		EDBFF555187DB6440037F986 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
+		EDBFF556187DB6440037F986 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
+		EDBFF557187DB6440037F986 /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WelcomeViewController.h; sourceTree = "<group>"; };
+		EDBFF558187DB6440037F986 /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WelcomeViewController.m; sourceTree = "<group>"; };
+		EDBFF55C187DB65F0037F986 /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarViewController.h; sourceTree = "<group>"; };
+		EDBFF55D187DB65F0037F986 /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewController.m; sourceTree = "<group>"; };
 		EDBFF560187DB6DC0037F986 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TaxiBook.storyboard; sourceTree = "<group>"; };
-		EDBFF562187DB6FE0037F986 /* TaxiBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TaxiBookViewController.h; path = ViewControllers/TaxiBookViewController.h; sourceTree = "<group>"; };
-		EDBFF563187DB6FE0037F986 /* TaxiBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TaxiBookViewController.m; path = ViewControllers/TaxiBookViewController.m; sourceTree = "<group>"; };
+		EDBFF562187DB6FE0037F986 /* TaxiBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiBookViewController.h; sourceTree = "<group>"; };
+		EDBFF563187DB6FE0037F986 /* TaxiBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookViewController.m; sourceTree = "<group>"; };
 		EDBFF573187DDDBF0037F986 /* ConfirmationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmationViewController.h; sourceTree = "<group>"; };
 		EDBFF574187DDDBF0037F986 /* ConfirmationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmationViewController.m; sourceTree = "<group>"; };
 		F92DB0BA8861486AB6F6D1B3 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
@@ -146,8 +164,12 @@
 			children = (
 				77402F42187F0DE2008E9C9B /* Order.h */,
 				77402F43187F0DE2008E9C9B /* Order.m */,
+				77402F4D187FD1EC008E9C9B /* Driver.h */,
+				77402F4E187FD1EC008E9C9B /* Driver.m */,
+				77402F50187FD257008E9C9B /* TaxiBookGPS.h */,
+				77402F51187FD257008E9C9B /* TaxiBookGPS.m */,
 			);
-			name = Unit;
+			path = Unit;
 			sourceTree = "<group>";
 		};
 		774CED961820E3EB0004A123 = {
@@ -196,7 +218,6 @@
 				EDBFF548187D87070037F986 /* Images.xcassets */,
 				774CEDA91820E3EB0004A123 /* Supporting Files */,
 				77517EFD182CA0E5009991F3 /* Utility */,
-				ED40EB8E187EE77400E186F1 /* VenueTableCell.xib */,
 			);
 			path = TaxiBook;
 			sourceTree = "<group>";
@@ -247,14 +268,17 @@
 				ED40EB7E187E915800E186F1 /* CustomNavigationController.h */,
 				ED40EB7F187E915800E186F1 /* CustomNavigationController.m */,
 			);
-			name = ViewControllers;
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		77517EF8182CA0B1009991F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				77402F48187FCD71008E9C9B /* DriverInfoView.xib */,
+				77402F4A187FCDB7008E9C9B /* DriverInfoView.h */,
+				77402F4B187FCDB7008E9C9B /* DriverInfoView.m */,
 			);
-			name = Views;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		77517EF9182CA0BD009991F3 /* Models */ = {
@@ -262,12 +286,14 @@
 			children = (
 				77402F41187F0DB4008E9C9B /* Unit */,
 			);
-			name = Models;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		77517EFD182CA0E5009991F3 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				773001E818906BF300100A2A /* GoogleMapPlaceSearchService.h */,
+				773001E918906BF300100A2A /* GoogleMapPlaceSearchService.m */,
 				77517EFA182CA0E0009991F3 /* TaxiBookConnectionManager.h */,
 				77517EFB182CA0E0009991F3 /* TaxiBookConnectionManager.m */,
 				77517F01182CA86C009991F3 /* TaxiBookErrorSet.h */,
@@ -277,7 +303,7 @@
 				77402F45187F2E1F008E9C9B /* MDDirectionService.h */,
 				77402F46187F2E1F008E9C9B /* MDDirectionService.m */,
 			);
-			name = Utility;
+			path = Utility;
 			sourceTree = "<group>";
 		};
 		ED40EB84187E92A800E186F1 /* Setting */ = {
@@ -288,7 +314,7 @@
 				ED40EB85187E948A00E186F1 /* SettingViewController.h */,
 				ED40EB86187E948A00E186F1 /* SettingViewController.m */,
 			);
-			name = Setting;
+			path = Setting;
 			sourceTree = "<group>";
 		};
 		EDBFF551187DB54D0037F986 /* Login */ = {
@@ -301,12 +327,16 @@
 				EDBFF557187DB6440037F986 /* WelcomeViewController.h */,
 				EDBFF558187DB6440037F986 /* WelcomeViewController.m */,
 			);
-			name = Login;
+			path = Login;
 			sourceTree = "<group>";
 		};
 		EDBFF552187DB56A0037F986 /* BookTaxi */ = {
 			isa = PBXGroup;
 			children = (
+				773001E518906B7800100A2A /* PlaceSearchResultTableViewController.h */,
+				773001E618906B7800100A2A /* PlaceSearchResultTableViewController.m */,
+				773001E218905E7E00100A2A /* TaxiBookBookingViewController.h */,
+				773001E318905E7E00100A2A /* TaxiBookBookingViewController.m */,
 				EDBFF573187DDDBF0037F986 /* ConfirmationViewController.h */,
 				EDBFF574187DDDBF0037F986 /* ConfirmationViewController.m */,
 				ED40EB78187E679C00E186F1 /* BookingDetailViewController.h */,
@@ -314,7 +344,7 @@
 				ED40EB8B187EE02E00E186F1 /* TaxiBookTableViewController.h */,
 				ED40EB8C187EE02E00E186F1 /* TaxiBookTableViewController.m */,
 			);
-			name = BookTaxi;
+			path = BookTaxi;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -396,8 +426,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED40EB8F187EE77400E186F1 /* VenueTableCell.xib in Resources */,
 				EDBFF561187DB6DC0037F986 /* TaxiBook.storyboard in Resources */,
+				77402F49187FCD71008E9C9B /* DriverInfoView.xib in Resources */,
 				774CEDAD1820E3EB0004A123 /* InfoPlist.strings in Resources */,
 				EDBFF549187D87070037F986 /* Images.xcassets in Resources */,
 				774CEDB61820E3EB0004A123 /* Main.storyboard in Resources */,
@@ -453,20 +483,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDBFF55A187DB6440037F986 /* SignInViewController.m in Sources */,
+				773001EA18906BF300100A2A /* GoogleMapPlaceSearchService.m in Sources */,
 				77402F40187F0BB0008E9C9B /* LanguageSettingViewController.m in Sources */,
 				77402F47187F2E1F008E9C9B /* MDDirectionService.m in Sources */,
+				77402F4C187FCDB7008E9C9B /* DriverInfoView.m in Sources */,
 				ED40EB7D187E7BC500E186F1 /* SubView.m in Sources */,
 				774CEDAF1820E3EB0004A123 /* main.m in Sources */,
-				ED40EB8A187ECD9100E186F1 /* LocationSearchBar.m in Sources */,
 				77402F44187F0DE2008E9C9B /* Order.m in Sources */,
 				ED40EB7A187E679C00E186F1 /* BookingDetailViewController.m in Sources */,
 				EDBFF55B187DB6440037F986 /* WelcomeViewController.m in Sources */,
 				EDBFF575187DDDBF0037F986 /* ConfirmationViewController.m in Sources */,
+				773001E418905E7E00100A2A /* TaxiBookBookingViewController.m in Sources */,
 				77517EFC182CA0E0009991F3 /* TaxiBookConnectionManager.m in Sources */,
 				ED40EB87187E948A00E186F1 /* SettingViewController.m in Sources */,
+				773001E718906B7800100A2A /* PlaceSearchResultTableViewController.m in Sources */,
 				774CEDB31820E3EB0004A123 /* TaxiBookAppDelegate.m in Sources */,
+				77402F52187FD257008E9C9B /* TaxiBookGPS.m in Sources */,
 				EDBFF559187DB6440037F986 /* RegisterViewController.m in Sources */,
 				ED40EB80187E915800E186F1 /* CustomNavigationController.m in Sources */,
+				77402F4F187FD1EC008E9C9B /* Driver.m in Sources */,
 				EDBFF564187DB6FE0037F986 /* TaxiBookViewController.m in Sources */,
 				ED40EB8D187EE02E00E186F1 /* TaxiBookTableViewController.m in Sources */,
 				EDBFF55E187DB65F0037F986 /* TabBarViewController.m in Sources */,
