@@ -48,7 +48,6 @@
 		EDBFF55E187DB65F0037F986 /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF55D187DB65F0037F986 /* TabBarViewController.m */; };
 		EDBFF561187DB6DC0037F986 /* TaxiBook.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDBFF55F187DB6DC0037F986 /* TaxiBook.storyboard */; };
 		EDBFF564187DB6FE0037F986 /* TaxiBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF563187DB6FE0037F986 /* TaxiBookViewController.m */; };
-		EDBFF575187DDDBF0037F986 /* ConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EDBFF574187DDDBF0037F986 /* ConfirmationViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,8 +129,6 @@
 		EDBFF560187DB6DC0037F986 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/TaxiBook.storyboard; sourceTree = "<group>"; };
 		EDBFF562187DB6FE0037F986 /* TaxiBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiBookViewController.h; sourceTree = "<group>"; };
 		EDBFF563187DB6FE0037F986 /* TaxiBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookViewController.m; sourceTree = "<group>"; };
-		EDBFF573187DDDBF0037F986 /* ConfirmationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmationViewController.h; sourceTree = "<group>"; };
-		EDBFF574187DDDBF0037F986 /* ConfirmationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmationViewController.m; sourceTree = "<group>"; };
 		F92DB0BA8861486AB6F6D1B3 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		FFFCA88C5CDA45279A4CE0BA /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -342,8 +339,6 @@
 				773001E618906B7800100A2A /* PlaceSearchResultTableViewController.m */,
 				773001E218905E7E00100A2A /* TaxiBookBookingViewController.h */,
 				773001E318905E7E00100A2A /* TaxiBookBookingViewController.m */,
-				EDBFF573187DDDBF0037F986 /* ConfirmationViewController.h */,
-				EDBFF574187DDDBF0037F986 /* ConfirmationViewController.m */,
 				ED40EB78187E679C00E186F1 /* BookingDetailViewController.h */,
 				ED40EB79187E679C00E186F1 /* BookingDetailViewController.m */,
 				ED40EB8B187EE02E00E186F1 /* TaxiBookTableViewController.h */,
@@ -497,7 +492,6 @@
 				77402F44187F0DE2008E9C9B /* Order.m in Sources */,
 				ED40EB7A187E679C00E186F1 /* BookingDetailViewController.m in Sources */,
 				EDBFF55B187DB6440037F986 /* WelcomeViewController.m in Sources */,
-				EDBFF575187DDDBF0037F986 /* ConfirmationViewController.m in Sources */,
 				773001E418905E7E00100A2A /* TaxiBookBookingViewController.m in Sources */,
 				77517EFC182CA0E0009991F3 /* TaxiBookConnectionManager.m in Sources */,
 				ED40EB87187E948A00E186F1 /* SettingViewController.m in Sources */,
