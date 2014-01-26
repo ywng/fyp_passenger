@@ -24,7 +24,7 @@
         if (self.displayOrder.fromGPS.latitude != 0 && self.displayOrder.fromGPS.longitude != 0) {
             camera = [GMSCameraPosition cameraWithLatitude:self.displayOrder.fromGPS.latitude longitude:self.displayOrder.fromGPS.longitude zoom:15];
         } else {
-            camera = [GMSCameraPosition cameraWithLatitude:22.3964 longitude:114.1095 zoom:10];
+            camera = [GMSCameraPosition cameraWithLatitude:22.3964 longitude:114.1095 zoom:11];
         }
         
         

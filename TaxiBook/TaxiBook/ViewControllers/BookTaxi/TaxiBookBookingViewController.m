@@ -8,12 +8,18 @@
 
 #import "TaxiBookBookingViewController.h"
 #import "PlaceSearchResultTableViewController.h"
+#import "GoogleMapPickerViewController.h"
 
-@interface TaxiBookBookingViewController ()
+@interface TaxiBookBookingViewController () <GoogleMapPickerDelegate, PlaceSearchResultDelegate, GMPlaceSearchServiceDelegate>
 
 @property (nonatomic, getter = isOriginExpanded) BOOL originExpand;
 @property (nonatomic, getter = isDestExpanded) BOOL destExpand;
 @property (nonatomic, getter = isTimeExpanded) BOOL timeExpand;
+
+@property (nonatomic) NSInteger selectedPlaceIndex;
+
+@property (strong, nonatomic) GMPlace *originPlace;
+@property (strong, nonatomic) GMPlace *destPlace;
 
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 
@@ -26,6 +32,7 @@
 
 static NSString *originVCSegueIdentifier = @"origin";
 static NSString *destVCSegueIdentifier = @"dest";
+static NSString *mapPickerSegueIdentifier = @"mapPicker";
 
 
 - (NSDateFormatter *)dateFormatter
@@ -62,6 +69,8 @@ static NSString *destVCSegueIdentifier = @"dest";
     [self.originTextField addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
     [self.destinationTextField addTarget:self action:@selector(textDidChange:) forControlEvents:UIControlEventEditingChanged];
     
+    [self.timePicker setMinimumDate:[[NSDate alloc] initWithTimeIntervalSinceNow:0]];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,8 +83,23 @@ static NSString *destVCSegueIdentifier = @"dest";
 {
     if ([originVCSegueIdentifier isEqualToString:segue.identifier]) {
         self.originTableViewController = (PlaceSearchResultTableViewController *)segue.destinationViewController;
+        self.originTableViewController.delegate = self;
     } else if ([destVCSegueIdentifier isEqualToString:segue.identifier]) {
         self.destTableViewController = (PlaceSearchResultTableViewController *)segue.destinationViewController;
+        self.destTableViewController.delegate = self;
+    } else if ([mapPickerSegueIdentifier isEqualToString:segue.identifier]) {
+        GoogleMapPickerViewController *pickerVC = (GoogleMapPickerViewController *)segue.destinationViewController;
+        
+        GMPlace *place = nil;
+        
+        if (self.selectedPlaceIndex == 0) {
+            place = self.originPlace;
+        } else {
+            place = self.destPlace;
+        }
+        
+        pickerVC.delegate = self;
+        [pickerVC setCurrentPlace:place];
     }
 }
 
@@ -94,8 +118,6 @@ static NSString *destVCSegueIdentifier = @"dest";
         [self collapseOriginView];
     }
 
-    
-    
 }
 
 - (IBAction)userDidTapOnDestContainerView:(id)sender {
@@ -135,13 +157,27 @@ static NSString *destVCSegueIdentifier = @"dest";
 - (IBAction)confirmButtonPressed:(UIBarButtonItem *)sender {
     if ([@"Done" isEqualToString:sender.title]) {
         [self resignAllResponder];
-        [self collapseOriginView];
-        [self collapseDestView];
-        [self collapseTimeView];
+        [self resetAllView];
     } else {
         [self performSegueWithIdentifier:@"confirm" sender:self];
     }
 }
+
+#pragma mark - Other IBActions
+- (IBAction)originMapButtonPressed:(id)sender
+{
+    self.selectedPlaceIndex = 0;
+    [self resetAllView];
+    [self performSegueWithIdentifier:mapPickerSegueIdentifier sender:sender];
+}
+
+- (IBAction)destMapButtonPressed:(id)sender
+{
+    self.selectedPlaceIndex = 1;
+    [self resetAllView];
+    [self performSegueWithIdentifier:mapPickerSegueIdentifier sender:sender];
+}
+
 
 #pragma mark - View Show/Hide
 
@@ -217,6 +253,16 @@ static NSString *destVCSegueIdentifier = @"dest";
     }
 }
 
+- (void)resetAllView
+{
+    [self collapseOriginView];
+    [self collapseDestView];
+    [self collapseTimeView];
+    
+    if ([self.rightBarButtonItem.title isEqualToString:@"Done"]) {
+        [self confirmButtonPressed:self.rightBarButtonItem];
+    }
+}
 
 #pragma mark - UITextFieldDelegate
 
@@ -232,10 +278,12 @@ This method tries to remove the keyboard from current view stack
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     if (self.originTextField == textField) {
+        self.selectedPlaceIndex = 0;
         if (![self isOriginExpanded]) {
             [self userDidTapOnOriginContainerView:textField];
         }
     } else if (self.destinationTextField == textField) {
+        self.selectedPlaceIndex = 1;
         if (![self isDestExpanded]) {
             [self userDidTapOnDestContainerView:textField];
         }
@@ -267,6 +315,64 @@ This method tries to remove the keyboard from current view stack
     
 }
 
+
+
+#pragma mark - GoogleMapPickerDelegate
+
+- (void)userDidFinishPickingPlace:(GMPlace *)place name:(NSString *)locationName
+{
+    if (self.selectedPlaceIndex == 0) {
+        
+        self.originPlace = place;
+        self.originTextField.text = locationName;
+        
+    } else if (self.selectedPlaceIndex == 1) {
+        
+        self.destPlace = place;
+        self.destinationTextField.text = locationName;
+        
+    }
+    if (!self.originPlace || !self.destPlace) {
+        self.navigationController.navigationBar.topItem.rightBarButtonItem.enabled = NO;
+    } else {
+        self.navigationController.navigationBar.topItem.rightBarButtonItem.enabled = YES;
+    }
+}
+
+
+#pragma mark - PlaceSearchResultDelegate
+
+- (void)userDidSelectThePlaceName:(GMPlace *)place
+{
+    // get the exact result from the search
+    if (self.selectedPlaceIndex == 0) {
+        self.originTextField.text = place.placeSecondaryDescription;
+        
+    } else if (self.selectedPlaceIndex == 1) {
+        self.destinationTextField.text = place.placeSecondaryDescription;
+    }
+    [SubView loadingView:@"loading"];
+}
+
+- (void)downloadTheExactPlace:(GMPlace *)place
+{
+    if (self.selectedPlaceIndex == 0) {
+        self.originPlace = place;
+        [self.originTextField resignFirstResponder];
+        [self resetAllView];
+    } else if (self.selectedPlaceIndex == 1) {
+        self.destPlace = place;
+        [self.destinationTextField resignFirstResponder];
+        [self resetAllView];
+    }
+    [SubView dismissAlert];
+    
+    if (!self.originPlace || !self.destPlace) {
+        self.navigationController.navigationBar.topItem.rightBarButtonItem.enabled = NO;
+    } else {
+        self.navigationController.navigationBar.topItem.rightBarButtonItem.enabled = YES;
+    }
+}
 
 
 @end

@@ -12,6 +12,10 @@
 
 @property (strong, nonatomic) NSArray *resultArray;
 
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) CLLocation *bestLocation;
+@property (strong, nonatomic) NSTimer *timer;
+
 @end
 
 @implementation PlaceSearchResultTableViewController
@@ -34,6 +38,19 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    if ([CLLocationManager locationServicesEnabled] != NO) {
+        
+        [self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
+        [self.locationManager setDistanceFilter:500];
+        
+        [self.locationManager startUpdatingLocation];
+        
+    } else {
+        NSLog(@"not available");
+        
+        // load up images to tell user
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,20 +68,34 @@
 
 - (void)downloadAutoComplete
 {
-    if (self.searchString.length > 0) {
-        [GoogleMapPlaceSearchService autoCompleteWithKeyword:self.searchString gpsEnable:NO withDelegate:self];
+    if (self.searchString.length > 0 && self.bestLocation) {
+        [GoogleMapPlaceSearchService autoCompleteWithKeyword:self.searchString gpsEnable:YES location:self.bestLocation withDelegate:self];
+    } else if (self.searchString.length > 0) {
+        [GoogleMapPlaceSearchService autoCompleteWithKeyword:self.searchString gpsEnable:NO location:nil withDelegate:self];
     } else {
-        // clear data is okay
+        // clear data maybe
     }
 }
 
 
 #pragma mark - GMPlaceSearchServiceDelegate
 
-- (void)finishDownloadPlaceSearch:(NSArray *)places
+- (void)finishDownloadPlaceSearch:(NSArray *)places searchType:(PlaceSearchType)searchType
 {
-    self.resultArray = places;
-    [self.tableView reloadData];
+    if (searchType == PlaceSearchTypeExactSearch) {
+        // notify the delegate
+        if ([places count] > 0) {
+            GMPlace *place = [places objectAtIndex:0];
+            if (self.delegate && [self.delegate conformsToProtocol:@protocol(PlaceSearchResultDelegate)]) {
+                [self.delegate downloadTheExactPlace:place];
+            }
+        } else {
+            [self.delegate downloadTheExactPlace:nil]; // temp solution
+        }
+    } else if (searchType == PlaceSearchTypeAutoComplete) {
+        self.resultArray = places;
+        [self.tableView reloadData];
+    }
 }
 
 
@@ -91,6 +122,58 @@
     cell.detailTextLabel.text = place.placeSecondaryDescription;
     
     return cell;
+}
+
+
+
+#pragma mark - CLLocationManager
+#pragma mark - CLLocationManagerDelegate method
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    
+    // If it's a relatively recent event, turn off updates to save power
+    
+    CLLocation* location = [locations lastObject];
+    NSDate* eventDate = location.timestamp;
+    NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
+    
+    if (abs(howRecent) < 15.0) {
+        // If the event is recent, do something with it.
+        [self setBestLocation:location];
+    }
+    
+    // Schedule location manager to run again in 10 seconds
+    [self.locationManager stopUpdatingLocation];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(turnOnLocationManager)  userInfo:nil repeats:NO];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    if (error.code == kCLErrorDenied) {
+        NSLog(@"user denied");
+        [self.locationManager stopUpdatingLocation];
+    } else if (error.code == kCLErrorLocationUnknown) {
+        NSLog(@"location unknown");
+    } else {
+        NSLog(@"error: %@", error);
+    }
+}
+
+- (void)turnOnLocationManager {
+    [self.locationManager startUpdatingLocation];
+}
+
+
+
+#pragma mark - UITableViewDelegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    GMPlace *place = [self.resultArray objectAtIndex:indexPath.row];
+    if (self.delegate && [self.delegate conformsToProtocol:@protocol(PlaceSearchResultDelegate)]) {
+        [self.delegate userDidSelectThePlaceName:place];
+    }
+    [GoogleMapPlaceSearchService searchWithKeyword:place.placeDescription gpsEnable:YES location:self.bestLocation withDelegate:self];
 }
 
 /*

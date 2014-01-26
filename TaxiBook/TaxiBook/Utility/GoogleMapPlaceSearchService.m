@@ -23,14 +23,57 @@
 
 static NSString *queryAutoCompleteUrl = @"https://maps.googleapis.com/maps/api/place/queryautocomplete/json?";
 
-+ (void)searchWithKeyword:(NSString *)keyword withDelegate:(id<GMPlaceSearchServiceDelegate>)delegate
+static NSString *reverseGeocodingCompleteUrl = @"https://maps.googleapis.com/maps/api/geocode/json?";
+
+static NSString *textSearchCompleteUrl = @"https://maps.googleapis.com/maps/api/place/textsearch/json?";
+
++ (void)searchWithKeyword:(NSString *)keyword gpsEnable:(BOOL)gpsEnable location:(CLLocation *)location withDelegate:(id<GMPlaceSearchServiceDelegate>)delegate
 {
+    NSString *completedUrl = nil;
     
+    if (gpsEnable && location) {
+        completedUrl = [NSString stringWithFormat:@"%@key=%@&sensor=true&location=%f,%f&query=%@", textSearchCompleteUrl, TaxiBookGoogleAPIServerKey, location.coordinate.latitude, location.coordinate.longitude, [keyword stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    } else {
+        completedUrl = [NSString stringWithFormat:@"%@key=%@&sensor=false&query=%@", textSearchCompleteUrl, TaxiBookGoogleAPIServerKey, [keyword stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
+    
+    [[AFHTTPRequestOperationManager manager] GET:completedUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        // parse the object here
+        //        NSLog(@"responseObject %@", responseObject);
+        id results = [responseObject objectForKey:@"results"];
+        NSMutableArray *array = [[NSMutableArray alloc] init];
+        
+        for (id result in results) {
+            GMPlace *place = [[GMPlace alloc] init];
+            [place setPlaceId:[result objectForKey:@"id"]];
+            NSString *formatAddress = [result objectForKey:@"formatted_address"];
+            [place setPlaceAddress:formatAddress];
+            
+            id geometry = [result objectForKey:@"geometry"];
+            id location = [geometry objectForKey:@"location"];
+            
+            place.coordinate = CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue], [[location objectForKey:@"lng"] floatValue]);
+            
+            [array addObject:place];
+        }
+        
+        [delegate finishDownloadPlaceSearch:array searchType:PlaceSearchTypeExactSearch];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"fail to download auto complete search result, error %@", error);
+    }];
 }
 
-+ (void)autoCompleteWithKeyword:(NSString *)keyword gpsEnable:(BOOL)gpsEnable withDelegate:(id<GMPlaceSearchServiceDelegate>)delegate
++ (void)autoCompleteWithKeyword:(NSString *)keyword gpsEnable:(BOOL)gpsEnable location:(CLLocation *)location withDelegate:(id<GMPlaceSearchServiceDelegate>)delegate
 {
-    NSString *completedUrl = [NSString stringWithFormat:@"%@key=%@&sensor=%@&input=%@", queryAutoCompleteUrl, TaxiBookGoogleAPIServerKey, gpsEnable?@"true":@"false", [keyword stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSString *completedUrl = nil;
+    
+    if (gpsEnable && location) {
+        completedUrl = [NSString stringWithFormat:@"%@key=%@&sensor=true&location=%f,%f&input=%@", queryAutoCompleteUrl, TaxiBookGoogleAPIServerKey, location.coordinate.latitude, location.coordinate.longitude, [keyword stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    } else {
+        completedUrl = [NSString stringWithFormat:@"%@key=%@&sensor=false&input=%@", queryAutoCompleteUrl, TaxiBookGoogleAPIServerKey, [keyword stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    }
     
 //    completedUrl = [completedUrl stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 //    NSLog(@"completed URL %@", completedUrl);
@@ -43,6 +86,7 @@ static NSString *queryAutoCompleteUrl = @"https://maps.googleapis.com/maps/api/p
         NSMutableArray *array = [[NSMutableArray alloc] init];
         
         for (id prediction in predictions) {
+//            NSLog(@"get prediction %@", prediction);
             GMPlace *place = [[GMPlace alloc] init];
             
             place.placeId = [prediction objectForKey:@"id"];
@@ -61,11 +105,56 @@ static NSString *queryAutoCompleteUrl = @"https://maps.googleapis.com/maps/api/p
             [array addObject:place];
         }
         
-        [delegate finishDownloadPlaceSearch:array];
+        [delegate finishDownloadPlaceSearch:array searchType:PlaceSearchTypeAutoComplete];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"fail to download auto complete search result, error %@", error);
     }];
+}
+
++ (void)reverseGeocodingWithLocation:(CLLocation *)location withDelegate:(id<GMPlaceSearchServiceDelegate>)delegate
+{
+    
+    /** Refer to https://developers.google.com/maps/documentation/geocoding/#ReverseGeocoding **/
+    
+    NSString *completeUrl = nil;
+    
+    if (!location) {
+        return;
+    }
+    
+    completeUrl = [NSString stringWithFormat:@"%@latlng=%f,%f&sensor=false", reverseGeocodingCompleteUrl, location.coordinate.latitude, location.coordinate.longitude];
+    
+    [[AFHTTPRequestOperationManager manager] GET:completeUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        // parse the object here
+
+        NSMutableArray *array = [[NSMutableArray alloc] init];
+        
+        id results = [responseObject objectForKey:@"results"];
+        
+        for (id result in results) {
+            GMPlace *place = [[GMPlace alloc] init];
+            
+            NSString *formatAddress = [result objectForKey:@"formatted_address"];
+            [place setPlaceAddress:formatAddress];
+            
+            id geometry = [result objectForKey:@"geometry"];
+            id location = [geometry objectForKey:@"location"];
+            
+            place.coordinate = CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue], [[location objectForKey:@"lng"] floatValue]);
+            
+            [array addObject:place];
+            
+        }
+        
+        
+        [delegate finishDownloadPlaceSearch:array searchType:PlaceSearchTypeReverseGeocoding];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"fail to download reverse geocoding search result, error %@", error);
+    }];
+    
 }
 
 @end

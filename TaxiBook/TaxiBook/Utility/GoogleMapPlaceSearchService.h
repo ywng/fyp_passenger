@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 /**
  Custom class for Google Place Search API Result
@@ -16,19 +17,35 @@
 @property (strong, nonatomic) NSString *placeId;
 @property (strong, nonatomic) NSString *placeDescription;
 @property (strong, nonatomic) NSString *placeSecondaryDescription;
+@property (strong, nonatomic) NSString *placeAddress;
+@property (nonatomic) CLLocationCoordinate2D coordinate;
 
 @end
 
+typedef NS_ENUM(NSInteger, PlaceSearchType) {
+
+    PlaceSearchTypeExactSearch = 1,
+    PlaceSearchTypeAutoComplete = 2,
+    PlaceSearchTypeReverseGeocoding = 3
+
+};
+
 @protocol GMPlaceSearchServiceDelegate <NSObject>
 
-- (void)finishDownloadPlaceSearch:(NSArray *)places;
+- (void)finishDownloadPlaceSearch:(NSArray *)places searchType:(PlaceSearchType)searchType;
 
 @end
 
 @interface GoogleMapPlaceSearchService : NSObject
 
-+ (void)searchWithKeyword:(NSString *)keyword withDelegate:(id<GMPlaceSearchServiceDelegate>)delegate;
++ (void)searchWithKeyword:(NSString *)keyword gpsEnable:(BOOL)gpsEnable location:(CLLocation *)location withDelegate:(id<GMPlaceSearchServiceDelegate>)delegate;
 
-+ (void)autoCompleteWithKeyword:(NSString *)keyword gpsEnable:(BOOL)gpsEnable withDelegate:(id<GMPlaceSearchServiceDelegate>)delegate;
++ (void)autoCompleteWithKeyword:(NSString *)keyword gpsEnable:(BOOL)gpsEnable location:(CLLocation *)location withDelegate:(id<GMPlaceSearchServiceDelegate>)delegate;
+
+
+/**
+ * Data will be returned via the delegate method, each object in the Array is type of `GMPlace`, with only `coordinate` and `placeAddress` available
+ */
++ (void)reverseGeocodingWithLocation:(CLLocation *)location withDelegate:(id<GMPlaceSearchServiceDelegate>)delegate;
 
 @end

@@ -9,8 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "GoogleMapPlaceSearchService.h"
 
-@interface PlaceSearchResultTableViewController : UITableViewController <GMPlaceSearchServiceDelegate>
+@protocol PlaceSearchResultDelegate <NSObject>
+
+- (void)userDidSelectThePlaceName:(GMPlace *)place;
+- (void)downloadTheExactPlace:(GMPlace *)place;
+
+@end
+
+@interface PlaceSearchResultTableViewController : UITableViewController <CLLocationManagerDelegate, GMPlaceSearchServiceDelegate>
 
 @property (strong, nonatomic) NSString *searchString;
+@property (weak, nonatomic) id<PlaceSearchResultDelegate> delegate;
 
 @end

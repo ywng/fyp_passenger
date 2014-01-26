@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SubView.h"
 
 @interface TaxiBookBookingViewController : UIViewController <UITextFieldDelegate>
 
@@ -14,15 +15,16 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *originTextField;
 @property (weak, nonatomic) IBOutlet UIView *originSearchTableView;
+@property (weak, nonatomic) IBOutlet UIButton *originMapButton;
 
 
 @property (weak, nonatomic) IBOutlet UITextField *destinationTextField;
 @property (weak, nonatomic) IBOutlet UIView *destSearchTableView;
+@property (weak, nonatomic) IBOutlet UIButton *destMapButton;
+
 
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet UIDatePicker *timePicker;
-
-
 
 
 
