@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <GoogleMaps/GoogleMaps.h>
 #import "DriverInfoView.h"
-#import "Order.h"
+#import "OrderModel.h"
 
-@interface BookingDetailViewController : UIViewController <UIScrollViewDelegate>
+@interface BookingDetailViewController : UIViewController <UIScrollViewDelegate, OrderModelDelegate>
 
 @property (strong, nonatomic) Order *displayOrder;
 

@@ -12,6 +12,9 @@
 
 @interface BookingDetailViewController () <MDDirectionServiceDelegate>
 
+@property (strong, nonatomic) OrderModel *orderModel;
+@property (strong, nonatomic) NSTimer *updateTimer;
+
 @end
 
 @implementation BookingDetailViewController
@@ -45,6 +48,14 @@
     }
 }
 
+- (OrderModel *)orderModel
+{
+    if (!_orderModel) {
+        _orderModel = [OrderModel newInstanceWithIdentifier:self.description delegate:self];
+    }
+    return _orderModel;
+}
+
 
 #pragma mark - VC Lifecycle
 
@@ -63,12 +74,10 @@
 	// Do any additional setup after loading the view.
     
     [self setupGoogleMapView];
-    if (!self.displayOrder) {
-        self.displayOrder = [[Order alloc] init];
-        self.displayOrder.orderId = 1;
-    }
+    [SubView loadingView:nil];
     [self updateDisplayOrder];
-
+    
+    self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(updateDisplayOrder) userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -83,31 +92,40 @@
     [self setupGoogleMapView];
 }
 
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [self.updateTimer invalidate];
+    self.updateTimer = nil;
+}
+
+- (void)dealloc
+{
+    NSLog(@"dealloc %@", self.description);
+    [self.updateTimer invalidate];
+    self.updateTimer = nil;
+}
+
+#pragma mark - OrderModelDelegate
+
+- (void)finishDownloadOrders:(OrderModel *)orderModel
+{
+    self.displayOrder = [orderModel objectAtIndex:0];
+    [self updateView];
+    [SubView dismissAlert];
+}
+
+- (void)failDownloadOrders:(OrderModel *)orderModel
+{
+    [self updateView];
+    [SubView dismissAlert];
+}
+
 #pragma mark - View update
 
 - (void)updateDisplayOrder
 {
-    TaxiBookConnectionManager *sharedManager = [TaxiBookConnectionManager sharedManager];
-    
-    __weak BookingDetailViewController *weakSelf = self;
-    
-    [SubView loadingView:nil];
-    
-    [sharedManager getUrl:[NSString stringWithFormat:@"/trip/trip_details?oid=%ld", (long)self.displayOrder.orderId] success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        id jsonData = [responseObject objectForKey:@"order"];
-        
-        weakSelf.displayOrder = [Order newInstanceFromServerData:jsonData];
-        
-        jsonData = [responseObject objectForKey:@"driver"];
-        if (jsonData) {
-            weakSelf.displayOrder.confirmedDriver = [Driver newInstanceFromServerData:jsonData];
-        }
-        
-        [weakSelf updateView];
-
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [SubView dismissAlert];
-    } loginIfNeed:YES];
+    [self.orderModel downloadOrderDetail:self.displayOrder.orderId];
 }
 
 - (void)updateView

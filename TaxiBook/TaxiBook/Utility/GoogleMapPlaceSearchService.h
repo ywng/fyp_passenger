@@ -8,19 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
-
-/**
- Custom class for Google Place Search API Result
-*/
-@interface GMPlace : NSObject
-
-@property (strong, nonatomic) NSString *placeId;
-@property (strong, nonatomic) NSString *placeDescription;
-@property (strong, nonatomic) NSString *placeSecondaryDescription;
-@property (strong, nonatomic) NSString *placeAddress;
-@property (nonatomic) CLLocationCoordinate2D coordinate;
-
-@end
+#import "GMPlace.h"
 
 typedef NS_ENUM(NSInteger, PlaceSearchType) {
 

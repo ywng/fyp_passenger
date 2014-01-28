@@ -10,11 +10,6 @@
 #import <AFNetworking/AFNetworking.h>
 #import <GoogleMaps/GoogleMaps.h>
 
-@implementation GMPlace
-
-@end
-
-
 @interface GoogleMapPlaceSearchService ()
 
 @end

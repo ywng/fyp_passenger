@@ -45,7 +45,7 @@
     // fromGPS
     TaxiBookGPS *fromGPS = [[TaxiBookGPS alloc] init], *toGPS = [[TaxiBookGPS alloc] init];
     
-    tmp = [jsonData objectForKey:@"locaton_from"];
+    tmp = [jsonData objectForKey:@"location_from"];
     if (tmp && tmp!= [NSNull null]) {
         fromGPS.streetDescription = tmp;
     }
@@ -64,7 +64,7 @@
     
     // toGPS
     
-    tmp = [jsonData objectForKey:@"locaton_to"];
+    tmp = [jsonData objectForKey:@"location_to"];
     if (tmp && tmp!= [NSNull null]) {
         toGPS.streetDescription = tmp;
     }
@@ -144,6 +144,37 @@
     }
     
     return newOrder;
+}
+
++ (NSString *)orderStatusToString:(OrderStatus)status
+{
+    switch (status) {
+        case OrderStatusBidded:
+            return @"Driver confirmed";
+            break;
+        case OrderStatusCustomerConfirmed:
+            return @"Trip confirmed";
+            break;
+        case OrderStatusDriverComing:
+            return @"Driver is coming";
+            break;
+        case OrderStatusDriverPickedUp:
+            return @"Trip started";
+            break;
+        case OrderStatusDriverWaiting:
+            return @"Driver is waiting";
+            break;
+        case OrderStatusOrderFinished:
+            return @"Trip is finished";
+            break;
+        case OrderStatusPending:
+            return @"Waiting for drivers to accept";
+            break;
+        case OrderStatusUnknown:
+        default:
+            return @"Unknown";
+            break;
+    }
 }
 
 

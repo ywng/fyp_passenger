@@ -9,8 +9,9 @@
 #import "TaxiBookBookingViewController.h"
 #import "PlaceSearchResultTableViewController.h"
 #import "GoogleMapPickerViewController.h"
+#import "ConfirmationViewController.h"
 
-@interface TaxiBookBookingViewController () <GoogleMapPickerDelegate, PlaceSearchResultDelegate, GMPlaceSearchServiceDelegate>
+@interface TaxiBookBookingViewController () <GoogleMapPickerDelegate, PlaceSearchResultDelegate>
 
 @property (nonatomic, getter = isOriginExpanded) BOOL originExpand;
 @property (nonatomic, getter = isDestExpanded) BOOL destExpand;
@@ -33,6 +34,7 @@
 static NSString *originVCSegueIdentifier = @"origin";
 static NSString *destVCSegueIdentifier = @"dest";
 static NSString *mapPickerSegueIdentifier = @"mapPicker";
+static NSString *confirmSegueIdentifier = @"confirm";
 
 
 - (NSDateFormatter *)dateFormatter
@@ -100,7 +102,7 @@ static NSString *mapPickerSegueIdentifier = @"mapPicker";
         
         pickerVC.delegate = self;
         [pickerVC setCurrentPlace:place];
-    }
+    } //else
 }
 
 
@@ -159,7 +161,7 @@ static NSString *mapPickerSegueIdentifier = @"mapPicker";
         [self resignAllResponder];
         [self resetAllView];
     } else {
-        [self performSegueWithIdentifier:@"confirm" sender:self];
+        [self performSegueWithIdentifier:confirmSegueIdentifier sender:self];
     }
 }
 

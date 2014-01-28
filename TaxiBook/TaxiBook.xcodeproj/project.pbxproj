@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		71A7C12FE9984A968C9AAF5B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFFCA88C5CDA45279A4CE0BA /* libPods.a */; };
 		7706C5CA1894F6FE004B7447 /* GoogleMapPickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7706C5C91894F6FE004B7447 /* GoogleMapPickerViewController.m */; };
+		7706C5CD189546C4004B7447 /* ConfirmationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7706C5CC189546C4004B7447 /* ConfirmationViewController.m */; };
+		7706C5D01895470F004B7447 /* GMPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 7706C5CF1895470F004B7447 /* GMPlace.m */; };
+		77188EF118977A4B009F18EA /* TaxiBookTripOverviewTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77188EF018977A4B009F18EA /* TaxiBookTripOverviewTableViewController.m */; };
+		77188EF418977AA0009F18EA /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77188EF318977AA0009F18EA /* OrderModel.m */; };
 		773001E418905E7E00100A2A /* TaxiBookBookingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 773001E318905E7E00100A2A /* TaxiBookBookingViewController.m */; };
 		773001E718906B7800100A2A /* PlaceSearchResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 773001E618906B7800100A2A /* PlaceSearchResultTableViewController.m */; };
 		773001EA18906BF300100A2A /* GoogleMapPlaceSearchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 773001E918906BF300100A2A /* GoogleMapPlaceSearchService.m */; };
@@ -63,6 +67,14 @@
 /* Begin PBXFileReference section */
 		7706C5C81894F6FE004B7447 /* GoogleMapPickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoogleMapPickerViewController.h; sourceTree = "<group>"; };
 		7706C5C91894F6FE004B7447 /* GoogleMapPickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GoogleMapPickerViewController.m; sourceTree = "<group>"; };
+		7706C5CB189546C4004B7447 /* ConfirmationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConfirmationViewController.h; sourceTree = "<group>"; };
+		7706C5CC189546C4004B7447 /* ConfirmationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConfirmationViewController.m; sourceTree = "<group>"; };
+		7706C5CE1895470F004B7447 /* GMPlace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GMPlace.h; sourceTree = "<group>"; };
+		7706C5CF1895470F004B7447 /* GMPlace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GMPlace.m; sourceTree = "<group>"; };
+		77188EEF18977A4B009F18EA /* TaxiBookTripOverviewTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiBookTripOverviewTableViewController.h; sourceTree = "<group>"; };
+		77188EF018977A4B009F18EA /* TaxiBookTripOverviewTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookTripOverviewTableViewController.m; sourceTree = "<group>"; };
+		77188EF218977AA0009F18EA /* OrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderModel.h; sourceTree = "<group>"; };
+		77188EF318977AA0009F18EA /* OrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderModel.m; sourceTree = "<group>"; };
 		773001E218905E7E00100A2A /* TaxiBookBookingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiBookBookingViewController.h; sourceTree = "<group>"; };
 		773001E318905E7E00100A2A /* TaxiBookBookingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookBookingViewController.m; sourceTree = "<group>"; };
 		773001E518906B7800100A2A /* PlaceSearchResultTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceSearchResultTableViewController.h; sourceTree = "<group>"; };
@@ -162,6 +174,8 @@
 		77402F41187F0DB4008E9C9B /* Unit */ = {
 			isa = PBXGroup;
 			children = (
+				7706C5CE1895470F004B7447 /* GMPlace.h */,
+				7706C5CF1895470F004B7447 /* GMPlace.m */,
 				77402F42187F0DE2008E9C9B /* Order.h */,
 				77402F43187F0DE2008E9C9B /* Order.m */,
 				77402F4D187FD1EC008E9C9B /* Driver.h */,
@@ -284,6 +298,8 @@
 		77517EF9182CA0BD009991F3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				77188EF218977AA0009F18EA /* OrderModel.h */,
+				77188EF318977AA0009F18EA /* OrderModel.m */,
 				77402F41187F0DB4008E9C9B /* Unit */,
 			);
 			path = Models;
@@ -333,6 +349,10 @@
 		EDBFF552187DB56A0037F986 /* BookTaxi */ = {
 			isa = PBXGroup;
 			children = (
+				77188EEF18977A4B009F18EA /* TaxiBookTripOverviewTableViewController.h */,
+				77188EF018977A4B009F18EA /* TaxiBookTripOverviewTableViewController.m */,
+				7706C5CB189546C4004B7447 /* ConfirmationViewController.h */,
+				7706C5CC189546C4004B7447 /* ConfirmationViewController.m */,
 				7706C5C81894F6FE004B7447 /* GoogleMapPickerViewController.h */,
 				7706C5C91894F6FE004B7447 /* GoogleMapPickerViewController.m */,
 				773001E518906B7800100A2A /* PlaceSearchResultTableViewController.h */,
@@ -484,8 +504,11 @@
 			files = (
 				EDBFF55A187DB6440037F986 /* SignInViewController.m in Sources */,
 				773001EA18906BF300100A2A /* GoogleMapPlaceSearchService.m in Sources */,
+				77188EF418977AA0009F18EA /* OrderModel.m in Sources */,
 				77402F40187F0BB0008E9C9B /* LanguageSettingViewController.m in Sources */,
 				77402F47187F2E1F008E9C9B /* MDDirectionService.m in Sources */,
+				7706C5CD189546C4004B7447 /* ConfirmationViewController.m in Sources */,
+				7706C5D01895470F004B7447 /* GMPlace.m in Sources */,
 				77402F4C187FCDB7008E9C9B /* DriverInfoView.m in Sources */,
 				ED40EB7D187E7BC500E186F1 /* SubView.m in Sources */,
 				774CEDAF1820E3EB0004A123 /* main.m in Sources */,
@@ -507,6 +530,7 @@
 				EDBFF55E187DB65F0037F986 /* TabBarViewController.m in Sources */,
 				778533D81845CC0B007BCA1B /* TaxiBookProfileViewController.m in Sources */,
 				77517F03182CA86C009991F3 /* TaxiBookErrorSet.m in Sources */,
+				77188EF118977A4B009F18EA /* TaxiBookTripOverviewTableViewController.m in Sources */,
 				77517F00182CA2DC009991F3 /* TaxiBookStringSet.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

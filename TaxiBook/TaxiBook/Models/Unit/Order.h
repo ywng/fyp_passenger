@@ -45,5 +45,6 @@ typedef NS_ENUM(NSInteger, OrderStatus) {
 @property (nonatomic) float actualPrice;
 
 + (Order *)newInstanceFromServerData:(id)jsonData;
++ (NSString *)orderStatusToString:(OrderStatus)status;
 
 @end

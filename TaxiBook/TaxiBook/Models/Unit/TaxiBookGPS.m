@@ -7,7 +7,18 @@
 //
 
 #import "TaxiBookGPS.h"
+#import "GMPlace.h"
 
 @implementation TaxiBookGPS
+
++ (TaxiBookGPS *)taxibookGPSFromGMPlace:(GMPlace *)place
+{
+    TaxiBookGPS *gps = [[TaxiBookGPS alloc] init];
+    gps.latitude = place.coordinate.latitude;
+    gps.longitude = place.coordinate.longitude;
+    gps.streetDescription = place.placeAddress;
+    
+    return gps;
+}
 
 @end

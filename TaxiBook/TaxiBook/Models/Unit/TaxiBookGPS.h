@@ -8,10 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class GMPlace;
+
 @interface TaxiBookGPS : NSObject
 
 @property (nonatomic) float latitude;
 @property (nonatomic) float longitude;
 @property (nonatomic) NSString *streetDescription;
+
++ (TaxiBookGPS *)taxibookGPSFromGMPlace:(GMPlace *)place;
 
 @end
