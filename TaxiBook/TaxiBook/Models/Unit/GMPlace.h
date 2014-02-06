@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSString *placeSecondaryDescription;
 @property (strong, nonatomic) NSString *placeAddress;
 @property (nonatomic) CLLocationCoordinate2D coordinate;
+@property (strong, nonatomic) NSString *placeReference;
 
 
 @end

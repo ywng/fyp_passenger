@@ -82,7 +82,7 @@
 
 - (void)finishDownloadPlaceSearch:(NSArray *)places searchType:(PlaceSearchType)searchType
 {
-    if (searchType == PlaceSearchTypeExactSearch) {
+    if (searchType == PlaceSearchTypeDetailSearch) {
         // notify the delegate
         if ([places count] > 0) {
             GMPlace *place = [places objectAtIndex:0];
@@ -173,7 +173,7 @@
     if (self.delegate && [self.delegate conformsToProtocol:@protocol(PlaceSearchResultDelegate)]) {
         [self.delegate userDidSelectThePlaceName:place];
     }
-    [GoogleMapPlaceSearchService searchWithKeyword:place.placeDescription gpsEnable:YES location:self.bestLocation withDelegate:self];
+    [GoogleMapPlaceSearchService placeDetail:place.placeReference withDelegate:self];
 }
 
 /*

@@ -11,6 +11,13 @@
 
 @interface ConfirmationViewController : UIViewController
 
-@property (strong, nonatomic) GMPlace *place;
+@property (strong, nonatomic) GMPlace *originPlace;
+@property (strong, nonatomic) GMPlace *destPlace;
+@property (strong, nonatomic) NSDate *pickupDate;
+
+@property (weak, nonatomic) IBOutlet UILabel *pickupLocationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dropoffLocationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *pickupTimeLabel;
+
 
 @end

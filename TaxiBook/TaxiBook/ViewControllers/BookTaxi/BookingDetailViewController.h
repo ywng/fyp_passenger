@@ -13,7 +13,7 @@
 
 @interface BookingDetailViewController : UIViewController <UIScrollViewDelegate, OrderModelDelegate>
 
-@property (strong, nonatomic) Order *displayOrder;
+@property (weak, nonatomic) Order *displayOrder;
 
 @property (strong, nonatomic) GMSMapView *googleMapView;
 @property (weak, nonatomic) IBOutlet UIView *mapView;

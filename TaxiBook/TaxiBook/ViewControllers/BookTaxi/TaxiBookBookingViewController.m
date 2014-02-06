@@ -73,6 +73,7 @@ static NSString *confirmSegueIdentifier = @"confirm";
     
     [self.timePicker setMinimumDate:[[NSDate alloc] initWithTimeIntervalSinceNow:0]];
     
+    [self.rightBarButtonItem setEnabled:NO];
 }
 
 - (void)didReceiveMemoryWarning
@@ -102,7 +103,13 @@ static NSString *confirmSegueIdentifier = @"confirm";
         
         pickerVC.delegate = self;
         [pickerVC setCurrentPlace:place];
-    } //else
+    } else if ([confirmSegueIdentifier isEqualToString:segue.identifier]) {
+        ConfirmationViewController *confirmVC = (ConfirmationViewController *)segue.destinationViewController;
+        [confirmVC setOriginPlace:self.originPlace];
+        [confirmVC setDestPlace:self.destPlace];
+        [confirmVC setPickupDate:self.timePicker.date];
+        NSLog(@"%@ self.timePicker.date ", self.timePicker.date);
+    }
 }
 
 
@@ -161,7 +168,13 @@ static NSString *confirmSegueIdentifier = @"confirm";
         [self resignAllResponder];
         [self resetAllView];
     } else {
-        [self performSegueWithIdentifier:confirmSegueIdentifier sender:self];
+        // check fields to be filled already
+        if (self.originPlace && self.destPlace) {
+            [self performSegueWithIdentifier:confirmSegueIdentifier sender:self];
+        } else {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please make sure you have put your starting point and ending point." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+            [alertView show];
+        }
     }
 }
 
@@ -335,9 +348,9 @@ This method tries to remove the keyboard from current view stack
         
     }
     if (!self.originPlace || !self.destPlace) {
-        self.navigationController.navigationBar.topItem.rightBarButtonItem.enabled = NO;
+        self.rightBarButtonItem.enabled = NO;
     } else {
-        self.navigationController.navigationBar.topItem.rightBarButtonItem.enabled = YES;
+        self.rightBarButtonItem.enabled = YES;
     }
 }
 

@@ -22,6 +22,8 @@ static NSString *reverseGeocodingCompleteUrl = @"https://maps.googleapis.com/map
 
 static NSString *textSearchCompleteUrl = @"https://maps.googleapis.com/maps/api/place/textsearch/json?";
 
+static NSString *detailSearchCompleteUrl = @"https://maps.googleapis.com/maps/api/place/details/json?";
+
 + (void)searchWithKeyword:(NSString *)keyword gpsEnable:(BOOL)gpsEnable location:(CLLocation *)location withDelegate:(id<GMPlaceSearchServiceDelegate>)delegate
 {
     NSString *completedUrl = nil;
@@ -44,6 +46,7 @@ static NSString *textSearchCompleteUrl = @"https://maps.googleapis.com/maps/api/
             [place setPlaceId:[result objectForKey:@"id"]];
             NSString *formatAddress = [result objectForKey:@"formatted_address"];
             [place setPlaceAddress:formatAddress];
+            [place setPlaceDescription:[result objectForKey:@"name"]];
             
             id geometry = [result objectForKey:@"geometry"];
             id location = [geometry objectForKey:@"location"];
@@ -58,6 +61,38 @@ static NSString *textSearchCompleteUrl = @"https://maps.googleapis.com/maps/api/
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"fail to download auto complete search result, error %@", error);
     }];
+}
+
++ (void)placeDetail:(NSString *)placeReference withDelegate:(id<GMPlaceSearchServiceDelegate>)delegate
+{
+    NSString *completedUrl = [NSString stringWithFormat:@"%@key=%@&sensor=false&reference=%@", detailSearchCompleteUrl, TaxiBookGoogleAPIServerKey, placeReference];
+    
+    [[AFHTTPRequestOperationManager manager] GET:completedUrl parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        // parse the object here
+        //        NSLog(@"responseObject %@", responseObject);
+        id result = [responseObject objectForKey:@"result"];
+        NSMutableArray *array = [[NSMutableArray alloc] init];
+        
+        GMPlace *place = [[GMPlace alloc] init];
+        [place setPlaceId:[result objectForKey:@"id"]];
+        NSString *formatAddress = [result objectForKey:@"formatted_address"];
+        [place setPlaceAddress:formatAddress];
+        [place setPlaceDescription:[result objectForKey:@"name"]];
+        
+        id geometry = [result objectForKey:@"geometry"];
+        id location = [geometry objectForKey:@"location"];
+        
+        place.coordinate = CLLocationCoordinate2DMake([[location objectForKey:@"lat"] floatValue], [[location objectForKey:@"lng"] floatValue]);
+        
+        [array addObject:place];
+        
+        [delegate finishDownloadPlaceSearch:array searchType:PlaceSearchTypeDetailSearch];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"fail to download auto complete search result, error %@", error);
+    }];
+
 }
 
 + (void)autoCompleteWithKeyword:(NSString *)keyword gpsEnable:(BOOL)gpsEnable location:(CLLocation *)location withDelegate:(id<GMPlaceSearchServiceDelegate>)delegate
@@ -86,6 +121,7 @@ static NSString *textSearchCompleteUrl = @"https://maps.googleapis.com/maps/api/
             
             place.placeId = [prediction objectForKey:@"id"];
             place.placeSecondaryDescription = [prediction objectForKey:@"description"];
+            place.placeReference = [prediction objectForKey:@"reference"];
             
             id terms = [prediction objectForKey:@"terms"];
             NSString *description = nil;

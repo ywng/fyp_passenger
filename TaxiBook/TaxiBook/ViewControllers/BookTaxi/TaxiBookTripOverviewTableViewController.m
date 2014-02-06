@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) OrderModel *orderModel;
 
+
 @end
 
 @implementation TaxiBookTripOverviewTableViewController
@@ -134,13 +135,11 @@ static NSString *bookingDetailSegueIdentifer = @"viewDetail";
 }
 */
 
-- (IBAction)refreshButtonPressed:(id)sender
-{
-    // redownload the orders
-    [self.orderModel downloadActiveOrders];
-    
-}
 
+- (IBAction)pullToRefresh:(id)sender {
+    [self.refreshControl beginRefreshing];
+    [self.orderModel downloadActiveOrders];
+}
 
 #pragma mark - OrderModelDelegate
 
@@ -148,11 +147,12 @@ static NSString *bookingDetailSegueIdentifer = @"viewDetail";
 {
     self.orderModel = orderModel;
     [self.tableView reloadData];
+    [self.refreshControl endRefreshing];
 }
 
 - (void)failDownloadOrders:(OrderModel *)orderModel
 {
-    
+    [self.refreshControl endRefreshing];
 }
 
 

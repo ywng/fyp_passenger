@@ -46,5 +46,6 @@ typedef NS_ENUM(NSInteger, OrderStatus) {
 
 + (Order *)newInstanceFromServerData:(id)jsonData;
 + (NSString *)orderStatusToString:(OrderStatus)status;
+- (void)updateDetail:(Order *)order;
 
 @end

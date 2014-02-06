@@ -91,7 +91,17 @@
         if (jsonData) {
             order.confirmedDriver = [Driver newInstanceFromServerData:jsonData];
         }
+        
+        jsonData = [responseObject objectForKey:@"driver_location"];
+        if (jsonData) {
+            NSLog(@"jsonData %@", jsonData);
+            TaxiBookGPS *gps = [[TaxiBookGPS alloc] init];
+            gps.latitude = [[jsonData objectForKey:@"latitude"] floatValue];
+            gps.longitude = [[jsonData objectForKey:@"longitude"] floatValue];
+            order.confirmedDriver.currentLocation = gps;
+        }
         [newModel.orderArray addObject:order];
+
         
         if (self.delegate && [self.delegate conformsToProtocol:@protocol(OrderModelDelegate)]) {
             [self.delegate finishDownloadOrders:newModel];
@@ -99,6 +109,9 @@
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"fail to download order detail %@", error);
+        
+        NSLog(@"%@", [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding]);
+        
         if (self.delegate && [self.delegate conformsToProtocol:@protocol(OrderModelDelegate)]) {
             [self.delegate failDownloadOrders:newModel];
         }

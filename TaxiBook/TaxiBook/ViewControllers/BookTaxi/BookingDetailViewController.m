@@ -10,10 +10,17 @@
 #import "MDDirectionService.h"
 #import "SubView.h"
 
-@interface BookingDetailViewController () <MDDirectionServiceDelegate>
+@interface BookingDetailViewController () <MDDirectionServiceDelegate> {
+    BOOL notFirstUpdate;
+}
 
 @property (strong, nonatomic) OrderModel *orderModel;
 @property (strong, nonatomic) NSTimer *updateTimer;
+
+@property (strong, nonatomic) GMSMarker *fromMarker;
+@property (strong, nonatomic) GMSMarker *toMarker;
+
+@property (strong, nonatomic) GMSCircle *driverPointer;
 
 @end
 
@@ -110,14 +117,19 @@
 
 - (void)finishDownloadOrders:(OrderModel *)orderModel
 {
-    self.displayOrder = [orderModel objectAtIndex:0];
-    [self updateView];
+    [self.displayOrder updateDetail:[orderModel objectAtIndex:0]];
+    if (!notFirstUpdate) {
+        [self updateView];
+        notFirstUpdate = YES;
+    } else {
+        [self minorUpdateView];
+    }
     [SubView dismissAlert];
 }
 
 - (void)failDownloadOrders:(OrderModel *)orderModel
 {
-    [self updateView];
+    [self minorUpdateView];
     [SubView dismissAlert];
 }
 
@@ -139,6 +151,7 @@
         marker.title = @"Pick up location";
         marker.map = self.googleMapView;
         marker.appearAnimation = kGMSMarkerAnimationPop;
+        self.fromMarker = marker;
         fromShown = YES;
     }
     if (self.displayOrder.toGPS.latitude != 0 && self.displayOrder.toGPS.longitude != 0) {
@@ -148,7 +161,8 @@
         marker.title = @"Drop off location";
         marker.map = self.googleMapView;
         marker.appearAnimation = kGMSMarkerAnimationPop;
-        [self.googleMapView setCamera:[GMSCameraPosition cameraWithLatitude:self.displayOrder.fromGPS.latitude longitude:self.displayOrder.fromGPS.longitude zoom:15]];
+        [self.googleMapView setCamera:[GMSCameraPosition cameraWithLatitude:self.displayOrder.toGPS.latitude longitude:self.displayOrder.toGPS.longitude zoom:15]];
+        self.toMarker = marker;
         toShown = YES;
     }
     if (fromShown && toShown) {
@@ -157,7 +171,6 @@
         
         GMSCoordinateBounds *bounds = [[GMSCoordinateBounds alloc] initWithCoordinate:CLLocationCoordinate2DMake(self.displayOrder.fromGPS.latitude, self.displayOrder.fromGPS.longitude) coordinate:CLLocationCoordinate2DMake(self.displayOrder.toGPS.latitude, self.displayOrder.toGPS.longitude)];
         [self.googleMapView animateWithCameraUpdate:[GMSCameraUpdate fitBounds:bounds]];
-        
         
         
         // draw polylines
@@ -182,6 +195,22 @@
     [SubView dismissAlert];
 }
 
+- (void)minorUpdateView
+{
+    // redraw driver location
+    if (self.displayOrder.confirmedDriver.currentLocation) {
+        if (!self.driverPointer) {
+            self.driverPointer = [GMSCircle circleWithPosition:CLLocationCoordinate2DMake(self.displayOrder.confirmedDriver.currentLocation.latitude, self.displayOrder.confirmedDriver.currentLocation.longitude)
+                                                                           radius:10];
+        } else {
+            [self.driverPointer setPosition:CLLocationCoordinate2DMake(self.displayOrder.confirmedDriver.currentLocation.latitude, self.displayOrder.confirmedDriver.currentLocation.longitude)];
+        }
+        self.driverPointer.map = self.googleMapView;
+    }
+    
+    // based on the status to update
+}
+
 - (void)setupGoogleMapView
 {
     CGRect mapRect = self.mapView.frame;
@@ -195,41 +224,52 @@
 
 - (void)drawDirection:(NSDictionary *)json
 {
-    NSDictionary *routes = [json objectForKey:@"routes"][0];
-    
-    NSDictionary *route = [routes objectForKey:@"overview_polyline"];
-    NSString *overviewRoute = [route objectForKey:@"points"];
-    GMSPath *path = [GMSPath pathFromEncodedPath:overviewRoute];
-    GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
-    polyline.map = self.googleMapView;
-    
-    NSDictionary *distances = [[[routes objectForKey:@"legs"] objectAtIndex:0] objectForKey:@"distance"];
-    NSDictionary *durations = [[[routes objectForKey:@"legs"] objectAtIndex:0] objectForKey:@"duration"];
-    
-    NSLog(@"distances %@; durations %@", distances, durations);
-    
-    [self.distanceLabel setText:[distances objectForKey:@"text"]];
-    [self.durationLabel setText:[durations objectForKey:@"text"]];
-    
-    [self.durationLabel sizeToFit];
-    
-    
-    [self.displayOrder setEstimatedDuration:[[durations objectForKey:@"value"] doubleValue]];
-    
-    // make up taxi fee
-    float distance = [[distances objectForKey:@"value"] floatValue];
-    
-    if (distance < 2000) {
-        self.displayOrder.estimatedPrice = 18.0;
+    if ([[json objectForKey:@"routes"] count] > 0) {
+        NSDictionary *routes = [json objectForKey:@"routes"][0];
+        
+        NSDictionary *route = [routes objectForKey:@"overview_polyline"];
+        NSString *overviewRoute = [route objectForKey:@"points"];
+        GMSPath *path = [GMSPath pathFromEncodedPath:overviewRoute];
+        GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
+        polyline.strokeWidth = 5;
+        polyline.map = self.googleMapView;
+
+        // wait for Google-Map-API to version 1.7, need to keep track on CocoaPods
+    //    GMSStrokeStyle *redYellow = [GMSStrokeStyle gradientFromColor:[UIColor redColor] toColor:[UIColor yellowColor]];
+    //    GMSStyleSpan *redYellowSpan = [GMSStyleSpan spanWithStyle:redYellow];
+        
+        NSDictionary *distances = [[[routes objectForKey:@"legs"] objectAtIndex:0] objectForKey:@"distance"];
+        NSDictionary *durations = [[[routes objectForKey:@"legs"] objectAtIndex:0] objectForKey:@"duration"];
+        
+        NSLog(@"distances %@; durations %@", distances, durations);
+
+        [self.distanceLabel setText:[distances objectForKey:@"text"]];
+        [self.durationLabel setText:[durations objectForKey:@"text"]];
+        
+        [self.durationLabel sizeToFit];
+        
+        [self.displayOrder setEstimatedDuration:[[durations objectForKey:@"value"] doubleValue]];
+        
+        // make up taxi fee
+        float distance = [[distances objectForKey:@"value"] floatValue];
+        
+        if (distance < 2000) {
+            self.displayOrder.estimatedPrice = 18.0;
+        } else {
+            self.displayOrder.estimatedPrice = 18 + (distance - 2000) /100 *1.5; // make up formula
+        }
+        
+        [self.estimatedFeeLabel setText:[NSString stringWithFormat:@"Estimated Fee: HK$ %.1f", self.displayOrder.estimatedPrice]];
+        
+        self.distanceLabel.hidden = NO;
+        self.durationLabel.hidden = NO;
+        self.estimatedFeeLabel.hidden = NO;
     } else {
-        self.displayOrder.estimatedPrice = 18 + (distance - 2000) /100 *1.5; // make up formula
+        // zero result
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"No possible routes" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
     }
-    
-    [self.estimatedFeeLabel setText:[NSString stringWithFormat:@"Estimated Fee: HK$ %.1f", self.displayOrder.estimatedPrice]];
-    
-    self.distanceLabel.hidden = NO;
-    self.durationLabel.hidden = NO;
-    self.estimatedFeeLabel.hidden = NO;
 }
 
 - (void)setupContentView

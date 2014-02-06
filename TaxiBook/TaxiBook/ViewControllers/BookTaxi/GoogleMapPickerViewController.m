@@ -8,6 +8,7 @@
 
 #import "GoogleMapPickerViewController.h"
 #import <CoreLocation/CoreLocation.h>
+#import "SubView.h"
 
 
 @interface GoogleMapPickerViewController ()
@@ -115,12 +116,19 @@
 - (IBAction)doneButtonPressed:(id)sender {
     
     if (self.selectedPlace) {
+        
+//        // need to do a complete search
+//        [SubView loadingView:nil];
+//        
+//        [GoogleMapPlaceSearchService searchWithKeyword:self.selectedPlace.placeAddress gpsEnable:YES location:[[CLLocation alloc] initWithLatitude:self.selectedPlace.coordinate.latitude longitude:self.selectedPlace.coordinate.longitude] withDelegate:self];
+//        
         if (self.delegate && [self.delegate conformsToProtocol:@protocol(GoogleMapPickerDelegate)]) {
             
             [self.delegate userDidFinishPickingPlace:self.selectedPlace name:self.selectedPlace.placeAddress];
         }
     }
     [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 

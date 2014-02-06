@@ -14,7 +14,8 @@ typedef NS_ENUM(NSInteger, PlaceSearchType) {
 
     PlaceSearchTypeExactSearch = 1,
     PlaceSearchTypeAutoComplete = 2,
-    PlaceSearchTypeReverseGeocoding = 3
+    PlaceSearchTypeReverseGeocoding = 3,
+    PlaceSearchTypeDetailSearch = 4,
 
 };
 
@@ -27,6 +28,8 @@ typedef NS_ENUM(NSInteger, PlaceSearchType) {
 @interface GoogleMapPlaceSearchService : NSObject
 
 + (void)searchWithKeyword:(NSString *)keyword gpsEnable:(BOOL)gpsEnable location:(CLLocation *)location withDelegate:(id<GMPlaceSearchServiceDelegate>)delegate;
+
++ (void)placeDetail:(NSString *)placeReference withDelegate:(id<GMPlaceSearchServiceDelegate>)delegate;
 
 + (void)autoCompleteWithKeyword:(NSString *)keyword gpsEnable:(BOOL)gpsEnable location:(CLLocation *)location withDelegate:(id<GMPlaceSearchServiceDelegate>)delegate;
 

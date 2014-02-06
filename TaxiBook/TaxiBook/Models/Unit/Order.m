@@ -177,5 +177,22 @@
     }
 }
 
+- (void)updateDetail:(Order *)newOrder
+{
+    self.orderId = newOrder.orderId;
+    self.driverId = newOrder.driverId;
+    self.passengerId = newOrder.passengerId;
+    self.fromGPS = newOrder.fromGPS;
+    self.toGPS = newOrder.toGPS;
+    self.postTime = newOrder.postTime;
+    self.orderTime = newOrder.orderTime;
+    self.specialNote = newOrder.specialNote;
+    self.orderStatus = newOrder.orderStatus;
+    self.estimatedDuration = newOrder.estimatedDuration;
+    self.estimatedPickupTime = newOrder.estimatedPickupTime;
+    self.estimatedPrice = newOrder.estimatedPrice;
+    self.confirmedDriver = newOrder.confirmedDriver;
+    self.actualPrice = newOrder.actualPrice;
+}
 
 @end
