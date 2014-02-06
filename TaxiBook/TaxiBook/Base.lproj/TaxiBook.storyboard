@@ -951,7 +951,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="We3-zn-0fi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="572" y="1018"/>
+            <point key="canvasLocation" x="688" y="952"/>
         </scene>
         <!--View Controller - Terms -->
         <scene sceneID="3LF-g4-nM8">
@@ -964,7 +964,22 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <view key="view" contentMode="scaleToFill" id="73D-ZA-Rth">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="TOS" translatesAutoresizingMaskIntoConstraints="NO" id="H7R-EA-XbS">
+                                <rect key="frame" x="0.0" y="64" width="320" height="455"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="H7R-EA-XbS" secondAttribute="trailing" id="Jr5-pC-Vh0"/>
+                            <constraint firstItem="H7R-EA-XbS" firstAttribute="leading" secondItem="73D-ZA-Rth" secondAttribute="leading" id="XM9-Q1-Swe"/>
+                            <constraint firstItem="H7R-EA-XbS" firstAttribute="top" secondItem="rjm-Oy-h5L" secondAttribute="bottom" id="csX-ak-fKq"/>
+                            <constraint firstItem="QNJ-PO-ehJ" firstAttribute="top" secondItem="H7R-EA-XbS" secondAttribute="bottom" id="pKI-ve-nyZ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Terms " id="ruU-zz-9FP"/>
                 </viewController>
