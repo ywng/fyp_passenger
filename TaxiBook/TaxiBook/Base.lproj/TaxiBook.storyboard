@@ -1285,7 +1285,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kl3-p1-MlB">
+                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="First Name" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="kl3-p1-MlB">
                                 <rect key="frame" x="48" y="76" width="225" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -1298,7 +1298,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <outlet property="delegate" destination="CUv-oI-wk7" id="Kmu-By-8rX"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bXC-Q0-Z5m">
+                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Last Name" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="bXC-Q0-Z5m">
                                 <rect key="frame" x="48" y="114" width="225" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -1311,7 +1311,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <outlet property="delegate" destination="CUv-oI-wk7" id="MGT-g4-VVD"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number (8 digits)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MHr-EQ-NQt">
+                            <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Phone Number (8 digits)" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="MHr-EQ-NQt">
                                 <rect key="frame" x="48" y="152" width="225" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -1324,7 +1324,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <outlet property="delegate" destination="CUv-oI-wk7" id="Ib3-jP-2Fz"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="c8U-KD-Lg7">
+                            <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="c8U-KD-Lg7">
                                 <rect key="frame" x="48" y="190" width="225" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -1337,7 +1337,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <outlet property="delegate" destination="CUv-oI-wk7" id="XFM-ym-dRn"/>
                                 </connections>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password (at least 6 characters)" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fPr-lP-pJv">
+                            <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password (at least 6 characters)" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fPr-lP-pJv">
                                 <rect key="frame" x="48" y="228" width="225" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
@@ -1345,19 +1345,28 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <constraint firstAttribute="width" constant="225" id="iW5-DY-2fi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="CUv-oI-wk7" id="t8z-JY-WVk"/>
                                 </connections>
                             </textField>
+                            <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Retype your password" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="61l-yQ-UDs">
+                                <rect key="frame" x="48" y="266" width="225" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="225" id="6tg-qN-M8E"/>
+                                    <constraint firstAttribute="height" constant="30" id="zrv-1l-Ygy"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="CUv-oI-wk7" id="6bj-ly-po6"/>
+                                </connections>
+                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dmr-Jk-N46">
-                                <rect key="frame" x="48" y="281" width="225" height="42"/>
+                                <rect key="frame" x="48" y="309" width="225" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.21568629145622253" green="0.38039219379425049" blue="0.70196080207824707" alpha="1" colorSpace="deviceRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="42" id="3eY-vA-Kfb"/>
-                                    <constraint firstAttribute="width" constant="225" id="j28-vT-tYN"/>
-                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="Join Now">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1370,13 +1379,16 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="centerX" secondItem="Dmr-Jk-N46" secondAttribute="centerX" id="0dq-Fi-Wbv"/>
+                            <constraint firstItem="Dmr-Jk-N46" firstAttribute="trailing" secondItem="61l-yQ-UDs" secondAttribute="trailing" id="0lh-Kv-KMa"/>
+                            <constraint firstItem="Dmr-Jk-N46" firstAttribute="leading" secondItem="fPr-lP-pJv" secondAttribute="leading" id="3uA-R0-XDh"/>
                             <constraint firstItem="bXC-Q0-Z5m" firstAttribute="top" secondItem="kl3-p1-MlB" secondAttribute="bottom" constant="8" id="CBr-tO-lYg"/>
+                            <constraint firstItem="Dmr-Jk-N46" firstAttribute="top" secondItem="61l-yQ-UDs" secondAttribute="bottom" constant="13" id="FPx-Ls-0X5"/>
                             <constraint firstAttribute="centerX" secondItem="fPr-lP-pJv" secondAttribute="centerX" id="HWb-Sm-3OA"/>
+                            <constraint firstItem="Dmr-Jk-N46" firstAttribute="leading" secondItem="61l-yQ-UDs" secondAttribute="leading" id="JOZ-jh-fCg"/>
                             <constraint firstAttribute="centerX" secondItem="MHr-EQ-NQt" secondAttribute="centerX" id="KLf-SR-VHn"/>
                             <constraint firstItem="c8U-KD-Lg7" firstAttribute="top" secondItem="MHr-EQ-NQt" secondAttribute="bottom" constant="8" id="SSA-51-acP"/>
-                            <constraint firstItem="Dmr-Jk-N46" firstAttribute="top" secondItem="fPr-lP-pJv" secondAttribute="bottom" constant="23" id="aeu-1b-NIJ"/>
                             <constraint firstAttribute="centerX" secondItem="c8U-KD-Lg7" secondAttribute="centerX" id="dsa-lC-96t"/>
+                            <constraint firstItem="fdp-Qe-MIu" firstAttribute="top" secondItem="Dmr-Jk-N46" secondAttribute="bottom" constant="217" id="elH-Rc-Ajr"/>
                             <constraint firstAttribute="centerX" secondItem="bXC-Q0-Z5m" secondAttribute="centerX" id="mKK-Kh-c9K"/>
                             <constraint firstAttribute="centerX" secondItem="kl3-p1-MlB" secondAttribute="centerX" id="p1C-uP-8s5"/>
                             <constraint firstItem="kl3-p1-MlB" firstAttribute="top" secondItem="WuL-gq-m6D" secondAttribute="bottom" constant="12" id="p9A-ET-85W"/>
@@ -1392,6 +1404,7 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                         <outlet property="lastNameTextField" destination="bXC-Q0-Z5m" id="MDH-zI-LPM"/>
                         <outlet property="passwordTextField" destination="fPr-lP-pJv" id="3UF-3F-CUr"/>
                         <outlet property="phoneTextField" destination="MHr-EQ-NQt" id="Dob-Ee-ObP"/>
+                        <outlet property="retypePasswordTextField" destination="61l-yQ-UDs" id="OJx-eC-QtI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GRS-ol-KhF" userLabel="First Responder" sceneMemberID="firstResponder"/>
