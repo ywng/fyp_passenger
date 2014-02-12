@@ -10,4 +10,9 @@
 
 @interface WelcomeViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
+@property (weak, nonatomic) IBOutlet UIButton *joinButton;
+@property (weak, nonatomic) IBOutlet UIButton *signinButton;
+@property (weak, nonatomic) IBOutlet UIImageView *sloganImageView;
+
 @end

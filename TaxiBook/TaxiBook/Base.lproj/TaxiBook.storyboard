@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B3116" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Tcv-S0-hUC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Tcv-S0-hUC">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
@@ -16,10 +16,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Cq-6S-xa4">
-                                <rect key="frame" x="33" y="480" width="120" height="41"/>
+                            <imageView clearsContextBeforeDrawing="NO" userInteractionEnabled="NO" contentMode="TopLeft" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="ak5-Mi-hoX">
+                                <rect key="frame" x="0.0" y="0.0" width="850" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="850" id="Dvw-De-ZhF"/>
+                                </constraints>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="slogan" translatesAutoresizingMaskIntoConstraints="NO" id="q2U-Z0-Abw">
+                                <rect key="frame" x="320" y="60" width="211" height="165"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="165" id="Rpr-lG-gBs"/>
+                                    <constraint firstAttribute="width" constant="211" id="YD8-cF-ehz"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Cq-6S-xa4">
+                                <rect key="frame" x="340" y="477" width="120" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.19215688109397888" green="0.90980398654937744" blue="0.36078432202339172" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="iqX-Je-SmH"/>
+                                    <constraint firstAttribute="width" constant="120" id="rw5-Kv-u2m"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="Join ">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -29,10 +48,14 @@
                                     <segue destination="CUv-oI-wk7" kind="push" identifier="JoinPush" id="bZi-07-F3I"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MvB-b1-1m6">
-                                <rect key="frame" x="168" y="480" width="119" height="41"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MvB-b1-1m6">
+                                <rect key="frame" x="501" y="477" width="119" height="41"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.27450981736183167" green="0.7882353663444519" blue="1" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="41" id="AML-7I-ql7"/>
+                                    <constraint firstAttribute="width" constant="119" id="xl2-na-O77"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <state key="normal" title="Sign in">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -44,8 +67,26 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7Cq-6S-xa4" firstAttribute="leading" secondItem="UfW-OY-oaK" secondAttribute="leading" constant="340" id="8UB-UJ-Zyr"/>
+                            <constraint firstAttribute="trailing" secondItem="MvB-b1-1m6" secondAttribute="trailing" constant="-300" id="H03-dZ-g7D"/>
+                            <constraint firstAttribute="bottom" secondItem="MvB-b1-1m6" secondAttribute="bottom" constant="50" id="W92-eg-zLj"/>
+                            <constraint firstAttribute="bottom" secondItem="7Cq-6S-xa4" secondAttribute="bottom" constant="50" id="Xfx-yh-b3G"/>
+                            <constraint firstItem="ak5-Mi-hoX" firstAttribute="leading" secondItem="UfW-OY-oaK" secondAttribute="leading" id="gy3-GV-hmy"/>
+                            <constraint firstItem="q2U-Z0-Abw" firstAttribute="leading" secondItem="UfW-OY-oaK" secondAttribute="leading" constant="320" id="jjK-h3-FfU"/>
+                            <constraint firstItem="Pdj-8Z-d2I" firstAttribute="top" secondItem="ak5-Mi-hoX" secondAttribute="bottom" id="lrI-8a-6SY"/>
+                            <constraint firstItem="ak5-Mi-hoX" firstAttribute="top" secondItem="UfW-OY-oaK" secondAttribute="top" id="uYW-pb-x2r"/>
+                            <constraint firstItem="q2U-Z0-Abw" firstAttribute="top" secondItem="UfW-OY-oaK" secondAttribute="top" constant="60" id="wCq-M0-F5E"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ec8-lX-dpS"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="ak5-Mi-hoX" id="4rA-ps-EF8"/>
+                        <outlet property="joinButton" destination="7Cq-6S-xa4" id="q2g-A1-Aca"/>
+                        <outlet property="signinButton" destination="MvB-b1-1m6" id="yAQ-vE-OX6"/>
+                        <outlet property="sloganImageView" destination="q2U-Z0-Abw" id="sLF-JE-3Vs"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="exc-S0-IOJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -729,24 +770,12 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                                     <outlet property="delegate" destination="0nR-Wz-mmW" id="v07-8v-bt2"/>
                                 </connections>
                             </scrollView>
-                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="HkP-Dt-BAS">
-                                <rect key="frame" x="141" y="464" width="39" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="37" id="Ys3-tY-Buc"/>
-                                </constraints>
-                                <connections>
-                                    <action selector="pageControlValueChanged:" destination="0nR-Wz-mmW" eventType="valueChanged" id="1hB-WN-Qoh"/>
-                                </connections>
-                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="A9p-Rj-Ebu" secondAttribute="trailing" id="Ceh-tR-1rM"/>
                             <constraint firstItem="A9p-Rj-Ebu" firstAttribute="leading" secondItem="YzQ-Xa-9Da" secondAttribute="leading" id="MQY-f5-rFn"/>
-                            <constraint firstAttribute="centerX" secondItem="HkP-Dt-BAS" secondAttribute="centerX" id="NGV-Mo-qSz"/>
                             <constraint firstItem="e7E-6H-IRh" firstAttribute="top" secondItem="cCh-nO-bu6" secondAttribute="bottom" id="XVW-Tv-IO6"/>
-                            <constraint firstItem="tcr-Pg-89J" firstAttribute="top" secondItem="HkP-Dt-BAS" secondAttribute="bottom" constant="3" id="gFZ-bo-tHP"/>
                             <constraint firstItem="e7E-6H-IRh" firstAttribute="leading" secondItem="YzQ-Xa-9Da" secondAttribute="leading" id="gd9-iV-yTy"/>
                             <constraint firstItem="tcr-Pg-89J" firstAttribute="top" secondItem="A9p-Rj-Ebu" secondAttribute="bottom" id="j4g-GM-yP1"/>
                             <constraint firstItem="A9p-Rj-Ebu" firstAttribute="top" secondItem="e7E-6H-IRh" secondAttribute="bottom" id="kwt-Se-yov"/>
@@ -759,7 +788,6 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mapView" destination="e7E-6H-IRh" id="bVE-Mh-TUk"/>
-                        <outlet property="pageControl" destination="HkP-Dt-BAS" id="46i-lG-bbk"/>
                         <outlet property="scrollableContentView" destination="A9p-Rj-Ebu" id="XeJ-jH-T3W"/>
                     </connections>
                 </viewController>
@@ -1492,9 +1520,11 @@ AQABAAEAAQAB//+dkAEA//+PgAAE//+dkAEI//+dkAEMUERUAFBTVABQV1QAUFBUAAAAAAEAAAABA
     </scenes>
     <resources>
         <image name="account" width="30" height="30"/>
+        <image name="background" width="850" height="568"/>
         <image name="expand" width="25" height="25"/>
         <image name="location" width="64" height="64"/>
         <image name="options" width="30" height="30"/>
+        <image name="slogan" width="211" height="165"/>
         <image name="taxi" width="30" height="30"/>
         <image name="time" width="64" height="64"/>
     </resources>
