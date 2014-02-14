@@ -29,7 +29,6 @@
 		774CEDAD1820E3EB0004A123 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 774CEDAB1820E3EB0004A123 /* InfoPlist.strings */; };
 		774CEDAF1820E3EB0004A123 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 774CEDAE1820E3EB0004A123 /* main.m */; };
 		774CEDB31820E3EB0004A123 /* TaxiBookAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 774CEDB21820E3EB0004A123 /* TaxiBookAppDelegate.m */; };
-		774CEDB61820E3EB0004A123 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 774CEDB41820E3EB0004A123 /* Main.storyboard */; };
 		774CEDC21820E3EB0004A123 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 774CEDC11820E3EB0004A123 /* XCTest.framework */; };
 		774CEDC31820E3EB0004A123 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 774CEDA21820E3EB0004A123 /* Foundation.framework */; };
 		774CEDC41820E3EB0004A123 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 774CEDA61820E3EB0004A123 /* UIKit.framework */; };
@@ -104,7 +103,6 @@
 		774CEDB01820E3EB0004A123 /* TaxiBook-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TaxiBook-Prefix.pch"; sourceTree = "<group>"; };
 		774CEDB11820E3EB0004A123 /* TaxiBookAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaxiBookAppDelegate.h; sourceTree = "<group>"; };
 		774CEDB21820E3EB0004A123 /* TaxiBookAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaxiBookAppDelegate.m; sourceTree = "<group>"; };
-		774CEDB51820E3EB0004A123 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		774CEDC01820E3EB0004A123 /* TaxiBookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaxiBookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		774CEDC11820E3EB0004A123 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		774CEDC91820E3EB0004A123 /* TaxiBookTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TaxiBookTests-Info.plist"; sourceTree = "<group>"; };
@@ -228,7 +226,6 @@
 				77517EF7182CA0A7009991F3 /* ViewControllers */,
 				774CEDB11820E3EB0004A123 /* TaxiBookAppDelegate.h */,
 				774CEDB21820E3EB0004A123 /* TaxiBookAppDelegate.m */,
-				774CEDB41820E3EB0004A123 /* Main.storyboard */,
 				EDBFF548187D87070037F986 /* Images.xcassets */,
 				774CEDA91820E3EB0004A123 /* Supporting Files */,
 				77517EFD182CA0E5009991F3 /* Utility */,
@@ -450,7 +447,6 @@
 				77402F49187FCD71008E9C9B /* DriverInfoView.xib in Resources */,
 				774CEDAD1820E3EB0004A123 /* InfoPlist.strings in Resources */,
 				EDBFF549187D87070037F986 /* Images.xcassets in Resources */,
-				774CEDB61820E3EB0004A123 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -560,14 +556,6 @@
 				774CEDAC1820E3EB0004A123 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		774CEDB41820E3EB0004A123 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				774CEDB51820E3EB0004A123 /* Base */,
-			);
-			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		774CEDCA1820E3EB0004A123 /* InfoPlist.strings */ = {

@@ -149,6 +149,7 @@
 {
     [super viewDidLoad];
     [self.navigationController setNavigationBarHidden:NO animated:NO];
+   // [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"background.png"]]];
 	// Do any additional setup after loading the view.
 //    [self.emailTextField setText:@"default_email2@email.com"];
 //    [self.phoneTextField setText:@"98765431"];
