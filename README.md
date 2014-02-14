@@ -7,7 +7,7 @@ To get started, first install CocoaPod http://cocoapods.org
 
 After finish installing the CocoaPod, run the commands
 ```Shell
-  cd sensbeat_mobile
+  cd TaxiBook
 ```
 ```Shell
   pod install

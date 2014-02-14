@@ -52,6 +52,11 @@
         [SubView showError:@"Please input at least 6 character password!" withTitle:@"Register Failed"];
         return;
     }
+    if(![self.retypePasswordTextField.text isEqualToString:self.passwordTextField.text]){
+        [SubView showError:@"Please ensure the password is typed correctly!" withTitle:@"Register Failed"];
+        return;
+    }
+    
     [self.emailTextField resignFirstResponder];
     [self.phoneTextField resignFirstResponder];
     [self.firstNameTextField resignFirstResponder];
