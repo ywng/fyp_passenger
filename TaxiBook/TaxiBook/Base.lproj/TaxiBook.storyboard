@@ -176,7 +176,7 @@
             </objects>
             <point key="canvasLocation" x="-1679" y="254"/>
         </scene>
-        <!--Account View Controller-->
+        <!--Account View Controller - Profile-->
         <scene sceneID="z2i-ZY-XdB">
             <objects>
                 <viewController id="Tjx-fJ-a3Y" customClass="AccountViewController" sceneMemberID="viewController">
@@ -189,7 +189,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="WxA-x9-TJy"/>
+                    <navigationItem key="navigationItem" title="Profile" id="WxA-x9-TJy"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="07K-O3-nYg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -394,7 +394,7 @@
             </objects>
             <point key="canvasLocation" x="771" y="254"/>
         </scene>
-        <!--Taxi Book Trip Overview Table View Controller-->
+        <!--Taxi Book Trip Overview Table View Controller - Bookings-->
         <scene sceneID="Bn3-Ji-ezb">
             <objects>
                 <tableViewController id="1kF-gh-cy4" customClass="TaxiBookTripOverviewTableViewController" sceneMemberID="viewController">
@@ -433,7 +433,7 @@
                             <outlet property="delegate" destination="1kF-gh-cy4" id="PiF-Fa-zeP"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="vtG-zS-6rI">
+                    <navigationItem key="navigationItem" title="Bookings" id="vtG-zS-6rI">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="xux-SG-2Fa">
                             <connections>
                                 <segue destination="Gpc-Sa-hUv" kind="push" id="kVI-qQ-dj1"/>

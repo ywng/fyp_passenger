@@ -19,6 +19,8 @@ NSString const *TaxiBookGoogleAPIServerKey = @"AIzaSyBA78cM911xXcBpOFMzD6BMjwjt2
 NSString const *TaxiBookNotificationEmailCannotFind = @"com.taxibook.notification.user.email.notFound";
 NSString const *TaxiBookNotificationUserLoggedIn = @"com.taxibook.notifiation.user.login";
 NSString const *TaxiBookNotificationUserLoggedOut = @"com.taxibook.notification.user.logout";
+NSString const *TaxiBookNotificationUserLoadOrderData = @"com.taxibook.notification.user.load.order.data";
+
 
 #pragma mark -
 #pragma mark - Internal Key Mapping

@@ -21,6 +21,7 @@ extern NSString *TaxiBookGoogleAPIServerKey;
 extern NSString *TaxiBookNotificationEmailCannotFind;
 extern NSString *TaxiBookNotificationUserLoggedIn;
 extern NSString *TaxiBookNotificationUserLoggedOut;
+extern NSString *TaxiBookNotificationUserLoadOrderData;
 
 #pragma mark -
 #pragma mark - Internal Key Mapping
