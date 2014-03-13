@@ -8,6 +8,7 @@
 
 #import "AccountViewController.h"
 #import <NSUserDefaults+SecureAdditions.h>
+#import "SubView.h"
 
 @interface AccountViewController ()
 
@@ -28,11 +29,19 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    CALayer *imageLayer = self.profileImage.layer;
+    [imageLayer setCornerRadius:33];
+    [imageLayer setBorderWidth:0];
+    [imageLayer setMasksToBounds:YES];
     
     NSString *firstName = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyFirstName];
     NSString *lastName = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyLastName];
+    NSString *email = [[NSUserDefaults standardUserDefaults]secretStringForKey:TaxiBookInternalKeyEmail];
+    NSString *phoneNumber = [[NSUserDefaults standardUserDefaults]secretStringForKey:TaxiBookInternalKeyPhone];
     self.firstNameTextField.text = firstName;
     self.lastNameTextField.text = lastName;
+    self.emailLabel.text = email;
+    self.phoneNumberTextField.text = phoneNumber;
     
 }
 
@@ -81,15 +90,68 @@
     NSLog(@"done button pressed");
     [self.firstNameTextField resignFirstResponder];
     [self.lastNameTextField resignFirstResponder];
+    [self.phoneNumberTextField resignFirstResponder];
+    [self.passwordTextField resignFirstResponder];
     
     NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithCapacity:5];
     
-    [param setObject:@(0) forKey:@"password_flag"];
-    [param setObject:@(0) forKey:@"phone_flag"];
-    [param setObject:@(1) forKey:@"name_flag"];
-    [param setObject:self.firstNameTextField.text forKey:@"first_name"];
-    [param setObject:self.lastNameTextField.text forKey:@"last_name"];
-
+    //validate password
+    if (self.passwordTextField.hasText) {
+        if (self.passwordTextField.text.length<6) {
+            NSLog(@"Password too short");
+            [SubView showError:@"Please input at least 6 characters for password" withTitle:@"Update Failed"];
+            return;
+        }
+        else {
+            [param setObject:@(1) forKey:@"password_flag"];
+            [param setObject:self.passwordTextField.text forKey:@"password"];
+        }
+    }
+    else {
+        [param setObject:@(0) forKey:@"password_flag"];
+    }
+    
+    //validate phone number
+    if (self.phoneNumberTextField.text.length==8) {
+        NSScanner *scanner = [NSScanner scannerWithString:self.phoneNumberTextField.text];
+        BOOL isNumeric = [scanner scanInteger:NULL] && [scanner isAtEnd];
+        if (isNumeric) {
+            [param setObject:@(1) forKey:@"phone_flag"];
+            [param setObject:self.phoneNumberTextField.text forKey:@"phone"];
+        }
+        else {
+            [param setObject:@(0) forKey:@"phone_flag"];
+            NSLog(@"Non numeric phone number");
+            [SubView showError:@"Please input a valid phone number" withTitle:@"Update Failed"];
+            return;
+        }
+    }
+    else {
+        [param setObject:@(0) forKey:@"phone_flag"];
+        NSLog(@"Non 8-digit phone number");
+        [SubView showError:@"Please input a valid phone number" withTitle:@"Update Failed"];
+        return;
+    }
+    
+    if (self.lastNameTextField.text.length>0) {
+        if (self.firstNameTextField.text.length>0) {
+            [param setObject:@(1) forKey:@"name_flag"];
+            [param setObject:self.firstNameTextField.text forKey:@"first_name"];
+            [param setObject:self.lastNameTextField.text forKey:@"last_name"];
+        }
+        else {
+            [param setObject:@(0) forKey:@"name_flag"];
+            NSLog(@"No first name");
+            [SubView showError:@"Please input your first name" withTitle:@"Update Failed"];
+            return;
+        }
+    }
+    else {
+        [param setObject:@(0) forKey:@"name_flag"];
+        NSLog(@"No last name");
+        [SubView showError:@"Please input your last name" withTitle:@"Update Failed"];
+        return;
+    }
     
     // set request to server update profile
     TaxiBookConnectionManager *manager = [TaxiBookConnectionManager sharedManager];
@@ -103,6 +165,7 @@
             
             [[NSUserDefaults standardUserDefaults] setSecretObject:self.firstNameTextField.text forKey:TaxiBookInternalKeyFirstName];
             [[NSUserDefaults standardUserDefaults] setSecretObject:self.lastNameTextField.text forKey:TaxiBookInternalKeyLastName];
+            [[NSUserDefaults standardUserDefaults] setSecretObject:self.phoneNumberTextField.text forKey:TaxiBookInternalKeyPhone];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
         

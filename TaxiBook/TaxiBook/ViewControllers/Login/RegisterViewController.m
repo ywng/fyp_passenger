@@ -75,6 +75,7 @@
         [[NSUserDefaults standardUserDefaults] setSecretObject:self.emailTextField.text forKey:TaxiBookInternalKeyEmail];
         [[NSUserDefaults standardUserDefaults] setSecretObject:self.firstNameTextField.text forKey:TaxiBookInternalKeyFirstName];
         [[NSUserDefaults standardUserDefaults] setSecretObject:self.lastNameTextField.text forKey:TaxiBookInternalKeyLastName];
+        [[NSUserDefaults standardUserDefaults] setSecretObject:self.phoneTextField.text forKey:TaxiBookInternalKeyPhone];
         [[NSUserDefaults standardUserDefaults] setSecretInteger:pid forKey:TaxiBookInternalKeyUserId];
 
         [[NSUserDefaults standardUserDefaults] synchronize];

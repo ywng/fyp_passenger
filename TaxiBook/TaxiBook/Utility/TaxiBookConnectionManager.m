@@ -118,10 +118,12 @@
             NSString *lastName = [responseObject objectForKey:@"last_name"];
             NSInteger pid = [[responseObject objectForKey:@"pid"] integerValue];
             NSString *email = [responseObject objectForKey:@"email"];
+            NSString *phone = [responseObject objectForKey:@"phone_no"];
             
             [[NSUserDefaults standardUserDefaults] setSecretObject:email forKey:TaxiBookInternalKeyEmail];
             [[NSUserDefaults standardUserDefaults] setSecretObject:firstName forKey:TaxiBookInternalKeyFirstName];
             [[NSUserDefaults standardUserDefaults] setSecretObject:lastName forKey:TaxiBookInternalKeyLastName];
+            [[NSUserDefaults standardUserDefaults] setSecretObject:phone forKey:TaxiBookInternalKeyPhone];
             [[NSUserDefaults standardUserDefaults] setSecretObject:sessionToken forKey:TaxiBookInternalKeySessionToken];
             [[NSUserDefaults standardUserDefaults] setSecretObject:expireTime forKey:TaxiBookInternalKeySessionExpireTime];
             [[NSUserDefaults standardUserDefaults] setSecretInteger:pid forKey:TaxiBookInternalKeyUserId];
