@@ -259,10 +259,10 @@
         
         NSLog(@"distances %@; durations %@", distances, durations);
 
-        [self.distanceLabel setText:[distances objectForKey:@"text"]];
-        [self.durationLabel setText:[durations objectForKey:@"text"]];
-        
-        [self.durationLabel sizeToFit];
+//        [self.distanceLabel setText:[distances objectForKey:@"text"]];
+//        [self.durationLabel setText:[durations objectForKey:@"text"]];
+//        
+//        [self.durationLabel sizeToFit];
         
         [self.displayOrder setEstimatedDuration:[[durations objectForKey:@"value"] doubleValue]];
         
@@ -275,11 +275,11 @@
             self.displayOrder.estimatedPrice = 18 + (distance - 2000) /100 *1.5; // make up formula
         }
         
-        [self.estimatedFeeLabel setText:[NSString stringWithFormat:@"Estimated Fee: HK$ %.1f", self.displayOrder.estimatedPrice]];
-        
-        self.distanceLabel.hidden = NO;
-        self.durationLabel.hidden = NO;
-        self.estimatedFeeLabel.hidden = NO;
+//        [self.estimatedFeeLabel setText:[NSString stringWithFormat:@"Estimated Fee: HK$ %.1f", self.displayOrder.estimatedPrice]];
+//        
+//        self.distanceLabel.hidden = NO;
+//        self.durationLabel.hidden = NO;
+//        self.estimatedFeeLabel.hidden = NO;
     } else {
         // zero result
         
@@ -290,6 +290,17 @@
 
 - (void)setupContentView
 {
+    
+    if (!self.driverInfoView) {
+        self.driverInfoView = [self loadDriverInfoView];
+        [self.driverInfoView setFrame:CGRectMake(320, 0, 320, 100)];
+        [self.bottomContainerView addSubview:self.driverInfoView];
+        [self.driverInfoView updateInfo:self.displayOrder.confirmedDriver orderStatus:self.displayOrder.orderStatus];
+    } else {
+        [self.driverInfoView updateInfo:self.displayOrder.confirmedDriver orderStatus:self.displayOrder.orderStatus];
+    }
+    
+    
     switch (self.displayOrder.orderStatus) {
         case OrderStatusPending:
         {
@@ -304,8 +315,6 @@
                 
                 /* bottom view config */
             }
-            self.contentView.frame = CGRectMake(0, 0, 320, 100);
-            self.pageControl.numberOfPages = 1;
         }
             break;
         case OrderStatusBidded:
@@ -321,8 +330,6 @@
                 
                 /* bottom view config */
             }
-            self.contentView.frame = CGRectMake(0, 0, 640, 100);
-            self.pageControl.numberOfPages = 2;
         }
             break;
         case OrderStatusCustomerConfirmed:
@@ -337,8 +344,6 @@
                 
                 /* bottom view config */
             }
-            self.contentView.frame = CGRectMake(0, 0, 640, 100);
-            self.pageControl.numberOfPages = 2;
         }
             break;
         case OrderStatusDriverComing:
@@ -353,9 +358,6 @@
                 
                 /* bottom view config */
             }
-            
-            self.contentView.frame = CGRectMake(0, 0, 640, 100);
-            self.pageControl.numberOfPages = 2;
         }
             break;
         case OrderStatusDriverWaiting:
@@ -370,9 +372,6 @@
                 
                 /* bottom view config */
             }
-            
-            self.contentView.frame = CGRectMake(0, 0, 640, 100);
-            self.pageControl.numberOfPages = 2;
         }
             break;
         case OrderStatusDriverPickedUp:
@@ -387,9 +386,6 @@
                 
                 /* bottom view config */
             }
-            
-            self.contentView.frame = CGRectMake(0, 0, 640, 100);
-            self.pageControl.numberOfPages = 2;
         }
             break;
         case OrderStatusOrderFinished:
@@ -404,34 +400,14 @@
                 
                 /* bottom view config */
             }
-            
-            self.contentView.frame = CGRectMake(0, 0, 640, 100);
-            self.pageControl.numberOfPages = 2;
         }
             break;
         default:
         {
-            self.contentView.frame = CGRectMake(0, 0, 320, 100);
-            self.pageControl.numberOfPages = 1;
         }
             break;
     }
     self.previousOrderStatus = self.displayOrder.orderStatus;
-    [self.scrollableContentView setScrollEnabled:YES];
-    [self.scrollableContentView setContentSize:self.contentView.frame.size];
-//    self.scrollableContentView.contentSize = self.contentView.frame.size;
-
-    if (self.pageControl.numberOfPages > 1) {
-        if (!self.driverInfoView) {
-            self.driverInfoView = [self loadDriverInfoView];
-            [self.driverInfoView setFrame:CGRectMake(320, 0, 320, 100)];
-            [self.contentView addSubview:self.driverInfoView];
-            [self.driverInfoView updateInfo:self.displayOrder.confirmedDriver orderStatus:self.displayOrder.orderStatus];
-        } else {
-            [self.driverInfoView updateInfo:self.displayOrder.confirmedDriver orderStatus:self.displayOrder.orderStatus];
-        }
-    }
-    [self.scrollableContentView setNeedsUpdateConstraints];
 }
 
 - (void)setupTopBarWithColor:(UIColor *)color withString:(NSString *)string spinnerNeed:(BOOL)spinnerNeed
@@ -456,33 +432,6 @@
     
     [self.mapOverlayView addSubview:label];
 }
-
-- (IBAction)pageControlValueChanged:(UIPageControl *)sender {
-    
-    CGFloat preferContentOffset = sender.currentPage * [UIScreen mainScreen].bounds.size.width;
-    
-//    
-//    if (self.contentView.frame.size.width <= preferContentOffset) {
-//        preferContentOffset = self.contentView.frame.size.width - [UIScreen mainScreen].bounds.size.width;
-//    }
-    
-    [self.scrollableContentView setContentOffset:CGPointMake(preferContentOffset, 0) animated:YES];
-
-}
-
-#pragma mark - UIScrollViewDelegate
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (scrollView == self.scrollableContentView) {
-        CGFloat pageWidth = self.scrollableContentView.frame.size.width;
-        float fractionalPage = self.scrollableContentView.contentOffset.x / pageWidth;
-        NSInteger page = lround(fractionalPage);
-        self.pageControl.currentPage = page;
-        
-    }
-}
-
 
 
 @end

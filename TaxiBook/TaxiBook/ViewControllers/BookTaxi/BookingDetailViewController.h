@@ -11,21 +11,19 @@
 #import "DriverInfoView.h"
 #import "OrderModel.h"
 
-@interface BookingDetailViewController : UIViewController <UIScrollViewDelegate, OrderModelDelegate>
+@interface BookingDetailViewController : UIViewController <OrderModelDelegate>
 
 @property (weak, nonatomic) Order *displayOrder;
 
 @property (strong, nonatomic) GMSMapView *googleMapView;
 @property (weak, nonatomic) IBOutlet UIView *mapView;
 
-@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *durationLabel;
-@property (weak, nonatomic) IBOutlet UILabel *estimatedFeeLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *durationLabel;
+//@property (weak, nonatomic) IBOutlet UILabel *estimatedFeeLabel;
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollableContentView;
-@property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) IBOutlet UIView *bottomContainerView;
 
-@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
 @property (strong, nonatomic) DriverInfoView *driverInfoView;
 
