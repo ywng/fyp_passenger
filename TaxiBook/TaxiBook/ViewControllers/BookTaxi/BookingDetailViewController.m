@@ -22,6 +22,9 @@
 
 @property (strong, nonatomic) GMSCircle *driverPointer;
 
+@property (nonatomic) OrderStatus previousOrderStatus;
+@property (strong, nonatomic) UIView *mapOverlayView;
+
 @end
 
 @implementation BookingDetailViewController
@@ -43,6 +46,14 @@
     }
     
     return _googleMapView;
+}
+
+- (UIView *)mapOverlayView
+{
+    if (!_mapOverlayView) {
+        _mapOverlayView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 44)];
+    }
+    return _mapOverlayView;
 }
 
 - (DriverInfoView *)loadDriverInfoView
@@ -79,7 +90,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
+    self.previousOrderStatus = OrderStatusUnknown;
     [self setupGoogleMapView];
     [SubView loadingView:nil];
     [self updateDisplayOrder];
@@ -209,6 +220,7 @@
     }
     
     // based on the status to update
+    [self setupContentView];
 }
 
 - (void)setupGoogleMapView
@@ -234,9 +246,13 @@
         polyline.strokeWidth = 5;
         polyline.map = self.googleMapView;
 
-        // wait for Google-Map-API to version 1.7, need to keep track on CocoaPods
-    //    GMSStrokeStyle *redYellow = [GMSStrokeStyle gradientFromColor:[UIColor redColor] toColor:[UIColor yellowColor]];
-    //    GMSStyleSpan *redYellowSpan = [GMSStyleSpan spanWithStyle:redYellow];
+        UIColor *transBlue = [UIColor colorWithRed:0 green:0 blue:1 alpha:0.7];
+        UIColor *transPurple = [UIColor colorWithRed:0.5 green:0 blue:0.5 alpha:0.7];
+        
+        GMSStrokeStyle *bluePurple = [GMSStrokeStyle gradientFromColor:transBlue toColor:transPurple];
+        GMSStyleSpan *redYellowSpan = [GMSStyleSpan spanWithStyle:bluePurple];
+        
+        polyline.spans = @[redYellowSpan];
         
         NSDictionary *distances = [[[routes objectForKey:@"legs"] objectAtIndex:0] objectForKey:@"distance"];
         NSDictionary *durations = [[[routes objectForKey:@"legs"] objectAtIndex:0] objectForKey:@"duration"];
@@ -277,42 +293,118 @@
     switch (self.displayOrder.orderStatus) {
         case OrderStatusPending:
         {
+            if (self.previousOrderStatus != self.displayOrder.orderStatus) {
+                
+                /* top bar config */
+                [self.mapOverlayView removeFromSuperview];
+                self.mapOverlayView = nil;
+                [self setupTopBarWithColor:[UIColor colorWithRed:60.0/255 green:188.0/255 blue:1 alpha:1] withString:@"Waiting for driver's confirmation" spinnerNeed:YES];
+                
+                [self.view addSubview:self.mapOverlayView];
+                
+                /* bottom view config */
+            }
             self.contentView.frame = CGRectMake(0, 0, 320, 100);
             self.pageControl.numberOfPages = 1;
         }
             break;
         case OrderStatusBidded:
         {
+            if (self.previousOrderStatus != self.displayOrder.orderStatus) {
+                
+                /* top bar config */
+                [self.mapOverlayView removeFromSuperview];
+                self.mapOverlayView = nil;
+                [self setupTopBarWithColor:[UIColor colorWithRed:0 green:237.0/255 blue:88.0/255 alpha:1] withString:@"You have one confirmed driver" spinnerNeed:NO];
+                
+                [self.view addSubview:self.mapOverlayView];
+                
+                /* bottom view config */
+            }
             self.contentView.frame = CGRectMake(0, 0, 640, 100);
             self.pageControl.numberOfPages = 2;
         }
             break;
         case OrderStatusCustomerConfirmed:
         {
+            if (self.previousOrderStatus != self.displayOrder.orderStatus) {
+                
+                /* top bar config */
+                [self.mapOverlayView removeFromSuperview];
+                self.mapOverlayView = nil;
+                [self setupTopBarWithColor:[UIColor colorWithRed:60.0/255 green:188.0/255 blue:1 alpha:1] withString:@"Your driver will come soon..." spinnerNeed:YES];
+                [self.view addSubview:self.mapOverlayView];
+                
+                /* bottom view config */
+            }
             self.contentView.frame = CGRectMake(0, 0, 640, 100);
             self.pageControl.numberOfPages = 2;
         }
             break;
         case OrderStatusDriverComing:
         {
+            if (self.previousOrderStatus != self.displayOrder.orderStatus) {
+                
+                /* top bar config */
+                [self.mapOverlayView removeFromSuperview];
+                self.mapOverlayView = nil;
+                [self setupTopBarWithColor:[UIColor colorWithRed:60.0/255 green:188.0/255 blue:1 alpha:1] withString:@"Your driver is coming" spinnerNeed:NO];
+                [self.view addSubview:self.mapOverlayView];
+                
+                /* bottom view config */
+            }
+            
             self.contentView.frame = CGRectMake(0, 0, 640, 100);
             self.pageControl.numberOfPages = 2;
         }
             break;
         case OrderStatusDriverWaiting:
         {
+            if (self.previousOrderStatus != self.displayOrder.orderStatus) {
+                
+                /* top bar config */
+                [self.mapOverlayView removeFromSuperview];
+                self.mapOverlayView = nil;
+                [self setupTopBarWithColor:[UIColor colorWithRed:0 green:237.0/255 blue:88.0/255 alpha:1] withString:@"Your driver has arrived" spinnerNeed:NO];
+                [self.view addSubview:self.mapOverlayView];
+                
+                /* bottom view config */
+            }
+            
             self.contentView.frame = CGRectMake(0, 0, 640, 100);
             self.pageControl.numberOfPages = 2;
         }
             break;
         case OrderStatusDriverPickedUp:
         {
+            if (self.previousOrderStatus != self.displayOrder.orderStatus) {
+                
+                /* top bar config */
+                [self.mapOverlayView removeFromSuperview];
+                self.mapOverlayView = nil;
+                [self setupTopBarWithColor:[UIColor colorWithRed:0 green:237.0/255 blue:88.0/255 alpha:1] withString:@"Your trip is started" spinnerNeed:NO];
+                [self.view addSubview:self.mapOverlayView];
+                
+                /* bottom view config */
+            }
+            
             self.contentView.frame = CGRectMake(0, 0, 640, 100);
             self.pageControl.numberOfPages = 2;
         }
             break;
         case OrderStatusOrderFinished:
         {
+            if (self.previousOrderStatus != self.displayOrder.orderStatus) {
+                
+                /* top bar config */
+                [self.mapOverlayView removeFromSuperview];
+                self.mapOverlayView = nil;
+                [self setupTopBarWithColor:[UIColor colorWithRed:0 green:237.0/255 blue:88.0/255 alpha:1] withString:@"Thank you for riding with TaxiBook!" spinnerNeed:NO];
+                [self.view addSubview:self.mapOverlayView];
+                
+                /* bottom view config */
+            }
+            
             self.contentView.frame = CGRectMake(0, 0, 640, 100);
             self.pageControl.numberOfPages = 2;
         }
@@ -324,7 +416,7 @@
         }
             break;
     }
-    
+    self.previousOrderStatus = self.displayOrder.orderStatus;
     [self.scrollableContentView setScrollEnabled:YES];
     [self.scrollableContentView setContentSize:self.contentView.frame.size];
 //    self.scrollableContentView.contentSize = self.contentView.frame.size;
@@ -340,6 +432,29 @@
         }
     }
     [self.scrollableContentView setNeedsUpdateConstraints];
+}
+
+- (void)setupTopBarWithColor:(UIColor *)color withString:(NSString *)string spinnerNeed:(BOOL)spinnerNeed
+{
+    [self.mapOverlayView setBackgroundColor:color];
+    UILabel *label = nil;
+    if (spinnerNeed) {
+        UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        [activityIndicator setCenter:CGPointMake(30, 22)];
+        [activityIndicator startAnimating];
+        [self.mapOverlayView addSubview:activityIndicator];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 240, 30)];
+        [label setCenter:CGPointMake(180, 22)];
+    } else {
+        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 280, 30)];
+        [label setCenter:CGPointMake(160, 22)];
+    }
+    
+    [label setText:string];
+    [label setFont:[UIFont fontWithName:UIFontTextStyleHeadline size:15]];
+    [label setTextColor:[UIColor whiteColor]];
+    
+    [self.mapOverlayView addSubview:label];
 }
 
 - (IBAction)pageControlValueChanged:(UIPageControl *)sender {
