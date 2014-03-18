@@ -259,9 +259,9 @@
         
         NSLog(@"distances %@; durations %@", distances, durations);
 
-//        [self.distanceLabel setText:[distances objectForKey:@"text"]];
-//        [self.durationLabel setText:[durations objectForKey:@"text"]];
-//        
+        [self.distanceLabel setText:[distances objectForKey:@"text"]];
+        [self.durationLabel setText:[durations objectForKey:@"text"]];
+//
 //        [self.durationLabel sizeToFit];
         
         [self.displayOrder setEstimatedDuration:[[durations objectForKey:@"value"] doubleValue]];
@@ -271,15 +271,17 @@
         
         if (distance < 2000) {
             self.displayOrder.estimatedPrice = 18.0;
+        } else if ( distance < 9500 ) {
+            self.displayOrder.estimatedPrice = 18 + (distance - 2000) /200 *1.6; // make up formula
         } else {
-            self.displayOrder.estimatedPrice = 18 + (distance - 2000) /100 *1.5; // make up formula
+            self.displayOrder.estimatedPrice = 78 + (distance - 9500) /200 * 1; // make up formula
         }
         
-//        [self.estimatedFeeLabel setText:[NSString stringWithFormat:@"Estimated Fee: HK$ %.1f", self.displayOrder.estimatedPrice]];
-//        
-//        self.distanceLabel.hidden = NO;
-//        self.durationLabel.hidden = NO;
-//        self.estimatedFeeLabel.hidden = NO;
+        [self.estimatedFeeLabel setText:[NSString stringWithFormat:@"HK$ %.1f", self.displayOrder.estimatedPrice]];
+        
+        self.distanceLabel.hidden = NO;
+        self.durationLabel.hidden = NO;
+        self.estimatedFeeLabel.hidden = NO;
     } else {
         // zero result
         
@@ -290,30 +292,17 @@
 
 - (void)setupContentView
 {
-    
-    if (!self.driverInfoView) {
-        self.driverInfoView = [self loadDriverInfoView];
-        [self.driverInfoView setFrame:CGRectMake(320, 0, 320, 100)];
-        [self.bottomContainerView addSubview:self.driverInfoView];
-        [self.driverInfoView updateInfo:self.displayOrder.confirmedDriver orderStatus:self.displayOrder.orderStatus];
-    } else {
-        [self.driverInfoView updateInfo:self.displayOrder.confirmedDriver orderStatus:self.displayOrder.orderStatus];
-    }
-    
-    
     switch (self.displayOrder.orderStatus) {
         case OrderStatusPending:
         {
             if (self.previousOrderStatus != self.displayOrder.orderStatus) {
                 
                 /* top bar config */
-                [self.mapOverlayView removeFromSuperview];
-                self.mapOverlayView = nil;
                 [self setupTopBarWithColor:[UIColor colorWithRed:60.0/255 green:188.0/255 blue:1 alpha:1] withString:@"Waiting for driver's confirmation" spinnerNeed:YES];
                 
-                [self.view addSubview:self.mapOverlayView];
-                
                 /* bottom view config */
+                [self.driverInfoView removeFromSuperview];
+                self.driverInfoView = nil;
             }
         }
             break;
@@ -322,13 +311,11 @@
             if (self.previousOrderStatus != self.displayOrder.orderStatus) {
                 
                 /* top bar config */
-                [self.mapOverlayView removeFromSuperview];
-                self.mapOverlayView = nil;
                 [self setupTopBarWithColor:[UIColor colorWithRed:0 green:237.0/255 blue:88.0/255 alpha:1] withString:@"You have one confirmed driver" spinnerNeed:NO];
                 
-                [self.view addSubview:self.mapOverlayView];
-                
                 /* bottom view config */
+                [self.driverInfoView removeFromSuperview];
+                self.driverInfoView = nil;
             }
         }
             break;
@@ -337,12 +324,10 @@
             if (self.previousOrderStatus != self.displayOrder.orderStatus) {
                 
                 /* top bar config */
-                [self.mapOverlayView removeFromSuperview];
-                self.mapOverlayView = nil;
                 [self setupTopBarWithColor:[UIColor colorWithRed:60.0/255 green:188.0/255 blue:1 alpha:1] withString:@"Your driver will come soon..." spinnerNeed:YES];
-                [self.view addSubview:self.mapOverlayView];
                 
                 /* bottom view config */
+                [self setupBottomBarDriverInfoView];
             }
         }
             break;
@@ -351,12 +336,10 @@
             if (self.previousOrderStatus != self.displayOrder.orderStatus) {
                 
                 /* top bar config */
-                [self.mapOverlayView removeFromSuperview];
-                self.mapOverlayView = nil;
                 [self setupTopBarWithColor:[UIColor colorWithRed:60.0/255 green:188.0/255 blue:1 alpha:1] withString:@"Your driver is coming" spinnerNeed:NO];
-                [self.view addSubview:self.mapOverlayView];
                 
                 /* bottom view config */
+                [self setupBottomBarDriverInfoView];
             }
         }
             break;
@@ -365,12 +348,10 @@
             if (self.previousOrderStatus != self.displayOrder.orderStatus) {
                 
                 /* top bar config */
-                [self.mapOverlayView removeFromSuperview];
-                self.mapOverlayView = nil;
                 [self setupTopBarWithColor:[UIColor colorWithRed:0 green:237.0/255 blue:88.0/255 alpha:1] withString:@"Your driver has arrived" spinnerNeed:NO];
-                [self.view addSubview:self.mapOverlayView];
                 
                 /* bottom view config */
+                [self setupBottomBarDriverInfoView];
             }
         }
             break;
@@ -379,12 +360,10 @@
             if (self.previousOrderStatus != self.displayOrder.orderStatus) {
                 
                 /* top bar config */
-                [self.mapOverlayView removeFromSuperview];
-                self.mapOverlayView = nil;
                 [self setupTopBarWithColor:[UIColor colorWithRed:0 green:237.0/255 blue:88.0/255 alpha:1] withString:@"Your trip is started" spinnerNeed:NO];
-                [self.view addSubview:self.mapOverlayView];
                 
                 /* bottom view config */
+                [self setupBottomBarDriverInfoView];
             }
         }
             break;
@@ -393,12 +372,10 @@
             if (self.previousOrderStatus != self.displayOrder.orderStatus) {
                 
                 /* top bar config */
-                [self.mapOverlayView removeFromSuperview];
-                self.mapOverlayView = nil;
                 [self setupTopBarWithColor:[UIColor colorWithRed:0 green:237.0/255 blue:88.0/255 alpha:1] withString:@"Thank you for riding with TaxiBook!" spinnerNeed:NO];
-                [self.view addSubview:self.mapOverlayView];
                 
                 /* bottom view config */
+                [self setupBottomBarDriverInfoView];
             }
         }
             break;
@@ -412,15 +389,17 @@
 
 - (void)setupTopBarWithColor:(UIColor *)color withString:(NSString *)string spinnerNeed:(BOOL)spinnerNeed
 {
+    [self.mapOverlayView removeFromSuperview];
+    self.mapOverlayView = nil;
     [self.mapOverlayView setBackgroundColor:color];
     UILabel *label = nil;
     if (spinnerNeed) {
-        UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        [activityIndicator setCenter:CGPointMake(30, 22)];
+        UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+        [activityIndicator setCenter:CGPointMake(20, 22)];
         [activityIndicator startAnimating];
         [self.mapOverlayView addSubview:activityIndicator];
-        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 240, 30)];
-        [label setCenter:CGPointMake(180, 22)];
+        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 260, 30)];
+        [label setCenter:CGPointMake(170, 22)];
     } else {
         label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 280, 30)];
         [label setCenter:CGPointMake(160, 22)];
@@ -431,6 +410,19 @@
     [label setTextColor:[UIColor whiteColor]];
     
     [self.mapOverlayView addSubview:label];
+    [self.view addSubview:self.mapOverlayView];
+}
+
+- (void)setupBottomBarDriverInfoView
+{
+    if (!self.driverInfoView) {
+        self.driverInfoView = [self loadDriverInfoView];
+        [self.driverInfoView setFrame:CGRectMake(0, 0, 320, 100)];
+        [self.bottomContainerView addSubview:self.driverInfoView];
+        [self.driverInfoView updateInfo:self.displayOrder.confirmedDriver orderStatus:self.displayOrder.orderStatus];
+    } else {
+        [self.driverInfoView updateInfo:self.displayOrder.confirmedDriver orderStatus:self.displayOrder.orderStatus];
+    }
 }
 
 
