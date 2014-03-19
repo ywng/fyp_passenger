@@ -11,7 +11,7 @@
 #import "DriverInfoView.h"
 #import "OrderModel.h"
 
-@interface BookingDetailViewController : UIViewController <OrderModelDelegate>
+@interface BookingDetailViewController : UIViewController <OrderModelDelegate, GMSMapViewDelegate>
 
 @property (weak, nonatomic) Order *displayOrder;
 

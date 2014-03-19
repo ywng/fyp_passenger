@@ -94,7 +94,6 @@
         
         jsonData = [responseObject objectForKey:@"driver_location"];
         if (jsonData) {
-            NSLog(@"jsonData %@", jsonData);
             TaxiBookGPS *gps = [[TaxiBookGPS alloc] init];
             gps.latitude = [[jsonData objectForKey:@"latitude"] floatValue];
             gps.longitude = [[jsonData objectForKey:@"longitude"] floatValue];

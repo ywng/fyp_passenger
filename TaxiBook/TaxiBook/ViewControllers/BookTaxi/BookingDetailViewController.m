@@ -20,10 +20,12 @@
 @property (strong, nonatomic) GMSMarker *fromMarker;
 @property (strong, nonatomic) GMSMarker *toMarker;
 
-@property (strong, nonatomic) GMSCircle *driverPointer;
+@property (strong, nonatomic) GMSMarker *driverMarker;
 
 @property (nonatomic) OrderStatus previousOrderStatus;
 @property (strong, nonatomic) UIView *mapOverlayView;
+@property (strong, nonatomic) UIView *currentOverlayView;
+@property (strong, nonatomic) UIView *driverMarkerInfoView;
 
 @end
 
@@ -39,9 +41,8 @@
         } else {
             camera = [GMSCameraPosition cameraWithLatitude:22.3964 longitude:114.1095 zoom:11];
         }
-        
-        
         _googleMapView = [GMSMapView mapWithFrame:CGRectMake(0, 0, mapRect.size.width, mapRect.size.height) camera:camera];
+        _googleMapView.delegate = self;
         [self.mapView addSubview:_googleMapView];
     }
     
@@ -95,7 +96,7 @@
     [SubView loadingView:nil];
     [self updateDisplayOrder];
     
-    self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(updateDisplayOrder) userInfo:nil repeats:YES];
+    self.updateTimer = [NSTimer scheduledTimerWithTimeInterval:20.0 target:self selector:@selector(updateDisplayOrder) userInfo:nil repeats:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -133,15 +134,27 @@
         [self updateView];
         notFirstUpdate = YES;
     } else {
-        [self minorUpdateView];
+        [self setupContentView];
     }
     [SubView dismissAlert];
 }
 
 - (void)failDownloadOrders:(OrderModel *)orderModel
 {
-    [self minorUpdateView];
+    [self setupContentView];
     [SubView dismissAlert];
+}
+
+#pragma mark - IBAction
+
+- (void)userConfirmTheDriver:(id)sender
+{
+    NSLog(@"Confirm button pressed");
+}
+
+- (void)userRejectTheDriver:(id)sender
+{
+    NSLog(@"Reject button pressed");
 }
 
 #pragma mark - View update
@@ -206,21 +219,21 @@
     [SubView dismissAlert];
 }
 
-- (void)minorUpdateView
+- (void)updateDriverLocation
 {
     // redraw driver location
     if (self.displayOrder.confirmedDriver.currentLocation) {
-        if (!self.driverPointer) {
-            self.driverPointer = [GMSCircle circleWithPosition:CLLocationCoordinate2DMake(self.displayOrder.confirmedDriver.currentLocation.latitude, self.displayOrder.confirmedDriver.currentLocation.longitude)
-                                                                           radius:10];
+        if (!self.driverMarker) {
+
+            GMSMarker *marker = [GMSMarker markerWithPosition:CLLocationCoordinate2DMake(self.displayOrder.confirmedDriver.currentLocation.latitude, self.displayOrder.confirmedDriver.currentLocation.longitude)];
+            // need an image for the circle
+            self.driverMarker = marker;
+            
         } else {
-            [self.driverPointer setPosition:CLLocationCoordinate2DMake(self.displayOrder.confirmedDriver.currentLocation.latitude, self.displayOrder.confirmedDriver.currentLocation.longitude)];
+            [self.driverMarker setPosition:CLLocationCoordinate2DMake(self.displayOrder.confirmedDriver.currentLocation.latitude, self.displayOrder.confirmedDriver.currentLocation.longitude)];
         }
-        self.driverPointer.map = self.googleMapView;
+        self.driverMarker.map = self.googleMapView;
     }
-    
-    // based on the status to update
-    [self setupContentView];
 }
 
 - (void)setupGoogleMapView
@@ -257,7 +270,7 @@
         NSDictionary *distances = [[[routes objectForKey:@"legs"] objectAtIndex:0] objectForKey:@"distance"];
         NSDictionary *durations = [[[routes objectForKey:@"legs"] objectAtIndex:0] objectForKey:@"duration"];
         
-        NSLog(@"distances %@; durations %@", distances, durations);
+//        NSLog(@"distances %@; durations %@", distances, durations);
 
         [self.distanceLabel setText:[distances objectForKey:@"text"]];
         [self.durationLabel setText:[durations objectForKey:@"text"]];
@@ -292,6 +305,14 @@
 
 - (void)setupContentView
 {
+    [self updateDriverLocation];
+    
+    
+    if (self.currentOverlayView && self.previousOrderStatus != self.displayOrder.orderStatus) {
+        [self.currentOverlayView removeFromSuperview];
+        self.currentOverlayView = nil;
+    }
+    
     switch (self.displayOrder.orderStatus) {
         case OrderStatusPending:
         {
@@ -313,9 +334,36 @@
                 /* top bar config */
                 [self setupTopBarWithColor:[UIColor colorWithRed:0 green:237.0/255 blue:88.0/255 alpha:1] withString:@"You have one confirmed driver" spinnerNeed:NO];
                 
+                /* driver location config */
+//                GMSCircle *circle = [GMSCircle circleWithPosition:self.displayOrder. radius:10];
+                
+                
                 /* bottom view config */
                 [self.driverInfoView removeFromSuperview];
                 self.driverInfoView = nil;
+                
+                UIView *confirmDriverView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 100)];
+                
+                UIButton *cancelButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 150, 80)];
+                [cancelButton addTarget:self action:@selector(userRejectTheDriver:) forControlEvents:UIControlEventTouchUpInside];
+                [cancelButton setCenter:CGPointMake(80, 50)];
+                [cancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+                [cancelButton setBackgroundColor:[UIColor redColor]];
+                [cancelButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                
+                [confirmDriverView addSubview:cancelButton];
+                
+                UIButton *confirmButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 150, 80)];
+                [confirmButton addTarget:self action:@selector(userConfirmTheDriver:) forControlEvents:UIControlEventTouchUpInside];
+                [confirmButton setCenter:CGPointMake(240, 50)];
+                [confirmButton setTitle:@"Confirm" forState:UIControlStateNormal];
+                [confirmButton setBackgroundColor:[UIColor greenColor]];
+                [confirmButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+                
+                [confirmDriverView addSubview:confirmButton];
+                [confirmDriverView setBackgroundColor:[UIColor whiteColor]];
+                [self.bottomContainerView addSubview:confirmDriverView];
+                self.currentOverlayView = confirmDriverView;
             }
         }
             break;
@@ -325,6 +373,8 @@
                 
                 /* top bar config */
                 [self setupTopBarWithColor:[UIColor colorWithRed:60.0/255 green:188.0/255 blue:1 alpha:1] withString:@"Your driver will come soon..." spinnerNeed:YES];
+                
+                /* driver location config */
                 
                 /* bottom view config */
                 [self setupBottomBarDriverInfoView];
@@ -404,7 +454,7 @@
         label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 280, 30)];
         [label setCenter:CGPointMake(160, 22)];
     }
-    
+    [label setTextAlignment:NSTextAlignmentCenter];
     [label setText:string];
     [label setFont:[UIFont fontWithName:UIFontTextStyleHeadline size:15]];
     [label setTextColor:[UIColor whiteColor]];
@@ -425,5 +475,60 @@
     }
 }
 
+#pragma mark - GMSMapViewDelegate
+
+- (UIView *)mapView:(GMSMapView *)mapView markerInfoWindow:(GMSMarker *)marker
+{
+    if (marker == self.driverMarker) {
+        if (!self.driverMarkerInfoView) {
+            self.driverMarkerInfoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
+        }
+        [self.driverMarkerInfoView setBackgroundColor:[UIColor whiteColor]];
+        
+        // calculate distance between them
+        //CLLocationDistance distance = [firstLocation distanceFromLocation:secondLocation];
+        
+        return self.driverMarkerInfoView;
+    } else {
+        return nil;
+    }
+}
+
+//
+//- (BOOL)mapView:(GMSMapView *)mapView didTapMarker:(GMSMarker *)marker
+//{
+//    // return YES for handled the event, NO will trigger default action
+//    NSLog(@"did tap called");
+//    
+//    if (marker == self.driverMarker) {
+//        if (mapView.selectedMarker == marker) {
+//            // deselect the marker
+//            mapView.selectedMarker = nil;
+//            [self.driverMarkerInfoView removeFromSuperview];
+//        } else {
+//            mapView.selectedMarker = marker;
+//            
+//            // add a custom view?
+//            UIView *infoView = nil;
+//            if (!self.driverMarkerInfoView) {
+//                infoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 100, 50)];
+//            } else {
+//                infoView = self.driverMarkerInfoView;
+//            }
+//            [infoView setBackgroundColor:[UIColor whiteColor]];
+//            infoView.center = marker.infoWindowAnchor;
+//            
+//            [self.googleMapView addSubview:infoView];
+//            self.driverMarkerInfoView = infoView;
+//            
+//        }
+//        
+//        
+//
+//        return YES;
+//    } else {
+//        return NO;
+//    }
+//}
 
 @end
