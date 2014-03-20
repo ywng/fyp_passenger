@@ -9,6 +9,7 @@
 #import "BookingDetailViewController.h"
 #import "MDDirectionService.h"
 #import "SubView.h"
+#import <UIKit+AFNetworking.h>
 
 @interface BookingDetailViewController () <MDDirectionServiceDelegate> {
     BOOL notFirstUpdate;
@@ -60,6 +61,16 @@
 - (DriverInfoView *)loadDriverInfoView
 {
     NSArray *ele = [[NSBundle mainBundle] loadNibNamed:@"DriverInfoView" owner:self options:nil];
+    if ([ele count] > 0) {
+        return [ele objectAtIndex:0];
+    } else {
+        return nil;
+    }
+}
+
+- (DriverProfileView *)loadDriverProfileView
+{
+    NSArray *ele = [[NSBundle mainBundle] loadNibNamed:@"DriverProfileView" owner:self options:nil];
     if ([ele count] > 0) {
         return [ele objectAtIndex:0];
     } else {
@@ -227,12 +238,16 @@
 
             GMSMarker *marker = [GMSMarker markerWithPosition:CLLocationCoordinate2DMake(self.displayOrder.confirmedDriver.currentLocation.latitude, self.displayOrder.confirmedDriver.currentLocation.longitude)];
             // need an image for the circle
+
             self.driverMarker = marker;
             
         } else {
             [self.driverMarker setPosition:CLLocationCoordinate2DMake(self.displayOrder.confirmedDriver.currentLocation.latitude, self.displayOrder.confirmedDriver.currentLocation.longitude)];
         }
         self.driverMarker.map = self.googleMapView;
+        if (!self.googleMapView.selectedMarker) {
+            self.googleMapView.selectedMarker = self.driverMarker;
+        }
     }
 }
 
@@ -481,12 +496,16 @@
 {
     if (marker == self.driverMarker) {
         if (!self.driverMarkerInfoView) {
-            self.driverMarkerInfoView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 50)];
+            self.driverProfileView = [self loadDriverProfileView];
+            self.driverMarkerInfoView = self.driverProfileView;
         }
-        [self.driverMarkerInfoView setBackgroundColor:[UIColor whiteColor]];
+        
+        [self.driverProfileView updateViewWithDriver:self.displayOrder.confirmedDriver];
         
         // calculate distance between them
         //CLLocationDistance distance = [firstLocation distanceFromLocation:secondLocation];
+        
+        
         
         return self.driverMarkerInfoView;
     } else {

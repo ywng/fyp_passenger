@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSString *phoneNumber;
 @property (strong, nonatomic) NSString *licenseNumber;
 @property (strong, nonatomic) NSURL *licensePhotoUrl;
+@property (strong, nonatomic) NSURL *profilePicUrl;
 @property (strong, nonatomic) TaxiBookGPS *currentLocation;
 
 + (Driver *)newInstanceFromServerData:(id)jsonData;

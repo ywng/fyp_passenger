@@ -10,6 +10,16 @@
 
 @implementation Driver
 
+- (NSURL *)profilePicUrl
+{
+    if (!_licensePhotoUrl) {
+        return nil;
+    } else {
+        return [NSURL URLWithString:_licensePhotoUrl.absoluteString relativeToURL:[[TaxiBookConnectionManager sharedManager] serviceBaseURL]];
+    }
+}
+
+
 + (Driver *)newInstanceFromServerData:(id)jsonData
 {
     Driver *newDriver = [[Driver alloc] init];

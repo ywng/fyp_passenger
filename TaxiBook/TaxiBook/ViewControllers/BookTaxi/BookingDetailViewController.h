@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <GoogleMaps/GoogleMaps.h>
 #import "DriverInfoView.h"
+#import "DriverProfileView.h"
 #import "OrderModel.h"
 
 @interface BookingDetailViewController : UIViewController <OrderModelDelegate, GMSMapViewDelegate>
@@ -26,5 +27,6 @@
 
 
 @property (strong, nonatomic) DriverInfoView *driverInfoView;
+@property (strong, nonatomic) DriverProfileView *driverProfileView;
 
 @end
