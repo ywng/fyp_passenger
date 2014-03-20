@@ -9,22 +9,24 @@
 #import <UIKit/UIKit.h>
 #import <GoogleMaps/GoogleMaps.h>
 #import "DriverInfoView.h"
+#import "DriverProfileView.h"
 #import "OrderModel.h"
 
-@interface BookingDetailViewController : UIViewController <OrderModelDelegate>
+@interface BookingDetailViewController : UIViewController <OrderModelDelegate, GMSMapViewDelegate>
 
 @property (weak, nonatomic) Order *displayOrder;
 
 @property (strong, nonatomic) GMSMapView *googleMapView;
 @property (weak, nonatomic) IBOutlet UIView *mapView;
 
-//@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
-//@property (weak, nonatomic) IBOutlet UILabel *durationLabel;
-//@property (weak, nonatomic) IBOutlet UILabel *estimatedFeeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *distanceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *durationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *estimatedFeeLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *bottomContainerView;
 
 
 @property (strong, nonatomic) DriverInfoView *driverInfoView;
+@property (strong, nonatomic) DriverProfileView *driverProfileView;
 
 @end

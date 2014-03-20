@@ -416,6 +416,11 @@
     
 }
 
+- (NSURL *)serviceBaseURL
+{
+    return [NSURL URLWithString:@"http://taxibook.site50.net/"];
+}
+
 - (id)init
 {
     if (self = [super init]) {

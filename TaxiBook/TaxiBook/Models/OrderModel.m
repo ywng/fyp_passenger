@@ -94,7 +94,6 @@
         
         jsonData = [responseObject objectForKey:@"driver_location"];
         if (jsonData) {
-            NSLog(@"jsonData %@", jsonData);
             TaxiBookGPS *gps = [[TaxiBookGPS alloc] init];
             gps.latitude = [[jsonData objectForKey:@"latitude"] floatValue];
             gps.longitude = [[jsonData objectForKey:@"longitude"] floatValue];
@@ -118,6 +117,28 @@
     } loginIfNeed:YES];
 }
 
+
+- (void)confirmDriver:(NSUInteger)orderId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    TaxiBookConnectionManager *sharedManager = [TaxiBookConnectionManager sharedManager];
+    
+    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:@(orderId), @"oid", nil];
+    
+    [sharedManager postToUrl:@"/trip/confirm_driver/" withParameters:params success:success failure:failure loginIfNeed:YES];
+}
+
+- (void)rejectDriver:(NSUInteger)orderId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    // not yet implemented
+    failure(nil, [NSError errorWithDomain:TaxiBookServiceName code:-123123 userInfo:nil]);
+
+//    TaxiBookConnectionManager *sharedManager = [TaxiBookConnectionManager sharedManager];
+//    
+//    NSDictionary *params = [[NSDictionary alloc] initWithObjectsAndKeys:@(orderId), @"oid", nil];
+//    
+//    
+//    [sharedManager postToUrl:@"/trip/reject_driver/" withParameters:params success:success failure:failure loginIfNeed:YES];
+}
 
 - (Order *)objectAtIndex:(NSUInteger)index
 {
