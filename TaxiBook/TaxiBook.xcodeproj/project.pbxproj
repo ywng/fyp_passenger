@@ -40,6 +40,7 @@
 		77517F03182CA86C009991F3 /* TaxiBookErrorSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 77517F02182CA86C009991F3 /* TaxiBookErrorSet.m */; };
 		77705D6718DA941C00A0AF9D /* DriverProfileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77705D6618DA941C00A0AF9D /* DriverProfileView.xib */; };
 		77705D6A18DA946C00A0AF9D /* DriverProfileView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77705D6918DA946C00A0AF9D /* DriverProfileView.m */; };
+		77705D6D18DAE2CF00A0AF9D /* TaxiBookBookingSummaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77705D6C18DAE2CF00A0AF9D /* TaxiBookBookingSummaryTableViewCell.m */; };
 		778533D81845CC0B007BCA1B /* TaxiBookProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778533D71845CC0B007BCA1B /* TaxiBookProfileViewController.m */; };
 		EA0352BA18BF74A10019A3A4 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0352B918BF74A10019A3A4 /* AccountViewController.m */; };
 		ED40EB7A187E679C00E186F1 /* BookingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED40EB79187E679C00E186F1 /* BookingDetailViewController.m */; };
@@ -121,6 +122,8 @@
 		77705D6618DA941C00A0AF9D /* DriverProfileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DriverProfileView.xib; sourceTree = "<group>"; };
 		77705D6818DA946C00A0AF9D /* DriverProfileView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriverProfileView.h; sourceTree = "<group>"; };
 		77705D6918DA946C00A0AF9D /* DriverProfileView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriverProfileView.m; sourceTree = "<group>"; };
+		77705D6B18DAE2CF00A0AF9D /* TaxiBookBookingSummaryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiBookBookingSummaryTableViewCell.h; sourceTree = "<group>"; };
+		77705D6C18DAE2CF00A0AF9D /* TaxiBookBookingSummaryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookBookingSummaryTableViewCell.m; sourceTree = "<group>"; };
 		778533D61845CC0B007BCA1B /* TaxiBookProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiBookProfileViewController.h; sourceTree = "<group>"; };
 		778533D71845CC0B007BCA1B /* TaxiBookProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookProfileViewController.m; sourceTree = "<group>"; };
 		EA0352B818BF74A10019A3A4 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
@@ -294,6 +297,8 @@
 		77517EF8182CA0B1009991F3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				77705D6B18DAE2CF00A0AF9D /* TaxiBookBookingSummaryTableViewCell.h */,
+				77705D6C18DAE2CF00A0AF9D /* TaxiBookBookingSummaryTableViewCell.m */,
 				77705D6818DA946C00A0AF9D /* DriverProfileView.h */,
 				77705D6918DA946C00A0AF9D /* DriverProfileView.m */,
 				77705D6618DA941C00A0AF9D /* DriverProfileView.xib */,
@@ -533,6 +538,7 @@
 				774CEDAF1820E3EB0004A123 /* main.m in Sources */,
 				77402F44187F0DE2008E9C9B /* Order.m in Sources */,
 				ED40EB7A187E679C00E186F1 /* BookingDetailViewController.m in Sources */,
+				77705D6D18DAE2CF00A0AF9D /* TaxiBookBookingSummaryTableViewCell.m in Sources */,
 				EDBFF55B187DB6440037F986 /* WelcomeViewController.m in Sources */,
 				773001E418905E7E00100A2A /* TaxiBookBookingViewController.m in Sources */,
 				77517EFC182CA0E0009991F3 /* TaxiBookConnectionManager.m in Sources */,

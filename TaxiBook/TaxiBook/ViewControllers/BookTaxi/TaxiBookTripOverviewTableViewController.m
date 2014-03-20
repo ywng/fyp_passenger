@@ -8,16 +8,15 @@
 
 #import "TaxiBookTripOverviewTableViewController.h"
 #import "BookingDetailViewController.h"
+#import "TaxiBookBookingSummaryTableViewCell.h"
 
 @interface TaxiBookTripOverviewTableViewController ()
 
 @property (strong, nonatomic) OrderModel *orderModel;
 
-
 @end
 
 @implementation TaxiBookTripOverviewTableViewController
-
 
 static NSString *bookingDetailSegueIdentifer = @"viewDetail";
 
@@ -100,11 +99,19 @@ static NSString *bookingDetailSegueIdentifer = @"viewDetail";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    if ([cell isKindOfClass:[TaxiBookBookingSummaryTableViewCell class]]) {
+        TaxiBookBookingSummaryTableViewCell *summaryCell = (TaxiBookBookingSummaryTableViewCell *)cell;
+        
+        Order *order = [self.orderModel objectAtIndex:indexPath.row];
+        [summaryCell.fromLabel setText:order.fromGPS.streetDescription];
+        [summaryCell.toLabel setText:order.toGPS.streetDescription];
+        [summaryCell.statusLabel setText:[NSString stringWithFormat:@"Status: %@", [Order orderStatusToString:order.orderStatus]]];
+        
+        return summaryCell;
+        
+    }
     
-    Order *order = [self.orderModel objectAtIndex:indexPath.row];
-    
-    cell.textLabel.text = order.toGPS.streetDescription;
-    cell.detailTextLabel.text = [Order orderStatusToString:order.orderStatus];
+   
     
     return cell;
 }
@@ -192,7 +199,7 @@ static NSString *bookingDetailSegueIdentifer = @"viewDetail";
         bookingVC.displayOrder = sender;
         
     }
-
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
 

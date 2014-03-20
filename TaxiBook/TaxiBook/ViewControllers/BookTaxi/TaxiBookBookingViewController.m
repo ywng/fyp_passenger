@@ -112,6 +112,11 @@ static NSString *confirmSegueIdentifier = @"confirm";
     }
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+}
 
 #pragma mark - Tap Gesture Recognizer
 - (IBAction)userDidTapOnOriginContainerView:(id)sender {

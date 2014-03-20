@@ -44,7 +44,19 @@
         // update view
         
         if (driver.profilePicUrl) {
-            [self.driverProfilePic setImageWithURL:driver.profilePicUrl];
+            NSURLRequest *request = [[NSURLRequest alloc] initWithURL:driver.profilePicUrl cachePolicy:NSURLCacheStorageAllowed timeoutInterval:30];
+            __weak UIImageView *weakDriverProfilePic = self.driverProfilePic;
+            
+            [self.driverProfilePic setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [weakDriverProfilePic setImage:image];
+                    [weakDriverProfilePic setNeedsDisplay];
+                });
+                
+                NSLog(@"image loaded");
+            } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+                NSLog(@"image fail to load");
+            }];
         }
         if (driver.firstName && driver.lastName) {
             [self.driverNameLabel setText:[NSString stringWithFormat:@"%@ %@", driver.firstName, driver.lastName]];

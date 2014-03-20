@@ -161,11 +161,28 @@
 - (void)userConfirmTheDriver:(id)sender
 {
     NSLog(@"Confirm button pressed");
+    
+    [self.orderModel confirmDriver:self.displayOrder.orderId success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"success to confirm driver");
+        [self updateDisplayOrder];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"fail to confirm driver %@", error);
+        NSString *string = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
+        NSLog(@"string %@",string);
+    }];
+    
 }
 
 - (void)userRejectTheDriver:(id)sender
 {
     NSLog(@"Reject button pressed");
+    
+    [self.orderModel rejectDriver:self.displayOrder.orderId success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"success to reject driver");
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"fail to reject driver %@", error);
+    }];
 }
 
 #pragma mark - View update
