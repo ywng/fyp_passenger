@@ -28,6 +28,7 @@
 @property (strong, nonatomic) UIView *currentOverlayView;
 @property (strong, nonatomic) UIView *driverMarkerInfoView;
 
+@property (nonatomic) BOOL manualUpdateDriverProfileView;
 @end
 
 @implementation BookingDetailViewController
@@ -515,9 +516,16 @@
         if (!self.driverMarkerInfoView) {
             self.driverProfileView = [self loadDriverProfileView];
             self.driverMarkerInfoView = self.driverProfileView;
+            [self.driverProfileView setDelegate:self];
         }
         
-        [self.driverProfileView updateViewWithDriver:self.displayOrder.confirmedDriver];
+        if (self.manualUpdateDriverProfileView) {
+            [self.driverProfileView updateViewWithDriver:self.displayOrder.confirmedDriver manuallyUpdate:YES];
+        } else {
+            [self.driverProfileView updateViewWithDriver:self.displayOrder.confirmedDriver];
+        }
+        
+        self.manualUpdateDriverProfileView = NO;
         
         // calculate distance between them
         //CLLocationDistance distance = [firstLocation distanceFromLocation:secondLocation];
@@ -527,6 +535,17 @@
         return self.driverMarkerInfoView;
     } else {
         return nil;
+    }
+}
+
+#pragma mark - DriverProfileViewDelegate
+
+- (void)driverProfilePicFinishLoading
+{
+    if (self.driverMarker && self.googleMapView.selectedMarker == self.driverMarker) {
+        self.googleMapView.selectedMarker = nil;
+        self.googleMapView.selectedMarker = self.driverMarker;
+        self.manualUpdateDriverProfileView = YES;
     }
 }
 

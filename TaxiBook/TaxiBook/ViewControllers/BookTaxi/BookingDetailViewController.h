@@ -12,7 +12,7 @@
 #import "DriverProfileView.h"
 #import "OrderModel.h"
 
-@interface BookingDetailViewController : UIViewController <OrderModelDelegate, GMSMapViewDelegate>
+@interface BookingDetailViewController : UIViewController <OrderModelDelegate, GMSMapViewDelegate, DriverProfileViewDelegate>
 
 @property (weak, nonatomic) Order *displayOrder;
 

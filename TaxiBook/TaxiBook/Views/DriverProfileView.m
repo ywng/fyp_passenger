@@ -8,6 +8,7 @@
 
 #import "DriverProfileView.h"
 #import <UIKit+AFNetworking.h>
+#import "UIImage+Color.h"
 
 @interface DriverProfileView ()
 
@@ -36,21 +37,37 @@
 {
     self.driverProfilePic.layer.cornerRadius = self.driverProfilePic.frame.size.height/2;
     self.driverProfilePic.clipsToBounds = YES;
+    [self.driverProfilePic setBackgroundColor:[UIColor clearColor]];
 }
 
 - (void)updateViewWithDriver:(Driver *)driver
 {
+    [self updateViewWithDriver:driver manuallyUpdate:NO];
+}
+
+- (void)updateViewWithDriver:(Driver *)driver manuallyUpdate:(BOOL)manuallyUpdate
+{
     if (!self.displayingDriver && self.displayingDriver.driverId != driver.driverId) {
         // update view
         
+        static UIImage *grayImage = nil;
+        
+        if (!grayImage) {
+            grayImage = [UIImage imageWithColor:[UIColor grayColor] andSize:self.driverProfilePic.frame.size];
+        }
+        
         if (driver.profilePicUrl) {
             NSURLRequest *request = [[NSURLRequest alloc] initWithURL:driver.profilePicUrl cachePolicy:NSURLCacheStorageAllowed timeoutInterval:30];
-            __weak UIImageView *weakDriverProfilePic = self.driverProfilePic;
+            __weak DriverProfileView *weakSelf = self;
             
-            [self.driverProfilePic setImageWithURLRequest:request placeholderImage:nil success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+            [self.driverProfilePic setImageWithURLRequest:request placeholderImage:grayImage success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    [weakDriverProfilePic setImage:image];
-                    [weakDriverProfilePic setNeedsDisplay];
+                    [weakSelf.driverProfilePic setImage:image];
+                    [weakSelf setNeedsDisplay];
+                    
+                    if (!manuallyUpdate && self.delegate && [self.delegate respondsToSelector:@selector(driverProfilePicFinishLoading)]) {
+                        [self.delegate driverProfilePicFinishLoading];
+                    }
                 });
                 
                 NSLog(@"image loaded");
