@@ -12,11 +12,7 @@
 
 - (NSURL *)profilePicUrl
 {
-    if (!_licensePhotoUrl) {
-        return nil;
-    } else {
-        return [NSURL URLWithString:_licensePhotoUrl.absoluteString relativeToURL:[[TaxiBookConnectionManager sharedManager] serviceBaseURL]];
-    }
+    return _licensePhotoUrl;
 }
 
 

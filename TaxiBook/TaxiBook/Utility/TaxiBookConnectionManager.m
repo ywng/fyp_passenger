@@ -418,7 +418,7 @@
 
 - (NSURL *)serviceBaseURL
 {
-    return [NSURL URLWithString:@"http://taxibook.site50.net/"];
+    return [NSURL URLWithString:@"http://ec2-54-255-141-218.ap-southeast-1.compute.amazonaws.com/"];
 }
 
 - (id)init

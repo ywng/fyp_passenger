@@ -100,7 +100,7 @@
 		77402F4E187FD1EC008E9C9B /* Driver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Driver.m; sourceTree = "<group>"; };
 		77402F50187FD257008E9C9B /* TaxiBookGPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiBookGPS.h; sourceTree = "<group>"; };
 		77402F51187FD257008E9C9B /* TaxiBookGPS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookGPS.m; sourceTree = "<group>"; };
-		774CED9F1820E3EB0004A123 /* TaxiBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaxiBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		774CED9F1820E3EB0004A123 /* Taxibook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taxibook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		774CEDA21820E3EB0004A123 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		774CEDA41820E3EB0004A123 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		774CEDA61820E3EB0004A123 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -110,7 +110,7 @@
 		774CEDB01820E3EB0004A123 /* TaxiBook-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TaxiBook-Prefix.pch"; sourceTree = "<group>"; };
 		774CEDB11820E3EB0004A123 /* TaxiBookAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaxiBookAppDelegate.h; sourceTree = "<group>"; };
 		774CEDB21820E3EB0004A123 /* TaxiBookAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaxiBookAppDelegate.m; sourceTree = "<group>"; };
-		774CEDC01820E3EB0004A123 /* TaxiBookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaxiBookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		774CEDC01820E3EB0004A123 /* TaxibookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaxibookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		774CEDC11820E3EB0004A123 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		774CEDC91820E3EB0004A123 /* TaxiBookTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TaxiBookTests-Info.plist"; sourceTree = "<group>"; };
 		774CEDCB1820E3EB0004A123 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -221,8 +221,8 @@
 		774CEDA01820E3EB0004A123 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				774CED9F1820E3EB0004A123 /* TaxiBook.app */,
-				774CEDC01820E3EB0004A123 /* TaxiBookTests.xctest */,
+				774CED9F1820E3EB0004A123 /* Taxibook.app */,
+				774CEDC01820E3EB0004A123 /* TaxibookTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -422,7 +422,7 @@
 			);
 			name = Taxibook;
 			productName = TaxiBook;
-			productReference = 774CED9F1820E3EB0004A123 /* TaxiBook.app */;
+			productReference = 774CED9F1820E3EB0004A123 /* Taxibook.app */;
 			productType = "com.apple.product-type.application";
 		};
 		774CEDBF1820E3EB0004A123 /* TaxibookTests */ = {
@@ -440,7 +440,7 @@
 			);
 			name = TaxibookTests;
 			productName = TaxiBookTests;
-			productReference = 774CEDC01820E3EB0004A123 /* TaxiBookTests.xctest */;
+			productReference = 774CEDC01820E3EB0004A123 /* TaxibookTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */

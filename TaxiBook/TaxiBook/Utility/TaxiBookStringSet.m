@@ -11,7 +11,7 @@
 @implementation TaxiBookStringSet
 
 NSString const *TaxiBookServiceName = @"com.taxibook.taxibook";
-NSString const *TaxiBookGoogleAPIIOSKey = @"AIzaSyAu-8oZWNCKRva2h2BFwrweMVRNdwbLDro";
+NSString const *TaxiBookGoogleAPIIOSKey = @"AIzaSyDICXJm7NJ-SXutreHUi09Q8TLZiJ9NFRU";
 NSString const *TaxiBookGoogleAPIServerKey = @"AIzaSyBA78cM911xXcBpOFMzD6BMjwjt2eLK2kM";
 
 #pragma mark -
