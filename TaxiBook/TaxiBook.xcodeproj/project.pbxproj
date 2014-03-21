@@ -406,9 +406,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		774CED9E1820E3EB0004A123 /* TaxiBook */ = {
+		774CED9E1820E3EB0004A123 /* Taxibook */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 774CEDD11820E3EB0004A123 /* Build configuration list for PBXNativeTarget "TaxiBook" */;
+			buildConfigurationList = 774CEDD11820E3EB0004A123 /* Build configuration list for PBXNativeTarget "Taxibook" */;
 			buildPhases = (
 				9919D4FF474945628810174C /* Check Pods Manifest.lock */,
 				774CED9B1820E3EB0004A123 /* Sources */,
@@ -420,14 +420,14 @@
 			);
 			dependencies = (
 			);
-			name = TaxiBook;
+			name = Taxibook;
 			productName = TaxiBook;
 			productReference = 774CED9F1820E3EB0004A123 /* TaxiBook.app */;
 			productType = "com.apple.product-type.application";
 		};
-		774CEDBF1820E3EB0004A123 /* TaxiBookTests */ = {
+		774CEDBF1820E3EB0004A123 /* TaxibookTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 774CEDD41820E3EB0004A123 /* Build configuration list for PBXNativeTarget "TaxiBookTests" */;
+			buildConfigurationList = 774CEDD41820E3EB0004A123 /* Build configuration list for PBXNativeTarget "TaxibookTests" */;
 			buildPhases = (
 				774CEDBC1820E3EB0004A123 /* Sources */,
 				774CEDBD1820E3EB0004A123 /* Frameworks */,
@@ -438,7 +438,7 @@
 			dependencies = (
 				774CEDC61820E3EB0004A123 /* PBXTargetDependency */,
 			);
-			name = TaxiBookTests;
+			name = TaxibookTests;
 			productName = TaxiBookTests;
 			productReference = 774CEDC01820E3EB0004A123 /* TaxiBookTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -453,6 +453,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = taxibook;
 				TargetAttributes = {
+					774CED9E1820E3EB0004A123 = {
+						DevelopmentTeam = TS38G64292;
+					};
 					774CEDBF1820E3EB0004A123 = {
 						TestTargetID = 774CED9E1820E3EB0004A123;
 					};
@@ -471,8 +474,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				774CED9E1820E3EB0004A123 /* TaxiBook */,
-				774CEDBF1820E3EB0004A123 /* TaxiBookTests */,
+				774CED9E1820E3EB0004A123 /* Taxibook */,
+				774CEDBF1820E3EB0004A123 /* TaxibookTests */,
 			);
 		};
 /* End PBXProject section */
@@ -588,7 +591,7 @@
 /* Begin PBXTargetDependency section */
 		774CEDC61820E3EB0004A123 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 774CED9E1820E3EB0004A123 /* TaxiBook */;
+			target = 774CED9E1820E3EB0004A123 /* Taxibook */;
 			targetProxy = 774CEDC51820E3EB0004A123 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -775,7 +778,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		774CEDD11820E3EB0004A123 /* Build configuration list for PBXNativeTarget "TaxiBook" */ = {
+		774CEDD11820E3EB0004A123 /* Build configuration list for PBXNativeTarget "Taxibook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				774CEDD21820E3EB0004A123 /* Debug */,
@@ -784,7 +787,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		774CEDD41820E3EB0004A123 /* Build configuration list for PBXNativeTarget "TaxiBookTests" */ = {
+		774CEDD41820E3EB0004A123 /* Build configuration list for PBXNativeTarget "TaxibookTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				774CEDD51820E3EB0004A123 /* Debug */,
