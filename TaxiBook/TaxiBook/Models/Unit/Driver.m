@@ -56,7 +56,7 @@
     }
     
     // licenseNumber
-    tmp = [jsonData objectForKey:@"licenseNumber"];
+    tmp = [jsonData objectForKey:@"license_no"];
     if (tmp && tmp!= [NSNull null]) {
         newDriver.licenseNumber = tmp;
     }

@@ -29,12 +29,13 @@
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mobile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Die-oe-Mfh">
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" editable="NO" text="Mobile" translatesAutoresizingMaskIntoConstraints="NO" id="Qm9-nj-eD6">
                     <rect key="frame" x="69" y="39" width="148" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    <dataDetectorType key="dataDetectorTypes" phoneNumber="YES"/>
+                </textView>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="License Plate" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w9K-3n-FpA">
                     <rect key="frame" x="20" y="57" width="84" height="18"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -53,7 +54,7 @@
             <connections>
                 <outlet property="driverNameLabel" destination="tuq-ji-W1I" id="GPP-Bi-jVB"/>
                 <outlet property="licenseNumberLabel" destination="vzd-il-TAn" id="HsJ-Lg-iOE"/>
-                <outlet property="mobileNumberLabel" destination="Die-oe-Mfh" id="Ndp-8b-EE2"/>
+                <outlet property="mobileNumberTextView" destination="Qm9-nj-eD6" id="7LN-Wz-vW9"/>
                 <outlet property="taxiStatusUpdateLabel" destination="CFa-OH-Gef" id="g6P-rl-03u"/>
             </connections>
         </view>
