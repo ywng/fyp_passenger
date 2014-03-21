@@ -36,7 +36,7 @@
     
     if (!driver) {
         [self.driverNameLabel setText:@"Waiting for driver"];
-        [self.mobileNumberLabel setText:@"Unknown"];
+        [self.mobileNumberTextView setText:@"Unknown"];
         [self.licenseNumberLabel setText:@"Unknown"];
         [self.taxiStatusUpdateLabel setText:@"Unknown"];
     } else {
