@@ -13,6 +13,7 @@
 		7706C5D01895470F004B7447 /* GMPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 7706C5CF1895470F004B7447 /* GMPlace.m */; };
 		77188EF118977A4B009F18EA /* TaxiBookTripOverviewTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 77188EF018977A4B009F18EA /* TaxiBookTripOverviewTableViewController.m */; };
 		77188EF418977AA0009F18EA /* OrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 77188EF318977AA0009F18EA /* OrderModel.m */; };
+		772F41FD18DC3A2A00ABC136 /* UIImage+Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 772F41FC18DC3A2A00ABC136 /* UIImage+Color.m */; };
 		773001E418905E7E00100A2A /* TaxiBookBookingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 773001E318905E7E00100A2A /* TaxiBookBookingViewController.m */; };
 		773001E718906B7800100A2A /* PlaceSearchResultTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 773001E618906B7800100A2A /* PlaceSearchResultTableViewController.m */; };
 		773001EA18906BF300100A2A /* GoogleMapPlaceSearchService.m in Sources */ = {isa = PBXBuildFile; fileRef = 773001E918906BF300100A2A /* GoogleMapPlaceSearchService.m */; };
@@ -78,6 +79,8 @@
 		77188EF018977A4B009F18EA /* TaxiBookTripOverviewTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookTripOverviewTableViewController.m; sourceTree = "<group>"; };
 		77188EF218977AA0009F18EA /* OrderModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderModel.h; sourceTree = "<group>"; };
 		77188EF318977AA0009F18EA /* OrderModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderModel.m; sourceTree = "<group>"; };
+		772F41FB18DC3A2A00ABC136 /* UIImage+Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Color.h"; sourceTree = "<group>"; };
+		772F41FC18DC3A2A00ABC136 /* UIImage+Color.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Color.m"; sourceTree = "<group>"; };
 		773001E218905E7E00100A2A /* TaxiBookBookingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiBookBookingViewController.h; sourceTree = "<group>"; };
 		773001E318905E7E00100A2A /* TaxiBookBookingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookBookingViewController.m; sourceTree = "<group>"; };
 		773001E518906B7800100A2A /* PlaceSearchResultTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlaceSearchResultTableViewController.h; sourceTree = "<group>"; };
@@ -97,7 +100,7 @@
 		77402F4E187FD1EC008E9C9B /* Driver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Driver.m; sourceTree = "<group>"; };
 		77402F50187FD257008E9C9B /* TaxiBookGPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiBookGPS.h; sourceTree = "<group>"; };
 		77402F51187FD257008E9C9B /* TaxiBookGPS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookGPS.m; sourceTree = "<group>"; };
-		774CED9F1820E3EB0004A123 /* TaxiBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaxiBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		774CED9F1820E3EB0004A123 /* Taxibook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taxibook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		774CEDA21820E3EB0004A123 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		774CEDA41820E3EB0004A123 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		774CEDA61820E3EB0004A123 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -107,7 +110,7 @@
 		774CEDB01820E3EB0004A123 /* TaxiBook-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TaxiBook-Prefix.pch"; sourceTree = "<group>"; };
 		774CEDB11820E3EB0004A123 /* TaxiBookAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TaxiBookAppDelegate.h; sourceTree = "<group>"; };
 		774CEDB21820E3EB0004A123 /* TaxiBookAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TaxiBookAppDelegate.m; sourceTree = "<group>"; };
-		774CEDC01820E3EB0004A123 /* TaxiBookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaxiBookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		774CEDC01820E3EB0004A123 /* TaxibookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TaxibookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		774CEDC11820E3EB0004A123 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		774CEDC91820E3EB0004A123 /* TaxiBookTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TaxiBookTests-Info.plist"; sourceTree = "<group>"; };
 		774CEDCB1820E3EB0004A123 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -180,6 +183,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		772F41FA18DC39F200ABC136 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				772F41FB18DC3A2A00ABC136 /* UIImage+Color.h */,
+				772F41FC18DC3A2A00ABC136 /* UIImage+Color.m */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
 		77402F41187F0DB4008E9C9B /* Unit */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,8 +221,8 @@
 		774CEDA01820E3EB0004A123 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				774CED9F1820E3EB0004A123 /* TaxiBook.app */,
-				774CEDC01820E3EB0004A123 /* TaxiBookTests.xctest */,
+				774CED9F1820E3EB0004A123 /* Taxibook.app */,
+				774CEDC01820E3EB0004A123 /* TaxibookTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -231,6 +243,7 @@
 		774CEDA81820E3EB0004A123 /* TaxiBook */ = {
 			isa = PBXGroup;
 			children = (
+				772F41FA18DC39F200ABC136 /* Category */,
 				EDBFF55F187DB6DC0037F986 /* TaxiBook.storyboard */,
 				77517EF9182CA0BD009991F3 /* Models */,
 				77517EF8182CA0B1009991F3 /* Views */,
@@ -393,9 +406,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		774CED9E1820E3EB0004A123 /* TaxiBook */ = {
+		774CED9E1820E3EB0004A123 /* Taxibook */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 774CEDD11820E3EB0004A123 /* Build configuration list for PBXNativeTarget "TaxiBook" */;
+			buildConfigurationList = 774CEDD11820E3EB0004A123 /* Build configuration list for PBXNativeTarget "Taxibook" */;
 			buildPhases = (
 				9919D4FF474945628810174C /* Check Pods Manifest.lock */,
 				774CED9B1820E3EB0004A123 /* Sources */,
@@ -407,14 +420,14 @@
 			);
 			dependencies = (
 			);
-			name = TaxiBook;
+			name = Taxibook;
 			productName = TaxiBook;
-			productReference = 774CED9F1820E3EB0004A123 /* TaxiBook.app */;
+			productReference = 774CED9F1820E3EB0004A123 /* Taxibook.app */;
 			productType = "com.apple.product-type.application";
 		};
-		774CEDBF1820E3EB0004A123 /* TaxiBookTests */ = {
+		774CEDBF1820E3EB0004A123 /* TaxibookTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 774CEDD41820E3EB0004A123 /* Build configuration list for PBXNativeTarget "TaxiBookTests" */;
+			buildConfigurationList = 774CEDD41820E3EB0004A123 /* Build configuration list for PBXNativeTarget "TaxibookTests" */;
 			buildPhases = (
 				774CEDBC1820E3EB0004A123 /* Sources */,
 				774CEDBD1820E3EB0004A123 /* Frameworks */,
@@ -425,9 +438,9 @@
 			dependencies = (
 				774CEDC61820E3EB0004A123 /* PBXTargetDependency */,
 			);
-			name = TaxiBookTests;
+			name = TaxibookTests;
 			productName = TaxiBookTests;
-			productReference = 774CEDC01820E3EB0004A123 /* TaxiBookTests.xctest */;
+			productReference = 774CEDC01820E3EB0004A123 /* TaxibookTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -440,6 +453,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = taxibook;
 				TargetAttributes = {
+					774CED9E1820E3EB0004A123 = {
+						DevelopmentTeam = TS38G64292;
+					};
 					774CEDBF1820E3EB0004A123 = {
 						TestTargetID = 774CED9E1820E3EB0004A123;
 					};
@@ -458,8 +474,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				774CED9E1820E3EB0004A123 /* TaxiBook */,
-				774CEDBF1820E3EB0004A123 /* TaxiBookTests */,
+				774CED9E1820E3EB0004A123 /* Taxibook */,
+				774CEDBF1820E3EB0004A123 /* TaxibookTests */,
 			);
 		};
 /* End PBXProject section */
@@ -528,6 +544,7 @@
 				EDBFF55A187DB6440037F986 /* SignInViewController.m in Sources */,
 				773001EA18906BF300100A2A /* GoogleMapPlaceSearchService.m in Sources */,
 				77188EF418977AA0009F18EA /* OrderModel.m in Sources */,
+				772F41FD18DC3A2A00ABC136 /* UIImage+Color.m in Sources */,
 				77402F40187F0BB0008E9C9B /* LanguageSettingViewController.m in Sources */,
 				77402F47187F2E1F008E9C9B /* MDDirectionService.m in Sources */,
 				7706C5CD189546C4004B7447 /* ConfirmationViewController.m in Sources */,
@@ -574,7 +591,7 @@
 /* Begin PBXTargetDependency section */
 		774CEDC61820E3EB0004A123 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 774CED9E1820E3EB0004A123 /* TaxiBook */;
+			target = 774CED9E1820E3EB0004A123 /* Taxibook */;
 			targetProxy = 774CEDC51820E3EB0004A123 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -761,7 +778,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		774CEDD11820E3EB0004A123 /* Build configuration list for PBXNativeTarget "TaxiBook" */ = {
+		774CEDD11820E3EB0004A123 /* Build configuration list for PBXNativeTarget "Taxibook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				774CEDD21820E3EB0004A123 /* Debug */,
@@ -770,7 +787,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		774CEDD41820E3EB0004A123 /* Build configuration list for PBXNativeTarget "TaxiBookTests" */ = {
+		774CEDD41820E3EB0004A123 /* Build configuration list for PBXNativeTarget "TaxibookTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				774CEDD51820E3EB0004A123 /* Debug */,

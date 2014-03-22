@@ -15,8 +15,19 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        [self initSetup];
     }
     return self;
+}
+
+- (void)awakeFromNib
+{
+    [self initSetup];
+}
+
+- (void)initSetup
+{
+    [self.mobileNumberTextView setContentInset:UIEdgeInsetsMake(-4, -4, 0, 0)];
 }
 
 - (void)updateInfo:(Driver *)driver orderStatus:(OrderStatus)orderStatus
@@ -25,12 +36,13 @@
     
     if (!driver) {
         [self.driverNameLabel setText:@"Waiting for driver"];
-        [self.mobileNumberLabel setText:@"Unknown"];
+        [self.mobileNumberTextView setText:@"Unknown"];
         [self.licenseNumberLabel setText:@"Unknown"];
         [self.taxiStatusUpdateLabel setText:@"Unknown"];
     } else {
         [self.driverNameLabel setText:[NSString stringWithFormat:@"%@ %@", driver.firstName, driver.lastName]];
-        [self.mobileNumberLabel setText:[NSString stringWithFormat:@"(852) %@", driver.phoneNumber]];
+        [self.mobileNumberTextView setText:[NSString stringWithFormat:@"+852-%@", driver.phoneNumber]];
+
         [self.licenseNumberLabel setText:driver.licenseNumber];
     }
     

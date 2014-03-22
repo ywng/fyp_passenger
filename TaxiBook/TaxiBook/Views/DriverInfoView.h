@@ -13,8 +13,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *driverNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *taxiStatusUpdateLabel;
-@property (weak, nonatomic) IBOutlet UILabel *mobileNumberLabel;
 @property (weak, nonatomic) IBOutlet UILabel *licenseNumberLabel;
+@property (weak, nonatomic) IBOutlet UITextView *mobileNumberTextView;
 
 - (void)updateInfo:(Driver *)driver orderStatus:(OrderStatus)orderStatus;
 

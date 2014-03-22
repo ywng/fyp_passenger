@@ -9,11 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "Driver.h"
 
+@protocol DriverProfileViewDelegate <NSObject>
+
+@optional
+
+- (void)driverProfilePicFinishLoading;
+
+@end
+
 @interface DriverProfileView : UIView
 
 @property (weak, nonatomic) IBOutlet UIImageView *driverProfilePic;
 @property (weak, nonatomic) IBOutlet UILabel *driverNameLabel;
+@property (weak, nonatomic) id<DriverProfileViewDelegate> delegate;
 
 - (void)updateViewWithDriver:(Driver *)driver;
+- (void)updateViewWithDriver:(Driver *)driver manuallyUpdate:(BOOL)manuallyUpdate;
 
 @end
