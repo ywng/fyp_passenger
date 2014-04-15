@@ -414,42 +414,6 @@
             }
         }
             break;
-        case OrderStatusDriverComing:
-        {
-            if (self.previousOrderStatus != self.displayOrder.orderStatus) {
-                
-                /* top bar config */
-                [self setupTopBarWithColor:[UIColor colorWithRed:60.0/255 green:188.0/255 blue:1 alpha:1] withString:@"Your driver is coming" spinnerNeed:NO];
-                
-                /* bottom view config */
-                [self setupBottomBarDriverInfoView];
-            }
-        }
-            break;
-        case OrderStatusDriverWaiting:
-        {
-            if (self.previousOrderStatus != self.displayOrder.orderStatus) {
-                
-                /* top bar config */
-                [self setupTopBarWithColor:[UIColor colorWithRed:0 green:237.0/255 blue:88.0/255 alpha:1] withString:@"Your driver has arrived" spinnerNeed:NO];
-                
-                /* bottom view config */
-                [self setupBottomBarDriverInfoView];
-            }
-        }
-            break;
-        case OrderStatusDriverPickedUp:
-        {
-            if (self.previousOrderStatus != self.displayOrder.orderStatus) {
-                
-                /* top bar config */
-                [self setupTopBarWithColor:[UIColor colorWithRed:0 green:237.0/255 blue:88.0/255 alpha:1] withString:@"Your trip is started" spinnerNeed:NO];
-                
-                /* bottom view config */
-                [self setupBottomBarDriverInfoView];
-            }
-        }
-            break;
         case OrderStatusOrderFinished:
         {
             if (self.previousOrderStatus != self.displayOrder.orderStatus) {

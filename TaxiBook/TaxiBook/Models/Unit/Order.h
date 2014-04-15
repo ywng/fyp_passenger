@@ -15,10 +15,7 @@ typedef NS_ENUM(NSInteger, OrderStatus) {
     OrderStatusPending = 0,
     OrderStatusBidded = 1,
     OrderStatusCustomerConfirmed = 2,
-    OrderStatusDriverComing = 3,
-    OrderStatusDriverWaiting = 4,
-    OrderStatusDriverPickedUp = 5,
-    OrderStatusOrderFinished = 6,
+    OrderStatusOrderFinished = 3,
     OrderStatusUnknown = 1<<9
 };
 

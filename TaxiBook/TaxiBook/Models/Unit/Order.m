@@ -155,15 +155,6 @@
         case OrderStatusCustomerConfirmed:
             return @"Trip confirmed";
             break;
-        case OrderStatusDriverComing:
-            return @"Driver is coming";
-            break;
-        case OrderStatusDriverPickedUp:
-            return @"Trip started";
-            break;
-        case OrderStatusDriverWaiting:
-            return @"Driver is waiting";
-            break;
         case OrderStatusOrderFinished:
             return @"Trip is finished";
             break;
