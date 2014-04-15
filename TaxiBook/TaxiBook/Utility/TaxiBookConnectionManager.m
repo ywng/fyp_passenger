@@ -119,6 +119,7 @@
             NSInteger pid = [[responseObject objectForKey:@"pid"] integerValue];
             NSString *email = [responseObject objectForKey:@"email"];
             NSString *phone = [responseObject objectForKey:@"phone_no"];
+            NSString *profilePic = [responseObject objectForKey:@"profile_pic"];
             
             [[NSUserDefaults standardUserDefaults] setSecretObject:email forKey:TaxiBookInternalKeyEmail];
             [[NSUserDefaults standardUserDefaults] setSecretObject:firstName forKey:TaxiBookInternalKeyFirstName];
@@ -128,6 +129,14 @@
             [[NSUserDefaults standardUserDefaults] setSecretObject:expireTime forKey:TaxiBookInternalKeySessionExpireTime];
             [[NSUserDefaults standardUserDefaults] setSecretInteger:pid forKey:TaxiBookInternalKeyUserId];
             [[NSUserDefaults standardUserDefaults] setSecretBool:YES forKey:TaxiBookInternalKeyLoggedIn];
+            [[NSUserDefaults standardUserDefaults] setSecretURL:profilePic forKey:TaxiBookInternalKeyProfilePic];
+            
+            if (profilePic == [NSNull null]) {
+                [[NSUserDefaults standardUserDefaults] setSecretBool:NO forKey:TaxiBookInternalKeyHasProfilePic];
+            }
+            else {
+                [[NSUserDefaults standardUserDefaults] setSecretBool:YES forKey:TaxiBookInternalKeyHasProfilePic];
+            }
             [[NSUserDefaults standardUserDefaults] synchronize];
             
             NSString *password = [formDataParameters objectForKey:@"password"];
@@ -171,6 +180,64 @@
         failure(operation, error);
     }];
 }
+
+- (void)editProfilePic:(NSDictionary *)formDataParameters image: (UIImage*) image success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure  loginIfNeed:(BOOL)loginIfNeed
+{
+    NSLog(@"edit profile pic");
+    
+    NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+    
+    NSString *postUrl = [NSString stringWithFormat:@"%@%@", self.serverDomain, @"passenger/edit_profile_pic/"];
+    
+    AFHTTPRequestSerializer *requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    // get email and session_token stored in nsuserdefault
+    
+    NSString *email = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeyEmail];
+    if (!email) {
+        NSLog(@"email cannot find");
+        [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationEmailCannotFind object:nil];
+        return ;
+    }
+    NSString *sessionToken = [[NSUserDefaults standardUserDefaults] secretStringForKey:TaxiBookInternalKeySessionToken];
+    if (!sessionToken) {
+        NSLog(@"session token cannot find");
+        sessionToken = @""; // let it expire the token and re-login
+    } else {
+        [requestSerializer setValue:sessionToken forHTTPHeaderField:@"X-taxibook-session-token"];
+    }
+    [requestSerializer setValue:email forHTTPHeaderField:@"X-taxibook-email"];
+    [requestSerializer setValue:@"passenger" forHTTPHeaderField:@"X-taxibook-user-type"];
+    
+    
+    NSMutableURLRequest *request = [requestSerializer multipartFormRequestWithMethod:@"POST" URLString:postUrl parameters:formDataParameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        [formData appendPartWithFileData:imageData name:@"userfile" fileName:@"userfile.jpg" mimeType:@"image/jpeg"];
+    } error:nil];
+    
+    
+    AFHTTPRequestOperation *uploadOp = [self.imageRequestManager HTTPRequestOperationWithRequest:request success:^(AFHTTPRequestOperation *operation, id responseObject){
+        
+        NSNumber *responseStatusCode = [responseObject objectForKey:@"status_code"];
+        
+        if (responseStatusCode && [responseStatusCode integerValue] < 0) {
+            NSError *errorWithMessage = [NSError errorWithDomain:TaxiBookServiceName code:[responseStatusCode integerValue] userInfo:@{@"message": [responseObject objectForKey:@"message"]}];
+            failure(operation, errorWithMessage); // negative reponse code consider to be fail
+        } else {
+            success(operation, responseObject);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSString *str = [[NSString alloc] initWithData:operation.responseData encoding:NSUTF8StringEncoding];
+        NSLog(@"server return error %@" ,str);
+        
+        failure(operation, error);
+    }];
+    
+    [self.imageRequestManager.operationQueue addOperation:uploadOp];
+    
+}
+
 
 - (void)postToUrl:(NSString *)relativeUrl withParameters:(NSDictionary *)formDataParameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure loginIfNeed:(BOOL)loginIfNeed
 {

@@ -44,6 +44,8 @@
 		77705D6D18DAE2CF00A0AF9D /* TaxiBookBookingSummaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77705D6C18DAE2CF00A0AF9D /* TaxiBookBookingSummaryTableViewCell.m */; };
 		778533D81845CC0B007BCA1B /* TaxiBookProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778533D71845CC0B007BCA1B /* TaxiBookProfileViewController.m */; };
 		EA0352BA18BF74A10019A3A4 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0352B918BF74A10019A3A4 /* AccountViewController.m */; };
+		EAD48B8F18FDC3E300615B00 /* FDTake.strings in Resources */ = {isa = PBXBuildFile; fileRef = EAD48B8C18FDC3E300615B00 /* FDTake.strings */; };
+		EAD48B9018FDC3E300615B00 /* FDTakeController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD48B8E18FDC3E300615B00 /* FDTakeController.m */; };
 		ED40EB7A187E679C00E186F1 /* BookingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED40EB79187E679C00E186F1 /* BookingDetailViewController.m */; };
 		ED40EB7D187E7BC500E186F1 /* SubView.m in Sources */ = {isa = PBXBuildFile; fileRef = ED40EB7C187E7BC500E186F1 /* SubView.m */; };
 		ED40EB80187E915800E186F1 /* CustomNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED40EB7F187E915800E186F1 /* CustomNavigationController.m */; };
@@ -131,6 +133,9 @@
 		778533D71845CC0B007BCA1B /* TaxiBookProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookProfileViewController.m; sourceTree = "<group>"; };
 		EA0352B818BF74A10019A3A4 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		EA0352B918BF74A10019A3A4 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
+		EAD48B8C18FDC3E300615B00 /* FDTake.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = FDTake.strings; sourceTree = "<group>"; };
+		EAD48B8D18FDC3E300615B00 /* FDTakeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDTakeController.h; sourceTree = "<group>"; };
+		EAD48B8E18FDC3E300615B00 /* FDTakeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDTakeController.m; sourceTree = "<group>"; };
 		ED40EB78187E679C00E186F1 /* BookingDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BookingDetailViewController.h; sourceTree = "<group>"; };
 		ED40EB79187E679C00E186F1 /* BookingDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BookingDetailViewController.m; sourceTree = "<group>"; };
 		ED40EB7B187E7BC500E186F1 /* SubView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubView.h; path = ../Views/SubView.h; sourceTree = "<group>"; };
@@ -335,6 +340,9 @@
 		77517EFD182CA0E5009991F3 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				EAD48B8C18FDC3E300615B00 /* FDTake.strings */,
+				EAD48B8D18FDC3E300615B00 /* FDTakeController.h */,
+				EAD48B8E18FDC3E300615B00 /* FDTakeController.m */,
 				773001E818906BF300100A2A /* GoogleMapPlaceSearchService.h */,
 				773001E918906BF300100A2A /* GoogleMapPlaceSearchService.m */,
 				77517EFA182CA0E0009991F3 /* TaxiBookConnectionManager.h */,
@@ -493,6 +501,7 @@
 				EDBFF561187DB6DC0037F986 /* TaxiBook.storyboard in Resources */,
 				77705D6718DA941C00A0AF9D /* DriverProfileView.xib in Resources */,
 				77402F49187FCD71008E9C9B /* DriverInfoView.xib in Resources */,
+				EAD48B8F18FDC3E300615B00 /* FDTake.strings in Resources */,
 				774CEDAD1820E3EB0004A123 /* InfoPlist.strings in Resources */,
 				EDBFF549187D87070037F986 /* Images.xcassets in Resources */,
 			);
@@ -572,6 +581,7 @@
 				EDBFF559187DB6440037F986 /* RegisterViewController.m in Sources */,
 				ED40EB80187E915800E186F1 /* CustomNavigationController.m in Sources */,
 				EA0352BA18BF74A10019A3A4 /* AccountViewController.m in Sources */,
+				EAD48B9018FDC3E300615B00 /* FDTakeController.m in Sources */,
 				77402F4F187FD1EC008E9C9B /* Driver.m in Sources */,
 				EDBFF564187DB6FE0037F986 /* TaxiBookViewController.m in Sources */,
 				ED40EB8D187EE02E00E186F1 /* TaxiBookTableViewController.m in Sources */,

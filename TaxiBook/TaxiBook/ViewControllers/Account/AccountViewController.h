@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FDTakeController.h"
 
 
 @interface AccountViewController : UIViewController
@@ -17,5 +18,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *phoneNumberTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property FDTakeController *takeController;
 
 @end
