@@ -44,6 +44,7 @@
 		77705D6D18DAE2CF00A0AF9D /* TaxiBookBookingSummaryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 77705D6C18DAE2CF00A0AF9D /* TaxiBookBookingSummaryTableViewCell.m */; };
 		778533D81845CC0B007BCA1B /* TaxiBookProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 778533D71845CC0B007BCA1B /* TaxiBookProfileViewController.m */; };
 		EA0352BA18BF74A10019A3A4 /* AccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA0352B918BF74A10019A3A4 /* AccountViewController.m */; };
+		EA616B8619044E6700EB13D3 /* HistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EA616B8519044E6700EB13D3 /* HistoryTableViewController.m */; };
 		EAD48B8F18FDC3E300615B00 /* FDTake.strings in Resources */ = {isa = PBXBuildFile; fileRef = EAD48B8C18FDC3E300615B00 /* FDTake.strings */; };
 		EAD48B9018FDC3E300615B00 /* FDTakeController.m in Sources */ = {isa = PBXBuildFile; fileRef = EAD48B8E18FDC3E300615B00 /* FDTakeController.m */; };
 		ED40EB7A187E679C00E186F1 /* BookingDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ED40EB79187E679C00E186F1 /* BookingDetailViewController.m */; };
@@ -133,6 +134,8 @@
 		778533D71845CC0B007BCA1B /* TaxiBookProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookProfileViewController.m; sourceTree = "<group>"; };
 		EA0352B818BF74A10019A3A4 /* AccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountViewController.h; sourceTree = "<group>"; };
 		EA0352B918BF74A10019A3A4 /* AccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountViewController.m; sourceTree = "<group>"; };
+		EA616B8419044E6700EB13D3 /* HistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HistoryTableViewController.h; sourceTree = "<group>"; };
+		EA616B8519044E6700EB13D3 /* HistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HistoryTableViewController.m; sourceTree = "<group>"; };
 		EAD48B8C18FDC3E300615B00 /* FDTake.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = FDTake.strings; sourceTree = "<group>"; };
 		EAD48B8D18FDC3E300615B00 /* FDTakeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FDTakeController.h; sourceTree = "<group>"; };
 		EAD48B8E18FDC3E300615B00 /* FDTakeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FDTakeController.m; sourceTree = "<group>"; };
@@ -360,6 +363,8 @@
 		EA0352B718BF74600019A3A4 /* Account */ = {
 			isa = PBXGroup;
 			children = (
+				EA616B8419044E6700EB13D3 /* HistoryTableViewController.h */,
+				EA616B8519044E6700EB13D3 /* HistoryTableViewController.m */,
 				EA0352B818BF74A10019A3A4 /* AccountViewController.h */,
 				EA0352B918BF74A10019A3A4 /* AccountViewController.m */,
 			);
@@ -555,6 +560,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA616B8619044E6700EB13D3 /* HistoryTableViewController.m in Sources */,
 				EDBFF55A187DB6440037F986 /* SignInViewController.m in Sources */,
 				773001EA18906BF300100A2A /* GoogleMapPlaceSearchService.m in Sources */,
 				77188EF418977AA0009F18EA /* OrderModel.m in Sources */,

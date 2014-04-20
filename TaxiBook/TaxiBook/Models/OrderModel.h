@@ -29,6 +29,8 @@
 - (Order *)objectAtIndex:(NSUInteger)index;
 - (void)downloadActiveOrders;
 - (void)downloadActiveOrders:(NSUInteger)limit offset:(NSUInteger)offset;
+- (void)downloadInactiveOrders;
+- (void)downloadInactiveOrders:(NSUInteger)limit offset:(NSUInteger)offset;
 
 - (void)downloadOrderDetail:(NSUInteger)orderId;
 

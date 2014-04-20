@@ -42,6 +42,14 @@
     [newModel downloadActiveOrders:DefaultOrderModelLimit offset:0];
 }
 
+- (void)downloadInactiveOrders
+{
+    OrderModel *newModel = [self mutableCopy];
+    [newModel clearData];
+    
+    [newModel downloadInactiveOrders:DefaultOrderModelLimit offset:0];
+}
+
 - (void)downloadActiveOrders:(NSUInteger)limit offset:(NSUInteger)offset
 {
     OrderModel *newModel = [self mutableCopy];
@@ -51,6 +59,37 @@
     [manager getUrl:[NSString stringWithFormat:@"/passenger/active_trip/%lu/%lu", limit, offset] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"successfully download active orders");
+        
+        id orders = [responseObject objectForKey:@"order"];
+        
+        for (id orderData in orders) {
+            Order *order = [Order newInstanceFromServerData:orderData];
+            [newModel.orderArray addObject:order];
+        }
+        
+        if (self.delegate && [self.delegate conformsToProtocol:@protocol(OrderModelDelegate)]) {
+            [self.delegate finishDownloadOrders:newModel];
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"fail to download active orders %@", error);
+        if (self.delegate && [self.delegate conformsToProtocol:@protocol(OrderModelDelegate)]) {
+            [self.delegate failDownloadOrders:newModel];
+        }
+    } loginIfNeed:YES];
+    
+    
+}
+
+- (void)downloadInactiveOrders:(NSUInteger)limit offset:(NSUInteger)offset
+{
+    OrderModel *newModel = [self mutableCopy];
+    
+    TaxiBookConnectionManager *manager = [TaxiBookConnectionManager sharedManager];
+    
+    [manager getUrl:[NSString stringWithFormat:@"/passenger/inactive_trip/%lu/%lu", limit, offset] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"successfully download inactive orders");
         
         id orders = [responseObject objectForKey:@"order"];
         
