@@ -20,7 +20,7 @@ NSString const *TaxiBookNotificationEmailCannotFind = @"com.taxibook.notificatio
 NSString const *TaxiBookNotificationUserLoggedIn = @"com.taxibook.notifiation.user.login";
 NSString const *TaxiBookNotificationUserLoggedOut = @"com.taxibook.notification.user.logout";
 NSString const *TaxiBookNotificationUserLoadOrderData = @"com.taxibook.notification.user.load.order.data";
-
+NSString const *TaxiBookNotificationUserCreatedOrder = @"com.taxibook.notification.user.created.order";
 
 #pragma mark -
 #pragma mark - Internal Key Mapping

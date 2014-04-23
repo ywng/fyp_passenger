@@ -9,6 +9,7 @@
 #import "ConfirmationViewController.h"
 #import "TaxiBookConnectionManager.h"
 #import "SubView.h"
+#import "RecentLocationHelper.h"
 
 @interface ConfirmationViewController ()
 
@@ -79,6 +80,11 @@
      array('field' => 'estimated_duration', 'label' => 'estimated duration', 'rules' => 'trim|required|xss_clean|numeric|min_length[1]')
      */
     
+    // save originPlace and destPlace into recent place plist
+    
+    [RecentLocationHelper addRecentLocationEntry:self.originPlace];
+    [RecentLocationHelper addRecentLocationEntry:self.destPlace];
+    
     TaxiBookConnectionManager *manager = [TaxiBookConnectionManager sharedManager];
     
     NSMutableDictionary *params = [[NSMutableDictionary alloc] init];
@@ -100,6 +106,7 @@
         NSLog(@"create trip!");
         NSLog(@"%@", responseObject);
         [SubView dismissAlert];
+        [[NSNotificationCenter defaultCenter] postNotificationName:TaxiBookNotificationUserCreatedOrder object:nil];
         [self.navigationController popToRootViewControllerAnimated:YES];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [SubView dismissAlert];

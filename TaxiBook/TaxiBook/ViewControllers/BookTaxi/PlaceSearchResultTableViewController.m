@@ -7,6 +7,7 @@
 //
 
 #import "PlaceSearchResultTableViewController.h"
+#import "RecentLocationHelper.h"
 
 @interface PlaceSearchResultTableViewController ()
 
@@ -16,9 +17,20 @@
 @property (strong, nonatomic) CLLocation *bestLocation;
 @property (strong, nonatomic) NSTimer *timer;
 
+@property (strong, nonatomic) NSMutableArray *defaultArray;
+
 @end
 
 @implementation PlaceSearchResultTableViewController
+
+- (NSMutableArray *)defaultArray
+{
+    if (!_defaultArray) {
+        _defaultArray = [[NSMutableArray alloc] init];
+        [_defaultArray addObjectsFromArray:[RecentLocationHelper getRecentLocations]];
+    }
+    return _defaultArray;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -27,6 +39,15 @@
         // Custom initialization
     }
     return self;
+}
+
+- (CLLocationManager *)locationManager
+{
+    if (!_locationManager){
+        _locationManager = [[CLLocationManager alloc] init];
+        _locationManager.delegate = self;
+    }
+    return _locationManager;
 }
 
 - (void)viewDidLoad
@@ -41,8 +62,8 @@
     
     if ([CLLocationManager locationServicesEnabled] != NO) {
         
-        [self.locationManager setDesiredAccuracy:kCLLocationAccuracyHundredMeters];
-        [self.locationManager setDistanceFilter:500];
+        [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBestForNavigation];
+        [self.locationManager setDistanceFilter:1];
         
         [self.locationManager startUpdatingLocation];
         
@@ -73,10 +94,11 @@
     } else if (self.searchString.length > 0) {
         [GoogleMapPlaceSearchService autoCompleteWithKeyword:self.searchString gpsEnable:NO location:nil withDelegate:self];
     } else {
-        // clear data maybe
+        // show default array
+        self.resultArray = @[];
+        [self.tableView reloadSections:[NSIndexSet indexSetWithIndex:0] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
-
 
 #pragma mark - GMPlaceSearchServiceDelegate
 
@@ -95,6 +117,14 @@
     } else if (searchType == PlaceSearchTypeAutoComplete) {
         self.resultArray = places;
         [self.tableView reloadData];
+    } else if (searchType == PlaceSearchTypeReverseGeocoding) {
+        if ([places count] >= 1) {
+            // get the first result
+            GMPlace *place = [places objectAtIndex:0];
+            if (self.delegate && [self.delegate conformsToProtocol:@protocol(PlaceSearchResultDelegate)]) {
+                [self.delegate downloadTheExactPlace:place];
+            }
+        }
     }
 }
 
@@ -103,12 +133,16 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.resultArray count];
+    if (section == 0) {
+        return [self.resultArray count];
+    } else {
+        return [self.defaultArray count] + 1;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -116,11 +150,21 @@
     static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    GMPlace *place = [self.resultArray objectAtIndex:indexPath.row];
-    
-    cell.textLabel.text = place.placeDescription;
-    cell.detailTextLabel.text = place.placeSecondaryDescription;
-    
+    if (indexPath.section == 0) {
+        GMPlace *place = [self.resultArray objectAtIndex:indexPath.row];
+        
+        cell.textLabel.text = place.placeDescription;
+        cell.detailTextLabel.text = place.placeSecondaryDescription;
+    } else if (indexPath.section == 1) {
+        if (indexPath.row != 0) {
+            GMPlace *place = [self.defaultArray objectAtIndex:indexPath.row - 1];
+            cell.textLabel.text = place.placeAddress;
+            cell.detailTextLabel.text = @"";
+        } else {
+            cell.textLabel.text = @"Current Location";
+            cell.detailTextLabel.text = @"";
+        }
+    }
     return cell;
 }
 
@@ -169,11 +213,37 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    GMPlace *place = [self.resultArray objectAtIndex:indexPath.row];
-    if (self.delegate && [self.delegate conformsToProtocol:@protocol(PlaceSearchResultDelegate)]) {
-        [self.delegate userDidSelectThePlaceName:place];
+    if (indexPath.section == 0) {
+        GMPlace *place = [self.resultArray objectAtIndex:indexPath.row];
+        if (self.delegate && [self.delegate conformsToProtocol:@protocol(PlaceSearchResultDelegate)]) {
+            [self.delegate userDidSelectThePlaceName:place];
+        }
+        [GoogleMapPlaceSearchService placeDetail:place.placeReference withDelegate:self];
+    } else if (indexPath.section == 1) {
+        if (indexPath.row != 0) {
+            GMPlace *place = [self.defaultArray objectAtIndex:indexPath.row - 1];
+            if (self.delegate && [self.delegate conformsToProtocol:@protocol(PlaceSearchResultDelegate)]) {
+                GMPlace *fakePlace = [[GMPlace alloc] init];
+                fakePlace.placeSecondaryDescription = place.placeAddress;
+                [self.delegate userDidSelectThePlaceName:fakePlace];
+
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    if (self.delegate && [self.delegate conformsToProtocol:@protocol(PlaceSearchResultDelegate)]) {
+                        [self.delegate downloadTheExactPlace:place];
+                    }
+                });
+            }
+        } else {
+            // thats the current location
+            GMPlace *place = [[GMPlace alloc] init];
+            place.placeSecondaryDescription = @"Current Location";
+            place.coordinate = self.bestLocation.coordinate;
+            if (self.delegate && [self.delegate conformsToProtocol:@protocol(PlaceSearchResultDelegate)]) {
+                [self.delegate userDidSelectThePlaceName:place];
+            }
+            [GoogleMapPlaceSearchService reverseGeocodingWithLocation:[[CLLocation alloc] initWithLatitude:self.bestLocation.coordinate.latitude longitude:self.bestLocation.coordinate.longitude] withDelegate:self];
+        }
     }
-    [GoogleMapPlaceSearchService placeDetail:place.placeReference withDelegate:self];
 }
 
 /*

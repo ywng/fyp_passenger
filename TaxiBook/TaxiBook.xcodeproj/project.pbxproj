@@ -24,6 +24,7 @@
 		77402F4C187FCDB7008E9C9B /* DriverInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = 77402F4B187FCDB7008E9C9B /* DriverInfoView.m */; };
 		77402F4F187FD1EC008E9C9B /* Driver.m in Sources */ = {isa = PBXBuildFile; fileRef = 77402F4E187FD1EC008E9C9B /* Driver.m */; };
 		77402F52187FD257008E9C9B /* TaxiBookGPS.m in Sources */ = {isa = PBXBuildFile; fileRef = 77402F51187FD257008E9C9B /* TaxiBookGPS.m */; };
+		7744B6F21907509A0004C366 /* RecentLocationHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7744B6F11907509A0004C366 /* RecentLocationHelper.m */; };
 		774CEDA31820E3EB0004A123 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 774CEDA21820E3EB0004A123 /* Foundation.framework */; };
 		774CEDA51820E3EB0004A123 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 774CEDA41820E3EB0004A123 /* CoreGraphics.framework */; };
 		774CEDA71820E3EB0004A123 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 774CEDA61820E3EB0004A123 /* UIKit.framework */; };
@@ -103,6 +104,8 @@
 		77402F4E187FD1EC008E9C9B /* Driver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Driver.m; sourceTree = "<group>"; };
 		77402F50187FD257008E9C9B /* TaxiBookGPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaxiBookGPS.h; sourceTree = "<group>"; };
 		77402F51187FD257008E9C9B /* TaxiBookGPS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaxiBookGPS.m; sourceTree = "<group>"; };
+		7744B6F01907509A0004C366 /* RecentLocationHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentLocationHelper.h; sourceTree = "<group>"; };
+		7744B6F11907509A0004C366 /* RecentLocationHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentLocationHelper.m; sourceTree = "<group>"; };
 		774CED9F1820E3EB0004A123 /* Taxibook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Taxibook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		774CEDA21820E3EB0004A123 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		774CEDA41820E3EB0004A123 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -343,6 +346,8 @@
 		77517EFD182CA0E5009991F3 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				7744B6F01907509A0004C366 /* RecentLocationHelper.h */,
+				7744B6F11907509A0004C366 /* RecentLocationHelper.m */,
 				EAD48B8C18FDC3E300615B00 /* FDTake.strings */,
 				EAD48B8D18FDC3E300615B00 /* FDTakeController.h */,
 				EAD48B8E18FDC3E300615B00 /* FDTakeController.m */,
@@ -573,6 +578,7 @@
 				77402F4C187FCDB7008E9C9B /* DriverInfoView.m in Sources */,
 				ED40EB7D187E7BC500E186F1 /* SubView.m in Sources */,
 				774CEDAF1820E3EB0004A123 /* main.m in Sources */,
+				7744B6F21907509A0004C366 /* RecentLocationHelper.m in Sources */,
 				77402F44187F0DE2008E9C9B /* Order.m in Sources */,
 				ED40EB7A187E679C00E186F1 /* BookingDetailViewController.m in Sources */,
 				77705D6D18DAE2CF00A0AF9D /* TaxiBookBookingSummaryTableViewCell.m in Sources */,

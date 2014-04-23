@@ -44,7 +44,7 @@ static NSString *bookingDetailSegueIdentifer = @"viewDetail";
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedLoadOrderNotification:) name:TaxiBookNotificationUserLoadOrderData object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedLogoutNotification:) name:TaxiBookNotificationUserLoggedOut object:nil];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedCreatedOrderNotification:) name:TaxiBookNotificationUserCreatedOrder object:nil];
 
    // [self.orderModel downloadActiveOrders];
     
@@ -71,6 +71,12 @@ static NSString *bookingDetailSegueIdentifer = @"viewDetail";
     [self.orderModel clearData];
     [self.tableView reloadData];
     
+}
+
+- (void)receivedCreatedOrderNotification:(NSNotification *)notification
+{
+    [self.refreshControl beginRefreshing];
+    [self.orderModel downloadActiveOrders];
 }
 
 - (void)didReceiveMemoryWarning

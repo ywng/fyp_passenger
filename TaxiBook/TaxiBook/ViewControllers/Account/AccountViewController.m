@@ -49,7 +49,7 @@
     
     if (hasProfilePic) {
         
-        NSURL *imageUrl = [NSURL URLWithString:[[NSUserDefaults standardUserDefaults] secretObjectForKey:TaxiBookInternalKeyProfilePic]];
+        NSURL *imageUrl = [[NSUserDefaults standardUserDefaults] secretURLForKey:TaxiBookInternalKeyProfilePic];
         
         [self.profileImage setImageWithURL:imageUrl];
         
