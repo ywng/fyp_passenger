@@ -23,6 +23,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *driverNameLabel;
 @property (weak, nonatomic) id<DriverProfileViewDelegate> delegate;
 
+@property (strong, nonatomic) IBOutletCollection(UIImageView) NSArray *starImageViewCollection;
+
 - (void)updateViewWithDriver:(Driver *)driver;
 - (void)updateViewWithDriver:(Driver *)driver manuallyUpdate:(BOOL)manuallyUpdate;
 

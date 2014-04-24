@@ -80,6 +80,19 @@
         } else {
             [self.driverNameLabel setText:@""];
         }
+        // reset
+        
+        float driverScore = [driver.rating floatValue];
+        int floorDriverScore = (int)(floorf(driverScore));
+        for (int  i = 1; i<= 6; i++) {
+            UIImageView *star = (UIImageView *)[self viewWithTag:i];
+            if (i <= floorDriverScore) {
+                [star setImage:[UIImage imageNamed:@"star_filled"]];
+            } else {
+                [star setImage:[UIImage imageNamed:@"star_unfilled"]];
+            }
+        }
+        
         self.displayingDriver = driver;
     }
 }

@@ -10,12 +10,6 @@
 
 @implementation Driver
 
-- (NSURL *)profilePicUrl
-{
-    return _licensePhotoUrl;
-}
-
-
 + (Driver *)newInstanceFromServerData:(id)jsonData
 {
     Driver *newDriver = [[Driver alloc] init];
@@ -61,6 +55,18 @@
     tmp = [jsonData objectForKey:@"license_photo"];
     if (tmp && tmp!= [NSNull null]) {
         newDriver.licensePhotoUrl = [NSURL URLWithString:tmp];
+    }
+    
+    //profilePicUrl
+    tmp = [jsonData objectForKey:@"profile_pic"];
+    if (tmp && tmp!= [NSNull null]) {
+        newDriver.profilePicUrl = [NSURL URLWithString:tmp];
+    }
+    
+    // average_rating
+    tmp = [jsonData objectForKey:@"average_rating"];
+    if (tmp && tmp!= [NSNull null]) {
+        newDriver.rating = tmp;
     }
     
     return newDriver;
