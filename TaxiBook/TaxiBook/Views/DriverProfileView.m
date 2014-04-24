@@ -74,6 +74,8 @@
             } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
                 NSLog(@"image fail to load");
             }];
+        } else {
+            [self.driverProfilePic setImage:[UIImage imageNamed:@"noProfilePic"]];
         }
         if (driver.firstName && driver.lastName) {
             [self.driverNameLabel setText:[NSString stringWithFormat:@"%@ %@", driver.firstName, driver.lastName]];
