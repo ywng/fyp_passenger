@@ -179,8 +179,25 @@
 {
     NSLog(@"Reject button pressed");
     
-    [self.orderModel rejectDriver:self.displayOrder.orderId success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"success to reject driver");
+    [self.orderModel rejectDriverInOrder:self.displayOrder.orderId driverId:self.displayOrder.driverId success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"success to reject driver %@", responseObject);
+        NSNumber *new_status = [responseObject objectForKey:@"new_status"];
+        if ([new_status intValue] == -1) {
+            // no more new drivers
+            [SubView showError:@"No more available drivers for now." withTitle:@"Oops"];
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            if ([new_status intValue] == 0) {
+                // remove driver location
+                if (self.driverMarker) {
+                    if (self.googleMapView.selectedMarker == self.driverMarker) {
+                        self.googleMapView.selectedMarker = nil;
+                    }
+                    self.driverMarker.map = nil;
+                }
+            }
+            [self updateDisplayOrder];
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"fail to reject driver %@", error);
     }];

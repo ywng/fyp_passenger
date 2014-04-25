@@ -35,6 +35,6 @@
 - (void)downloadOrderDetail:(NSUInteger)orderId;
 
 - (void)confirmDriver:(NSUInteger)orderId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
-- (void)rejectDriver:(NSUInteger)orderId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (void)rejectDriverInOrder:(NSUInteger)orderId driverId:(NSUInteger)driverId success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end

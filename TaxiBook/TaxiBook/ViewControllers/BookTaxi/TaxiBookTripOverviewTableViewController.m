@@ -55,7 +55,14 @@ static NSString *bookingDetailSegueIdentifer = @"viewDetail";
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
-
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    if (![self.refreshControl isRefreshing]) {
+        [self pullToRefresh:nil];
+    }
+}
 
 - (void)receivedLoadOrderNotification:(NSNotification *)notification
 {
